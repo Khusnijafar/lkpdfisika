@@ -1,0 +1,1619 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+<title>Energi dalam Kehidupan — LKPD Interaktif</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============ RESET & TOKENS ============ */
+*,*::before,*::after{box-sizing:border-box;}
+html,body{margin:0;padding:0;}
+:root{
+  --paper:#FBF4E3;
+  --paper-deep:#F1E3C2;
+  --paper-deeper:#E9D8AE;
+  --paper-line:#DEC998;
+  --ink:#2A2118;
+  --ink-soft:#69594420;
+  --ink-soft:#6B5D48;
+  --ink-faint:#9C8D74;
+  --sun:#E2941F;
+  --sun-deep:#A0620E;
+  --sun-bright:#F4B23D;
+  --teal:#146B70;
+  --teal-deep:#0D4F53;
+  --teal-bright:#1E8B8F;
+  --ember:#B8441A;
+  --ember-deep:#8F3513;
+  --ember-bright:#D65A2A;
+  --stone:#8B8272;
+  --stone-deep:#5B5446;
+  --cream-on-dark:#F6EAD0;
+  --shadow-color:20,12,5;
+  --radius-s:6px;
+  --radius-m:12px;
+  --radius-l:20px;
+  --font-display:'Fraunces',serif;
+  --font-body:'Source Sans 3',-apple-system,sans-serif;
+  --font-mono:'IBM Plex Mono',monospace;
+}
+body{
+  font-family:var(--font-body);
+  color:var(--ink);
+  min-height:100vh;
+  background-color:#E7D5A6;
+  background-image:
+    radial-gradient(1100px 700px at 50% -8%, #FFFAEE 0%, #F6E6C0 42%, #E7D5A6 100%);
+  overflow-x:hidden;
+}
+.desk-texture{
+  position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:radial-gradient(circle, rgba(42,33,24,.07) 1px, transparent 1.5px);
+  background-size:24px 24px;
+  opacity:.6;
+}
+h1,h2,h3,h4{font-family:var(--font-display); margin:0; color:var(--ink); font-weight:700;}
+p{margin:0 0 .75em; line-height:1.65;}
+button{font-family:inherit;}
+::selection{background:var(--sun); color:var(--ink);}
+
+/* scrollbar styling for page faces */
+.face::-webkit-scrollbar{width:9px;}
+.face::-webkit-scrollbar-track{background:transparent;}
+.face::-webkit-scrollbar-thumb{background:var(--paper-deeper); border-radius:10px;}
+.face::-webkit-scrollbar-thumb:hover{background:var(--ink-faint);}
+
+/* focus visibility */
+a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--teal-bright); outline-offset:2px;
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important; transition-duration:.001ms !important;}
+}
+
+/* ============ APP LAYOUT ============ */
+.app{position:relative; z-index:1; min-height:100vh; display:flex; flex-direction:column; align-items:center; padding:14px 14px 28px;}
+
+.topbar{
+  width:100%; max-width:980px;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:6px 4px 16px;
+  gap:10px;
+}
+.brand{
+  font-family:var(--font-mono); font-size:12px; letter-spacing:.06em;
+  color:var(--ink-soft); text-transform:uppercase; text-align:center;
+  flex:1;
+}
+.brand strong{color:var(--ember-deep);}
+.chip-btn{
+  display:inline-flex; align-items:center; gap:7px;
+  background:var(--paper); border:1.5px solid var(--paper-line);
+  color:var(--ink); font-family:var(--font-mono); font-size:12.5px; font-weight:500;
+  padding:8px 14px; border-radius:999px; cursor:pointer;
+  box-shadow:0 2px 6px rgba(var(--shadow-color),.12);
+  transition:transform .15s ease, box-shadow .15s ease, background .15s ease;
+  white-space:nowrap;
+}
+.chip-btn:hover{transform:translateY(-1px); box-shadow:0 5px 12px rgba(var(--shadow-color),.18); background:#fff9ea;}
+.chip-btn:active{transform:translateY(0);}
+.chip-btn .ico{width:15px; height:15px; flex:none;}
+
+.stage{width:100%; display:flex; justify-content:center; flex:1;}
+
+/* ============ BOOK FRAME ============ */
+.book{
+  position:relative;
+  width:min(760px, 94vw);
+  height:min(900px, 84vh);
+  margin:0 auto;
+}
+.spine{
+  position:absolute; left:-16px; top:8px; bottom:8px; width:30px; z-index:3;
+  background:linear-gradient(180deg,#3a2f22,#1c1712 60%,#140f0b);
+  border-radius:12px 3px 3px 12px;
+  box-shadow:inset -5px 0 10px rgba(0,0,0,.45), -4px 4px 14px rgba(var(--shadow-color),.35);
+  display:flex; align-items:center; justify-content:center;
+}
+.spine-title{
+  writing-mode:vertical-rl; transform:rotate(180deg);
+  font-family:var(--font-mono); font-size:10.5px; letter-spacing:.22em;
+  color:var(--sun); text-transform:uppercase; white-space:nowrap; opacity:.92;
+}
+.page-edges{
+  position:absolute; right:-5px; top:10px; bottom:10px; width:9px; z-index:1;
+  background:repeating-linear-gradient(180deg,#EFE2C2 0 2px,#DFCB9E 2px 3px);
+  border-radius:0 7px 7px 0;
+  box-shadow:2px 0 5px rgba(0,0,0,.18) inset, 3px 2px 6px rgba(var(--shadow-color),.2);
+}
+.book-inner{
+  position:relative; z-index:2; height:100%;
+  background:var(--paper);
+  border-radius:5px 16px 16px 5px;
+  box-shadow:0 34px 64px -22px rgba(var(--shadow-color),.5), 0 14px 30px -14px rgba(var(--shadow-color),.35);
+  display:flex; flex-direction:column;
+  padding:0 3px;
+  overflow:hidden;
+}
+.book-header{
+  flex:none; padding:16px 26px 10px; display:flex; flex-direction:column; gap:8px;
+  border-bottom:1px solid var(--paper-line);
+}
+.running-head{
+  font-family:var(--font-mono); font-size:11.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--teal-deep); font-weight:500;
+}
+.progress-track{height:4px; border-radius:4px; background:var(--paper-deeper); overflow:hidden;}
+.progress-fill{height:100%; width:5%; border-radius:4px; background:linear-gradient(90deg,var(--sun),var(--teal)); transition:width .5s ease;}
+
+.flip-stage{position:relative; flex:1; min-height:0; perspective:2600px; margin:0 6px;}
+.flipper{
+  position:absolute; inset:0;
+  transform-style:preserve-3d;
+  transform:rotateY(0deg);
+  transform-origin:0% 50%;
+  transition:transform .68s cubic-bezier(.61,.04,.36,1);
+  filter:drop-shadow(-8px 10px 20px rgba(var(--shadow-color),.28));
+}
+.flipper.no-anim{transition:none;}
+.flipper.flip-next{transform:rotateY(-179.9deg);}
+.flipper.flip-prev{transform:rotateY(179.9deg);}
+.face{
+  position:absolute; inset:0;
+  background:var(--paper);
+  backface-visibility:hidden; -webkit-backface-visibility:hidden;
+  overflow-y:auto; overflow-x:hidden;
+  padding:20px 26px 26px;
+}
+.face-back{transform:rotateY(180deg); pointer-events:none;}
+
+.book-footer{
+  flex:none; padding:10px 26px 16px; display:flex; align-items:center; justify-content:center; gap:18px;
+}
+.nav-btn{
+  width:38px; height:38px; border-radius:50%; border:1.5px solid var(--paper-line);
+  background:var(--paper); color:var(--ink); font-size:19px; line-height:1; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 6px rgba(var(--shadow-color),.14);
+  transition:transform .15s ease, background .15s ease, opacity .15s ease;
+}
+.nav-btn:hover:not(:disabled){transform:translateY(-2px); background:#fff8e8;}
+.nav-btn:disabled{opacity:.3; cursor:not-allowed;}
+.page-indicator{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft); min-width:64px; text-align:center;}
+
+@media (max-width:640px){
+  .book{width:100vw; height:calc(100vh - 118px); margin:0;}
+  .spine{left:-10px; width:20px;}
+  .spine-title{font-size:9px;}
+  .page-edges{right:-3px; width:6px;}
+  .book-inner{border-radius:3px 10px 10px 3px;}
+  .face{padding:16px 16px 20px;}
+  .book-header{padding:12px 16px 8px;}
+  .book-footer{padding:8px 16px 12px;}
+}
+
+/* ============ TOC DRAWER ============ */
+.toc-overlay{
+  position:fixed; inset:0; z-index:50; display:none;
+  background:rgba(20,15,10,.45); backdrop-filter:blur(2px);
+}
+.toc-overlay.open{display:block;}
+.toc-panel{
+  position:absolute; left:0; top:0; bottom:0; width:min(340px,88vw);
+  background:var(--paper); box-shadow:12px 0 40px rgba(0,0,0,.35);
+  display:flex; flex-direction:column;
+  transform:translateX(-100%); transition:transform .35s cubic-bezier(.2,.8,.3,1);
+}
+.toc-overlay.open .toc-panel{transform:translateX(0);}
+.toc-panel-head{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 20px; border-bottom:1px solid var(--paper-line);
+  font-family:var(--font-display); font-weight:700; font-size:19px;
+}
+.toc-panel-head button{
+  width:32px; height:32px; border-radius:50%; border:none; background:var(--paper-deep);
+  cursor:pointer; font-size:15px; color:var(--ink-soft);
+}
+.toc-list{flex:1; overflow-y:auto; padding:8px 0;}
+.toc-item{
+  display:flex; align-items:baseline; gap:10px; width:100%; text-align:left;
+  background:none; border:none; cursor:pointer; padding:9px 20px;
+  font-family:var(--font-body); font-size:14.5px; color:var(--ink);
+  border-left:3px solid transparent;
+}
+.toc-item:hover{background:var(--paper-deep);}
+.toc-item.active{border-left-color:var(--ember); background:var(--paper-deep); font-weight:600;}
+.toc-item .num{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-faint); min-width:20px;}
+.toc-item.section-label{
+  font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--teal-deep); font-weight:600; padding:14px 20px 5px; cursor:default; pointer-events:none;
+}
+.toc-panel-foot{padding:14px 20px 20px; border-top:1px solid var(--paper-line);}
+.toc-reset{
+  width:100%; padding:10px; border-radius:10px; border:1.5px solid var(--ember);
+  background:none; color:var(--ember-deep); font-weight:600; font-size:13px; cursor:pointer;
+}
+.toc-reset:hover{background:#fbe9df;}
+
+/* ============ SAVE TOAST ============ */
+.save-toast{
+  position:fixed; bottom:22px; left:50%; transform:translateX(-50%) translateY(20px);
+  background:var(--teal-deep); color:#fff; font-family:var(--font-mono); font-size:12.5px;
+  padding:9px 18px; border-radius:999px; box-shadow:0 8px 20px rgba(0,0,0,.25);
+  opacity:0; pointer-events:none; transition:opacity .3s ease, transform .3s ease; z-index:60;
+}
+.save-toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+/* ============ CONTENT TYPOGRAPHY ============ */
+.eyebrow{
+  font-family:var(--font-mono); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ember-deep); font-weight:600; margin-bottom:6px; display:block;
+}
+.page-title{font-size:clamp(21px,4.4vw,28px); line-height:1.18; margin-bottom:4px;}
+.page-sub{font-family:var(--font-body); color:var(--ink-soft); font-size:14.5px; margin-bottom:18px;}
+.section-block{margin-bottom:22px;}
+.section-block:last-child{margin-bottom:4px;}
+.lead-text{font-size:15.5px; line-height:1.72; color:var(--ink);}
+.hairline{border:none; border-top:1px dashed var(--paper-line); margin:18px 0;}
+
+/* ============ COVER PAGE ============ */
+.cover{height:100%; display:flex; flex-direction:column;}
+.cover-uni{
+  text-align:center; font-family:var(--font-mono); font-size:11px; letter-spacing:.12em;
+  color:var(--teal-deep); text-transform:uppercase; padding-top:2px;
+}
+.cover-uni b{display:block; font-size:12.5px; color:var(--ink); letter-spacing:.06em; margin-top:2px;}
+.cover-emblem{display:flex; justify-content:center; margin:14px 0 6px;}
+.cover-emblem svg{width:clamp(110px,22vw,150px); height:auto;}
+.cover-titles{text-align:center; margin:6px 0 16px;}
+.cover-kind{font-family:var(--font-mono); font-size:11.5px; letter-spacing:.16em; text-transform:uppercase; color:var(--ember-deep); margin-bottom:8px;}
+.cover-title{font-size:clamp(26px,6.2vw,38px); line-height:1.06; font-weight:900;}
+.cover-title em{font-style:italic; color:var(--teal-deep);}
+.cover-subtitle{font-family:var(--font-body); font-style:italic; color:var(--ink-soft); font-size:14.5px; margin-top:9px;}
+.cover-badges{display:flex; justify-content:center; gap:8px; flex-wrap:wrap; margin:16px 0;}
+.badge{
+  font-family:var(--font-mono); font-size:11.5px; padding:6px 12px; border-radius:999px;
+  border:1px solid var(--paper-line); color:var(--teal-deep); background:var(--paper-deep);
+}
+.cover-group{
+  background:var(--paper-deep); border:1px solid var(--paper-line); border-radius:var(--radius-m);
+  padding:14px 18px; margin:8px auto 0; max-width:420px; width:100%;
+}
+.cover-group-label{font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:8px; text-align:center;}
+.people-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:5px;}
+.people-list li{display:flex; justify-content:space-between; font-size:13.5px; gap:10px; border-bottom:1px dotted var(--paper-line); padding-bottom:4px;}
+.people-list li:last-child{border-bottom:none; padding-bottom:0;}
+.people-list .npm{font-family:var(--font-mono); color:var(--ink-faint); font-size:12px; white-space:nowrap;}
+.cover-spacer{flex:1;}
+.cover-cta{
+  display:flex; align-items:center; justify-content:center; gap:8px;
+  background:var(--ember); color:#fff8ec; border:none; border-radius:999px;
+  font-family:var(--font-body); font-weight:700; font-size:15px; letter-spacing:.02em;
+  padding:13px 26px; margin:18px auto 6px; cursor:pointer; width:fit-content;
+  box-shadow:0 10px 22px -8px rgba(184,68,26,.55);
+  transition:transform .15s ease, box-shadow .15s ease;
+}
+.cover-cta:hover{transform:translateY(-2px); box-shadow:0 14px 26px -8px rgba(184,68,26,.6);}
+.cover-foot{text-align:center; font-family:var(--font-mono); font-size:10.5px; color:var(--ink-faint); padding-bottom:2px;}
+
+/* ============ IDENTITY + TOC-IN-PAGE ============ */
+.field-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px 16px; margin-bottom:8px;}
+.field{display:flex; flex-direction:column; gap:5px;}
+.field label{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--teal-deep); font-weight:600;}
+.field input{
+  font-family:var(--font-body); font-size:15px; color:var(--ink);
+  border:none; border-bottom:1.5px solid var(--paper-deeper); background:transparent;
+  padding:5px 2px 8px; outline:none; transition:border-color .15s;
+}
+.field input:focus{border-color:var(--ember);}
+.field input::placeholder{color:var(--ink-faint); font-style:italic;}
+
+.mini-toc{list-style:none; margin:6px 0 0; padding:0; display:flex; flex-direction:column; gap:1px;}
+.mini-toc-item{
+  display:flex; align-items:center; gap:10px; width:100%; text-align:left;
+  background:none; border:none; border-bottom:1px solid var(--paper-line);
+  padding:9px 4px; cursor:pointer; font-family:var(--font-body); font-size:14px; color:var(--ink);
+}
+.mini-toc-item:hover{color:var(--ember-deep);}
+.mini-toc-item .letter{
+  font-family:var(--font-display); font-weight:700; font-size:15px; color:var(--sun-deep); min-width:22px;
+}
+.mini-toc-item .dots{flex:1; border-bottom:1px dotted var(--paper-deeper); margin:0 4px; height:0;}
+.mini-toc-item .pg{font-family:var(--font-mono); font-size:11.5px; color:var(--ink-faint);}
+
+/* ============ KD / TUJUAN LISTS ============ */
+.goal-card{
+  background:var(--paper-deep); border:1px solid var(--paper-line); border-radius:var(--radius-m);
+  padding:16px 18px; margin-bottom:14px;
+}
+.goal-card h3{font-size:14px; font-family:var(--font-mono); text-transform:uppercase; letter-spacing:.08em; color:var(--teal-deep); margin-bottom:11px; font-weight:600;}
+.num-list{list-style:none; margin:0; padding:0; counter-reset:num;}
+.num-list li{
+  counter-increment:num; display:flex; gap:11px; font-size:14.5px; line-height:1.55;
+  margin-bottom:10px; align-items:flex-start;
+}
+.num-list li:last-child{margin-bottom:0;}
+.num-list li::before{
+  content:counter(num); flex:none; width:23px; height:23px; border-radius:50%;
+  background:var(--sun); color:#3a2405; font-family:var(--font-mono); font-weight:700; font-size:12px;
+  display:flex; align-items:center; justify-content:center; margin-top:1px;
+}
+
+/* ============ INSTRUCTION LIST (B) ============ */
+.instr-callout{
+  border:1.5px solid var(--paper-line); border-radius:var(--radius-m); padding:16px 18px 6px;
+  background:linear-gradient(180deg,#fffdf6,var(--paper-deep));
+}
+.instr-callout > p:first-child{font-weight:600; font-size:14.5px; margin-bottom:12px;}
+.instr-list{list-style:none; margin:0; padding:0;}
+.instr-list li{display:flex; gap:12px; font-size:14px; line-height:1.55; margin-bottom:13px; align-items:flex-start;}
+.instr-list .ico{flex:none; width:26px; height:26px; color:var(--teal-deep); margin-top:1px;}
+.instr-list .ico svg{width:100%; height:100%;}
+
+/* ============ FLOW DIAGRAM (C.1) ============ */
+.law-box{
+  background:var(--paper-deep); border-left:4px solid var(--ember); border-radius:0 var(--radius-s) var(--radius-s) 0;
+  padding:13px 16px; font-size:14.5px; line-height:1.6; margin-bottom:20px;
+}
+.flow-wrap{display:flex; flex-direction:column; align-items:stretch; gap:0; margin-bottom:8px;}
+.flow-step{
+  display:flex; align-items:center; gap:12px; background:var(--paper-deep);
+  border:1px solid var(--paper-line); border-radius:var(--radius-m); padding:11px 14px;
+}
+.flow-step .ico{
+  flex:none; width:38px; height:38px; border-radius:50%; background:var(--paper);
+  display:flex; align-items:center; justify-content:center; box-shadow:0 2px 5px rgba(var(--shadow-color),.15);
+}
+.flow-step .ico svg{width:22px; height:22px;}
+.flow-step .txt b{display:block; font-size:13.5px; font-weight:700;}
+.flow-step .txt span{font-size:12px; color:var(--ink-soft);}
+.flow-arrow{display:flex; justify-content:center; padding:3px 0;}
+.flow-arrow svg{width:16px; height:22px; color:var(--ink-faint);}
+.flow-branch{display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:2px;}
+.flow-branch .flow-step{flex-direction:column; text-align:center; gap:6px; padding:12px 8px;}
+
+/* ============ FOOD-CHAIN ILLUSTRATION (Kegiatan 1) ============ */
+.foodchain{display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:8px; justify-content:center;}
+.fc-node{
+  display:flex; flex-direction:column; align-items:center; gap:2px; text-align:center;
+  background:var(--paper-deep); border:1.5px solid var(--paper-line); border-radius:var(--radius-s);
+  padding:9px 11px; min-width:76px;
+}
+.fc-node.fc-decomposer{background:#F1ECE2; border-color:var(--stone);}
+.fc-tier{font-family:var(--font-mono); font-size:9.5px; text-transform:uppercase; letter-spacing:.04em; color:var(--teal-deep); font-weight:600;}
+.fc-name{font-family:var(--font-display); font-weight:700; font-size:13.5px;}
+.fc-arrow{flex:none; color:var(--ink-faint); font-size:15px;}
+.fc-loop-note{font-size:12px; font-style:italic; color:var(--ink-soft); text-align:center; margin:6px 0 18px;}
+
+/* ============ COMPARE GRID (C.2) ============ */
+.compare-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px;}
+.compare-card{border-radius:var(--radius-m); padding:15px 15px 16px; border:1.5px solid;}
+.compare-card.tak{background:#F1ECE2; border-color:var(--stone);}
+.compare-card.bar{background:#FDF3E1; border-color:var(--sun);}
+.compare-card h4{font-size:13.5px; margin-bottom:9px; display:flex; align-items:center; gap:7px;}
+.compare-card.tak h4{color:var(--stone-deep);}
+.compare-card.bar h4{color:var(--sun-deep);}
+.compare-card h4 svg{width:17px; height:17px;}
+.compare-card ul{margin:0 0 10px; padding-left:18px; font-size:13px; line-height:1.6;}
+.compare-card .ciri{font-size:11.5px; line-height:1.55; font-style:italic; color:var(--ink-soft); border-top:1px dashed rgba(0,0,0,.15); padding-top:8px;}
+@media (max-width:520px){.compare-grid{grid-template-columns:1fr;}}
+
+/* ============ ENERGY TYPE CARDS (C.3) ============ */
+.energy-cards{display:flex; flex-direction:column; gap:10px;}
+.energy-card{
+  display:grid; grid-template-columns:40px 1fr; gap:12px;
+  background:var(--paper-deep); border:1px solid var(--paper-line); border-radius:var(--radius-m); padding:12px 14px;
+}
+.energy-card .ico{width:40px; height:40px; border-radius:10px; background:var(--paper); display:flex; align-items:center; justify-content:center; box-shadow:0 2px 5px rgba(var(--shadow-color),.13);}
+.energy-card .ico svg{width:24px; height:24px; color:var(--teal-deep);}
+.energy-card h4{font-size:13.5px; margin-bottom:3px;}
+.energy-card p{font-size:12.5px; line-height:1.5; margin:0 0 4px; color:var(--ink);}
+.energy-card .contoh{font-size:11.5px; color:var(--teal-deep); font-weight:600;}
+
+/* ============ CASE STUDY BOX ============ */
+.case-box{
+  background:#FFF7E4; border:1.5px solid var(--sun); border-radius:var(--radius-m);
+  padding:15px 17px; margin-bottom:18px; position:relative;
+}
+.case-box-tag{
+  display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:10.5px;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--ember-deep); font-weight:700; margin-bottom:9px;
+}
+.case-box-tag svg{width:14px; height:14px;}
+.case-box p{font-size:13.5px; line-height:1.62; margin-bottom:10px;}
+.case-box p:last-child{margin-bottom:0;}
+
+/* ============ Q&A BLOCK ============ */
+.qa{margin-bottom:16px;}
+.qa:last-child{margin-bottom:4px;}
+.qa-q{display:flex; gap:9px; font-size:14px; line-height:1.55; margin-bottom:8px;}
+.qa-q .tag{flex:none; font-family:var(--font-mono); font-weight:700; color:var(--ember-deep); font-size:13px;}
+.qa textarea, .fill-table textarea, .reflect-cell textarea{
+  width:100%; font-family:var(--font-body); font-size:13.7px; line-height:1.55; color:var(--ink);
+  background:#fffdf7; border:1.5px solid var(--paper-deeper); border-radius:var(--radius-s);
+  padding:9px 11px; resize:vertical; outline:none; transition:border-color .15s, background .15s;
+}
+.qa textarea{min-height:64px;}
+.qa textarea:focus, .fill-table textarea:focus, .reflect-cell textarea:focus{border-color:var(--teal-bright); background:#fff;}
+.qa textarea::placeholder, .fill-table textarea::placeholder, .reflect-cell textarea::placeholder{color:var(--ink-faint); font-style:italic;}
+
+/* ============ FILL TABLE ============ */
+.fill-table{width:100%; border-collapse:collapse; font-size:13px;}
+.fill-table th{
+  font-family:var(--font-mono); font-size:10.5px; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--teal-deep); text-align:left; padding:6px 8px; border-bottom:2px solid var(--paper-deeper);
+}
+.fill-table td{padding:6px 7px; vertical-align:top; border-bottom:1px solid var(--paper-line);}
+.fill-table td.label-cell{font-weight:600; font-size:13px; width:34%; padding-top:11px; color:var(--ink);}
+.fill-table textarea{min-height:44px;}
+.fill-table.two-col td.label-cell{width:32%;}
+
+/* ============ MCQ ============ */
+.mcq{margin-bottom:20px; border-bottom:1px dashed var(--paper-line); padding-bottom:16px;}
+.mcq:last-child{border-bottom:none;}
+.mcq-q{font-size:14px; line-height:1.55; margin-bottom:10px; display:flex; gap:8px;}
+.mcq-q .tag{flex:none; font-family:var(--font-mono); font-weight:700; color:var(--ember-deep);}
+.mcq-opts{display:flex; flex-direction:column; gap:7px;}
+.mcq-opt{
+  display:flex; align-items:center; gap:10px; text-align:left; width:100%;
+  background:#fffdf7; border:1.5px solid var(--paper-deeper); border-radius:var(--radius-s);
+  padding:8px 12px; cursor:pointer; font-size:13.3px; color:var(--ink); font-family:var(--font-body);
+  transition:border-color .15s, background .15s;
+}
+.mcq-opt:hover{border-color:var(--teal-bright);}
+.mcq-opt .letter{
+  flex:none; width:21px; height:21px; border-radius:50%; border:1.5px solid var(--ink-faint);
+  display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-size:11px; font-weight:600;
+  color:var(--ink-soft);
+}
+.mcq-opt.selected{border-color:var(--ember); background:#FCEFE6;}
+.mcq-opt.selected .letter{background:var(--ember); border-color:var(--ember); color:#fff;}
+
+/* ============ DRAWING PAD ============ */
+.pad-toolbar{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:9px; padding:8px 10px; background:var(--paper-deep); border-radius:var(--radius-s);}
+.pad-group{display:flex; align-items:center; gap:5px;}
+.pad-group .glabel{font-family:var(--font-mono); font-size:9.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--ink-faint); margin-right:2px;}
+.swatch{width:22px; height:22px; border-radius:50%; border:2px solid transparent; cursor:pointer; padding:0;}
+.swatch.active{border-color:var(--ink);}
+.pad-size{width:20px; height:20px; border-radius:50%; background:var(--ink); cursor:pointer; border:2px solid transparent; padding:0; display:flex; align-items:center; justify-content:center;}
+.pad-size.active{border-color:var(--ember);}
+.pad-btn{
+  font-family:var(--font-mono); font-size:11px; padding:6px 11px; border-radius:7px; border:1px solid var(--paper-deeper);
+  background:#fff; cursor:pointer; color:var(--ink-soft); display:flex; align-items:center; gap:5px;
+}
+.pad-btn:hover{background:var(--paper-deeper);}
+.pad-btn svg{width:13px; height:13px;}
+.pad-canvas-wrap{border:1.5px dashed var(--paper-deeper); border-radius:var(--radius-m); overflow:hidden; background:#fffefa; touch-action:none;}
+.pad-canvas-wrap canvas{width:100%; height:auto; display:block; cursor:crosshair;}
+
+/* ============ CHAPTER OPENER / DIVIDER ============ */
+.divider-page{min-height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:12px; padding:20px 0;}
+.divider-page .ico-big{width:60px; height:60px; color:var(--sun-deep);}
+.divider-page .ico-big svg{width:100%; height:100%;}
+.divider-kicker{font-family:var(--font-mono); font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--ember-deep); font-weight:700;}
+.divider-page h2{font-size:clamp(21px,5vw,28px);}
+.divider-page .lead-text{max-width:440px;}
+.preview-list{list-style:none; margin:8px 0 0; padding:0; display:flex; flex-direction:column; gap:8px; text-align:left; max-width:380px; width:100%;}
+.preview-list li{display:flex; gap:9px; font-size:13.5px; align-items:center; background:var(--paper-deep); border-radius:var(--radius-s); padding:9px 12px;}
+.preview-list .n{font-family:var(--font-mono); font-weight:700; color:var(--sun-deep); font-size:13px;}
+
+/* ============ REFLECTION GRID ============ */
+.reflect-grid{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+.reflect-cell label{display:block; font-size:12.5px; font-weight:600; color:var(--teal-deep); margin-bottom:6px; line-height:1.35;}
+.reflect-cell textarea{min-height:90px;}
+@media (max-width:520px){.reflect-grid{grid-template-columns:1fr;}}
+
+/* ============ BIBLIOGRAPHY ============ */
+.biblio-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:13px;}
+.biblio-list li{font-size:13.3px; line-height:1.6; padding-left:22px; text-indent:-22px;}
+.biblio-list li i{font-style:italic;}
+
+/* ============ BACK COVER ============ */
+.backcover{height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; gap:10px;}
+.backcover .ico-big{width:56px; height:56px; color:var(--teal-deep); margin-bottom:4px;}
+.backcover .ico-big svg{width:100%; height:100%;}
+.backcover h2{font-size:clamp(22px,5vw,29px);}
+.backcover .lead-text{max-width:420px; margin-bottom:6px;}
+.backcover .cover-cta{background:var(--teal-deep); box-shadow:0 10px 22px -8px rgba(13,79,83,.5);}
+.backcover .cover-cta:hover{box-shadow:0 14px 26px -8px rgba(13,79,83,.55);}
+.link-btn{background:none; border:none; color:var(--teal-deep); font-family:var(--font-mono); font-size:12.5px; text-decoration:underline; cursor:pointer; padding:6px;}
+
+/* ============ PRINT SHEET ============ */
+.print-sheet{display:none;}
+@media print{
+  body{background:#fff !important;}
+  .desk-texture,.topbar,.stage,.save-toast,.toc-overlay{display:none !important;}
+  .print-sheet{display:block !important; max-width:720px; margin:0 auto; font-family:var(--font-body); color:#000;}
+  .print-sheet h1{font-family:var(--font-display); font-size:22px; margin-bottom:4px;}
+  .print-sheet .p-meta{font-size:12px; color:#555; margin-bottom:20px;}
+  .print-sheet h2{font-family:var(--font-mono); font-size:13px; text-transform:uppercase; letter-spacing:.06em; border-bottom:1.5px solid #000; padding-bottom:4px; margin:22px 0 10px;}
+  .print-sheet .p-item{margin-bottom:11px; font-size:12.8px; page-break-inside:avoid;}
+  .print-sheet .p-item .p-label{font-weight:700; display:block; margin-bottom:2px;}
+  .print-sheet .p-item .p-val{white-space:pre-wrap; border-bottom:1px dotted #999; padding-bottom:4px; min-height:14px;}
+  .print-sheet img{max-width:260px; border:1px solid #ccc; margin-top:4px;}
+}
+</style>
+</head>
+<body>
+<div class="desk-texture"></div>
+<div class="app" id="app">
+
+  <div class="topbar">
+    <button class="chip-btn" id="tocBtn" aria-label="Buka daftar isi">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="14" y2="18"/></svg>
+      Daftar Isi
+    </button>
+    <div class="brand">Energi dalam Kehidupan · <strong>LKPD Interaktif</strong></div>
+    <button class="chip-btn" id="printBtn" data-action="print" aria-label="Cetak lembar jawaban">
+      <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-2"/><rect x="6" y="14" width="12" height="7"/></svg>
+      Cetak
+    </button>
+  </div>
+
+  <main class="stage">
+    <div class="book" id="book">
+      <div class="spine"><span class="spine-title">KELOMPOK 5 · ENERGI DALAM KEHIDUPAN · FISIKA SMA KELAS X</span></div>
+      <div class="page-edges"></div>
+      <div class="book-inner">
+        <div class="book-header">
+          <span class="running-head" id="runningHead">Sampul</span>
+          <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+        <div class="flip-stage">
+          <div class="flipper" id="flipper">
+            <div class="face face-front" id="faceFront"></div>
+            <div class="face face-back" id="faceBack" inert></div>
+          </div>
+        </div>
+        <div class="book-footer">
+          <button class="nav-btn" id="btnPrev" aria-label="Halaman sebelumnya">&#8249;</button>
+          <span class="page-indicator" id="pageIndicator">1 / 20</span>
+          <button class="nav-btn" id="btnNext" aria-label="Halaman berikutnya">&#8250;</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div class="save-toast" id="saveToast">Tersimpan ✓</div>
+
+  <div class="toc-overlay" id="tocOverlay">
+    <div class="toc-panel">
+      <div class="toc-panel-head"><span>Daftar Isi</span><button id="tocCloseBtn" aria-label="Tutup">&#10005;</button></div>
+      <nav class="toc-list" id="tocList"></nav>
+      <div class="toc-panel-foot"><button class="toc-reset" id="resetBtn">Reset semua jawaban</button></div>
+    </div>
+  </div>
+
+  <div id="printSheet" class="print-sheet"></div>
+
+</div>
+<script>
+/* ============================================================
+   ICON SET — inline SVG strings, stroke-based, currentColor
+   ============================================================ */
+const ICONS = {
+  sun: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><circle cx="24" cy="24" r="8"/><line x1="24" y1="4" x2="24" y2="10"/><line x1="24" y1="38" x2="24" y2="44"/><line x1="4" y1="24" x2="10" y2="24"/><line x1="38" y1="24" x2="44" y2="24"/><line x1="10.3" y1="10.3" x2="14.5" y2="14.5"/><line x1="33.5" y1="33.5" x2="37.7" y2="37.7"/><line x1="10.3" y1="37.7" x2="14.5" y2="33.5"/><line x1="33.5" y1="14.5" x2="37.7" y2="10.3"/></svg>`,
+  leaf: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 36C10 22 18 10 38 8C40 26 30 36 16 37C14.5 37.1 13 36.8 12 36Z"/><path d="M14 34C20 26 26 18 36 10"/></svg>`,
+  chain: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="16" width="19" height="13" rx="6.5"/><rect x="23" y="20" width="19" height="13" rx="6.5"/></svg>`,
+  person: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="14" r="7"/><path d="M10 40c0-9 6.3-15.5 14-15.5S38 31 38 40"/></svg>`,
+  flame: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6C24 6 14 17 14 27a10 10 0 0 0 20 0c0-4-2-6-3-8 0 4-2 6-4 6-3 0-4-3-3-6C25 15 24 6 24 6Z"/></svg>`,
+  motion: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M7 17c9-5 17-5 26 0"/><path d="M5 24c11-5.5 22-5.5 33 0"/><path d="M7 31c9-5 17-5 26 0"/></svg>`,
+  bolt: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"><path d="M26 4 12 27h10l-4 17 18-25H26l4-15Z"/></svg>`,
+  wind: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="24" y1="44" x2="24" y2="25"/><circle cx="24" cy="24" r="2.2" fill="currentColor" stroke="none"/><path d="M24 24C24 24 15.5 15.5 15.5 8.5 22 8.5 24 16.5 24 24Z"/><path d="M24 24C24 24 35.8 20 40.5 14.3 34.8 9.3 27 15 24 24Z"/><path d="M24 24C24 24 20 35.8 12.3 38.7 9.3 32 16 26 24 24Z"/></svg>`,
+  water: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 5C24 5 13 20 13 28a11 11 0 0 0 22 0C35 20 24 5 24 5Z"/></svg>`,
+  geo: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 38 17 16l7 11 5-7 15 18Z"/><path d="M29 11c1.4 1.8-.8 2.8.4 4.6"/><path d="M34.5 9c1.4 1.8-.8 2.8.4 4.6"/></svg>`,
+  biomass: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 40C6 24 16 10 40 8c2 20-10 32-28 33-1.5.1-3-.2-4-1Z"/><circle cx="33" cy="33" r="6"/></svg>`,
+  clock: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M24 14v10l7 7"/></svg>`,
+  group: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="17" r="6.5"/><circle cx="33" cy="20" r="5"/><path d="M6 40c0-8 5.5-13 12-13s12 5 12 13"/><path d="M27 40c.4-6.2 4.2-10.5 9.2-10.5S45 33.8 45 40"/></svg>`,
+  chat: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11h36v21H18l-8 8v-8H6Z"/><line x1="14" y1="18.5" x2="34" y2="18.5"/><line x1="14" y1="25" x2="28" y2="25"/></svg>`,
+  target: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6"><circle cx="24" cy="24" r="17"/><circle cx="24" cy="24" r="10"/><circle cx="24" cy="24" r="2.6" fill="currentColor" stroke="none"/></svg>`,
+  flag: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="10" y1="6" x2="10" y2="42"/><path d="M10 8h26l-6 8 6 8H10Z"/></svg>`,
+  book: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 12c-4-3-10-4-16-3v27c6-1 12 0 16 3 4-3 10-4 16-3V9c-6-1-12 0-16 3Z"/><line x1="24" y1="12" x2="24" y2="39"/></svg>`,
+  pin: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4a13 13 0 0 0-13 13c0 10 13 27 13 27s13-17 13-27A13 13 0 0 0 24 4Z"/><circle cx="24" cy="17" r="5"/></svg>`,
+  undo: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h10a6 6 0 0 1 0 12h-2"/></svg>`,
+  trash: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16"/><path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M6 7l1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13"/></svg>`,
+  check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>`,
+  printer: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-2"/><rect x="6" y="14" width="12" height="7"/></svg>`,
+  arrowDown: `<svg viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="23"/><path d="M6 17l6 8 6-8"/></svg>`,
+  compass: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M30 18l-4 9-9 4 4-9Z"/></svg>`
+};
+/* ============================================================
+   STORAGE LAYER — memoryCache (sync, always works within session)
+   + window.storage (async, best-effort cross-session persistence)
+   ============================================================ */
+const STORAGE_PREFIX = 'lkpd-energi-k5:';
+const memoryCache = {};
+const saveTimers = {};
+
+function hasStorage(){
+  return typeof window !== 'undefined' && window.storage && typeof window.storage.get === 'function';
+}
+
+async function loadField(id){
+  if (Object.prototype.hasOwnProperty.call(memoryCache, id)) return memoryCache[id];
+  if (!hasStorage()) return '';
+  try{
+    const res = await window.storage.get(STORAGE_PREFIX + id);
+    if (res && typeof res.value === 'string'){
+      memoryCache[id] = res.value;
+      return res.value;
+    }
+  }catch(e){ /* key not found or storage unavailable — silent */ }
+  return '';
+}
+
+function scheduleSave(id, value){
+  memoryCache[id] = value;
+  if (saveTimers[id]) clearTimeout(saveTimers[id]);
+  saveTimers[id] = setTimeout(async () => {
+    if (!hasStorage()) return;
+    try{
+      await window.storage.set(STORAGE_PREFIX + id, value);
+      flashSaved();
+    }catch(e){ /* best-effort only */ }
+  }, 500);
+}
+
+let saveToastTimer = null;
+function showToast(msg){
+  const toast = document.getElementById('saveToast');
+  if (!toast) return;
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(saveToastTimer);
+  saveToastTimer = setTimeout(() => toast.classList.remove('show'), 1600);
+}
+function flashSaved(){ showToast('Tersimpan \u2713'); }
+
+/* ============================================================
+   PAGE HYDRATION — binds live DOM inputs to memoryCache/storage
+   ============================================================ */
+function hydratePage(root){
+  // text inputs & textareas
+  root.querySelectorAll('[data-field]').forEach(el => {
+    const id = el.getAttribute('data-field');
+    const apply = (val) => { if (typeof val === 'string' && val) el.value = val; };
+    if (Object.prototype.hasOwnProperty.call(memoryCache, id)) apply(memoryCache[id]);
+    else loadField(id).then(apply);
+    el.addEventListener('input', () => scheduleSave(id, el.value));
+  });
+
+  // multiple choice groups
+  const mcqGroups = new Set();
+  root.querySelectorAll('[data-mcq-option]').forEach(btn => {
+    const group = btn.closest('[data-mcq]');
+    if (group) mcqGroups.add(group);
+  });
+  mcqGroups.forEach(group => {
+    const qid = group.getAttribute('data-mcq');
+    const applySelected = (letter) => {
+      group.querySelectorAll('[data-mcq-option]').forEach(b => {
+        b.classList.toggle('selected', b.getAttribute('data-mcq-option') === letter);
+      });
+    };
+    if (Object.prototype.hasOwnProperty.call(memoryCache, qid)) applySelected(memoryCache[qid]);
+    else loadField(qid).then(v => { if (v) applySelected(v); });
+    group.querySelectorAll('[data-mcq-option]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const letter = btn.getAttribute('data-mcq-option');
+        applySelected(letter);
+        scheduleSave(qid, letter);
+      });
+    });
+  });
+
+  // drawing canvas
+  const canvas = root.querySelector('[data-canvas]');
+  if (canvas) initDrawingPad(canvas, root);
+}
+
+/* ============================================================
+   DRAWING PAD — simple pointer-based sketch tool for Kegiatan 1
+   ============================================================ */
+function initDrawingPad(canvas, root){
+  const ctx = canvas.getContext('2d');
+  const id = canvas.getAttribute('data-canvas');
+  let drawing = false;
+  let last = null;
+  let color = '#2A2118';
+  let lineWidth = 4;
+  const undoStack = [];
+
+  function getPos(e){
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    return { x:(e.clientX - rect.left) * scaleX, y:(e.clientY - rect.top) * scaleY };
+  }
+  function pushUndo(){
+    try{
+      undoStack.push(canvas.toDataURL('image/png'));
+      if (undoStack.length > 14) undoStack.shift();
+    }catch(e){}
+  }
+  function persist(){ scheduleSave(id, canvas.toDataURL('image/png')); }
+
+  canvas.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    try{ canvas.setPointerCapture(e.pointerId); }catch(err){}
+    drawing = true; pushUndo(); last = getPos(e);
+    ctx.fillStyle = color; ctx.beginPath(); ctx.arc(last.x,last.y,lineWidth/2,0,Math.PI*2); ctx.fill();
+  });
+  canvas.addEventListener('pointermove', (e) => {
+    if (!drawing) return;
+    e.preventDefault();
+    const pos = getPos(e);
+    ctx.strokeStyle = color; ctx.lineWidth = lineWidth; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+    ctx.beginPath(); ctx.moveTo(last.x, last.y); ctx.lineTo(pos.x, pos.y); ctx.stroke();
+    last = pos;
+  });
+  const endStroke = () => { if (!drawing) return; drawing = false; persist(); };
+  canvas.addEventListener('pointerup', endStroke);
+  canvas.addEventListener('pointercancel', endStroke);
+  canvas.addEventListener('pointerleave', () => { if (drawing) endStroke(); });
+
+  root.querySelectorAll('[data-pen-color]').forEach(b => {
+    b.addEventListener('click', () => {
+      color = b.getAttribute('data-pen-color');
+      root.querySelectorAll('[data-pen-color]').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+  root.querySelectorAll('[data-pen-width]').forEach(b => {
+    b.addEventListener('click', () => {
+      lineWidth = +b.getAttribute('data-pen-width');
+      root.querySelectorAll('[data-pen-width]').forEach(x => x.classList.remove('active'));
+      b.classList.add('active');
+    });
+  });
+  const clearBtn = root.querySelector('[data-canvas-clear]');
+  if (clearBtn) clearBtn.addEventListener('click', () => {
+    pushUndo(); ctx.clearRect(0,0,canvas.width,canvas.height); persist();
+  });
+  const undoBtn = root.querySelector('[data-canvas-undo]');
+  if (undoBtn) undoBtn.addEventListener('click', () => {
+    if (!undoStack.length) return;
+    const prev = undoStack.pop();
+    const img = new Image();
+    img.onload = () => { ctx.clearRect(0,0,canvas.width,canvas.height); ctx.drawImage(img,0,0); persist(); };
+    img.src = prev;
+  });
+
+  const restore = (val) => {
+    if (!val) return;
+    const img = new Image();
+    img.onload = () => ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    img.src = val;
+  };
+  if (Object.prototype.hasOwnProperty.call(memoryCache, id)) restore(memoryCache[id]);
+  else loadField(id).then(restore);
+}
+/* ============================================================
+   SHARED TEMPLATE HELPERS
+   ============================================================ */
+const SUN_EMBLEM = `<svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <defs><linearGradient id="sunGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" stop-color="#F4B23D"/><stop offset="100%" stop-color="#B8441A"/>
+  </linearGradient></defs>
+  <circle cx="80" cy="80" r="66" fill="none" stroke="#146B70" stroke-width="1.5" stroke-dasharray="1 7" stroke-linecap="round" opacity="0.6"/>
+  <g stroke="#0D4F53" stroke-width="2.4" stroke-linecap="round" opacity="0.75">
+    <line x1="80" y1="14" x2="80" y2="6"/><line x1="80" y1="146" x2="80" y2="154"/>
+    <line x1="14" y1="80" x2="6" y2="80"/><line x1="146" y1="80" x2="154" y2="80"/>
+  </g>
+  <circle cx="80" cy="80" r="30" fill="url(#sunGrad)"/>
+  <g stroke="#8F3513" stroke-width="3.2" stroke-linecap="round">
+    <line x1="116" y1="80" x2="128" y2="80"/><line x1="105.5" y1="105.5" x2="114" y2="114"/>
+    <line x1="80" y1="116" x2="80" y2="128"/><line x1="54.5" y1="105.5" x2="46" y2="114"/>
+    <line x1="44" y1="80" x2="32" y2="80"/><line x1="54.5" y1="54.5" x2="46" y2="46"/>
+    <line x1="80" y1="44" x2="80" y2="32"/><line x1="105.5" y1="54.5" x2="114" y2="46"/>
+  </g>
+</svg>`;
+
+function qaBlock(tag, question, fieldId, rows){
+  const tagHtml = tag ? `<span class="tag">${tag}</span>` : '';
+  return `<div class="qa">
+    <div class="qa-q">${tagHtml}<span>${question}</span></div>
+    <textarea data-field="${fieldId}" rows="${rows||3}" placeholder="Tulis jawaban kelompokmu di sini..."></textarea>
+  </div>`;
+}
+function fillRow2(label, id1, id2){
+  return `<tr><td class="label-cell">${label}</td>
+    <td><textarea data-field="${id1}" rows="2" placeholder="Isi jawaban..."></textarea></td>
+    <td><textarea data-field="${id2}" rows="2" placeholder="Isi jawaban..."></textarea></td></tr>`;
+}
+function fillRow1(label, id){
+  return `<tr><td class="label-cell">${label}</td>
+    <td><textarea data-field="${id}" rows="2" placeholder="Isi jawaban..."></textarea></td></tr>`;
+}
+function mcqBlock(qnum, question, options, qid){
+  const letters = ['A','B','C','D','E'];
+  return `<div class="mcq" data-mcq="${qid}">
+    <div class="mcq-q"><span class="tag">${qnum}.</span><span>${question}</span></div>
+    <div class="mcq-opts">
+      ${options.map((opt,i)=>`<button type="button" class="mcq-opt" data-mcq-option="${letters[i]}"><span class="letter">${letters[i]}</span><span>${opt}</span></button>`).join('')}
+    </div>
+  </div>`;
+}
+function icoWrap(name){ return `<span class="ico">${ICONS[name]}</span>`; }
+
+/* ============================================================
+   PAGE RENDERERS — 0. Cover
+   ============================================================ */
+function renderCover(){
+  return `
+  <div class="cover">
+    <div class="cover-uni">Universitas Indraprasta PGRI Jakarta<b>Program Magister Pendidikan MIPA</b></div>
+    <div class="cover-emblem">${SUN_EMBLEM}</div>
+    <div class="cover-titles">
+      <div class="cover-kind">Lembar Kerja Peserta Didik (LKPD) &middot; Fisika SMA Kelas X</div>
+      <h1 class="cover-title">Energi dalam <em>Kehidupan</em></h1>
+      <p class="cover-subtitle">Siklus Energi, Sumber Energi, dan Energi Terbarukan</p>
+    </div>
+    <div class="cover-badges">
+      <span class="badge">Fisika</span>
+      <span class="badge">SMA &middot; Kelas X</span>
+      <span class="badge">Semester Genap</span>
+    </div>
+    <div class="cover-group">
+      <div class="cover-group-label">Disusun oleh — Kelompok 5</div>
+      <ul class="people-list">
+        <li><span>Khusni Ja'far</span><span class="npm">NPM 20257270264</span></li>
+        <li><span>Kandi</span><span class="npm">NPM xxxx</span></li>
+        <li><span>Risan</span><span class="npm">NPM xxxx</span></li>
+        <li><span>Marjah</span><span class="npm">NPM xxxx</span></li>
+        <li><span>Anindita</span><span class="npm">NPM xxxx</span></li>
+      </ul>
+    </div>
+    <div class="cover-spacer"></div>
+    <button class="cover-cta" data-goto="1" type="button">Buka LKPD <span aria-hidden="true">&rarr;</span></button>
+    <div class="cover-foot">Program Studi Magister Pendidikan MIPA &middot; Universitas Indraprasta PGRI Jakarta &middot; 2026</div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 1. Identitas & Daftar Isi
+   ============================================================ */
+function renderIdentitas(){
+  const rows = [
+    [2,'A','Kompetensi Dasar & Tujuan Pembelajaran'],
+    [3,'B','Petunjuk Penggunaan LKPD'],
+    [4,'C.1','Materi — Siklus Energi'],
+    [5,'C.2','Materi — Sumber Energi'],
+    [6,'C.3','Materi — Energi Terbarukan'],
+    [7,'D','Kegiatan 1 — Mengamati Siklus Energi'],
+    [8,'D','Kegiatan 1 — Pertanyaan Analisis'],
+    [9,'D','Kegiatan 2 — Tabel Perbandingan'],
+    [10,'D','Kegiatan 2 — Diskusi Kelompok'],
+    [11,'D','Kegiatan 3 — Studi Kasus'],
+    [12,'D','Kegiatan 3 — Proyek Mini'],
+    [13,'D','Kegiatan 4 — Evaluasi & Refleksi'],
+    [14,'E','Soal Pilihan Ganda'],
+    [15,'E','Soal Uraian (No. 1–2)'],
+    [16,'E','Soal Uraian (No. 3–4)'],
+    [17,'F','Refleksi Diri'],
+    [18,'G','Daftar Pustaka'],
+    [19,'&bull;','Penutup'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Identitas Peserta Didik</span>
+    <h2 class="page-title">Sebelum mulai, isi datamu</h2>
+    <p class="page-sub">Data ini membantu guru mengenali hasil kerja kelompokmu. Semua jawaban di LKPD ini tersimpan otomatis.</p>
+    <div class="field-grid">
+      <div class="field"><label>Nama</label><input type="text" placeholder="Nama lengkap" data-field="id-nama"></div>
+      <div class="field"><label>Kelas</label><input type="text" placeholder="cth. X-2" data-field="id-kelas"></div>
+      <div class="field"><label>No. Absen</label><input type="text" placeholder="cth. 14" data-field="id-absen"></div>
+      <div class="field"><label>Tanggal</label><input type="date" data-field="id-tanggal"></div>
+    </div>
+    <hr class="hairline">
+    <span class="eyebrow">Daftar Isi</span>
+    <div class="mini-toc">
+      ${rows.map(r => `<button type="button" class="mini-toc-item" data-goto="${r[0]}"><span class="letter">${r[1]}</span><span>${r[2]}</span><span class="dots"></span><span class="pg">${r[0]+1}</span></button>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 2. A. Kompetensi Dasar & Tujuan Pembelajaran
+   ============================================================ */
+function renderKD(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian A</span>
+    <h2 class="page-title">Kompetensi Dasar &amp; Tujuan Pembelajaran</h2>
+    <p class="page-sub">Ini yang akan kamu kuasai setelah menyelesaikan LKPD ini.</p>
+    <div class="goal-card">
+      <h3>${icoWrap('flag')} Kompetensi Dasar (KD)</h3>
+      <ol class="num-list">
+        <li>Mendeskripsikan konsep siklus energi dan kekekalan energi dalam sistem alam.</li>
+        <li>Mengidentifikasi berbagai sumber energi yang ada di alam dan pemanfaatannya dalam kehidupan sehari-hari.</li>
+        <li>Menganalisis potensi, keunggulan, dan tantangan energi terbarukan sebagai solusi energi masa depan.</li>
+        <li>Menyajikan gagasan pemecahan masalah krisis energi melalui pemanfaatan energi terbarukan secara berkelanjutan.</li>
+      </ol>
+    </div>
+    <div class="goal-card">
+      <h3>${icoWrap('target')} Tujuan Pembelajaran</h3>
+      <p style="font-size:13.5px; color:var(--ink-soft); margin-bottom:10px;">Setelah mempelajari LKPD ini, peserta didik diharapkan mampu:</p>
+      <ol class="num-list">
+        <li>Menjelaskan alur siklus energi dari matahari hingga bentuk energi lain yang digunakan manusia.</li>
+        <li>Membedakan jenis-jenis sumber energi berdasarkan karakteristik dan pembaruannya.</li>
+        <li>Menganalisis keunggulan, keterbatasan, dan prospek energi terbarukan.</li>
+        <li>Merancang solusi sederhana terkait pemanfaatan energi terbarukan di lingkungan sekitar.</li>
+      </ol>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 3. B. Petunjuk Penggunaan LKPD
+   ============================================================ */
+function renderPetunjuk(){
+  const items = [
+    ['book','Baca terlebih dahulu materi ringkas pada bagian C sebelum mengerjakan kegiatan.'],
+    ['check','Kerjakan setiap kegiatan secara berurutan dari Kegiatan 1 hingga Kegiatan 4.'],
+    ['chat','Diskusikan setiap pertanyaan bersama anggota kelompok dan tuliskan kesimpulan bersama.'],
+    ['compass','Gunakan referensi tambahan (buku teks, artikel ilmiah, atau internet) jika diperlukan.'],
+    ['clock','Waktu pengerjaan: 2 &times; 45 menit (1 pertemuan).'],
+    ['group','Presentasikan hasil kerja kelompok pada akhir kegiatan.'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian B</span>
+    <h2 class="page-title">Petunjuk Penggunaan LKPD</h2>
+    <p class="page-sub">Bacalah setiap petunjuk dengan seksama sebelum mengerjakan LKPD ini.</p>
+    <div class="instr-callout">
+      <ul class="instr-list">
+        ${items.map(it => `<li><span class="ico">${ICONS[it[0]]}</span><span>${it[1]}</span></li>`).join('')}
+      </ul>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 4. C.1 Siklus Energi
+   ============================================================ */
+function renderC1(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
+    <h2 class="page-title">C.1 Siklus Energi</h2>
+    <div class="law-box">Energi tidak dapat diciptakan maupun dimusnahkan, melainkan hanya dapat diubah dari satu bentuk ke bentuk lainnya <b>(Hukum Kekekalan Energi / Hukum Termodinamika I)</b>. Di alam, energi bergerak dalam suatu siklus yang dimulai dari matahari sebagai sumber energi utama.</div>
+    <span class="eyebrow" style="margin-bottom:10px;">Alur Siklus Energi</span>
+    <div class="flow-wrap">
+      <div class="flow-step"><span class="ico">${ICONS.sun}</span><span class="txt"><b>Energi Matahari</b><span>sumber energi utama di alam</span></span></div>
+      <div class="flow-arrow">${ICONS.arrowDown}</div>
+      <div class="flow-step"><span class="ico">${ICONS.leaf}</span><span class="txt"><b>Fotosintesis</b><span>menjadi energi kimia tumbuhan</span></span></div>
+      <div class="flow-arrow">${ICONS.arrowDown}</div>
+      <div class="flow-step"><span class="ico">${ICONS.chain}</span><span class="txt"><b>Rantai Makanan</b><span>menjadi energi kimia hewan &amp; manusia</span></span></div>
+      <div class="flow-arrow">${ICONS.arrowDown}</div>
+      <div class="flow-step"><span class="ico">${ICONS.person}</span><span class="txt"><b>Respirasi &amp; Aktivitas</b><span>energi digunakan tubuh &amp; kegiatan</span></span></div>
+      <div class="flow-arrow">${ICONS.arrowDown}</div>
+      <div class="flow-branch">
+        <div class="flow-step"><span class="ico">${ICONS.flame}</span><span class="txt"><b>Panas</b><span>termal</span></span></div>
+        <div class="flow-step"><span class="ico">${ICONS.motion}</span><span class="txt"><b>Gerak</b><span>kinetik</span></span></div>
+        <div class="flow-step"><span class="ico">${ICONS.bolt}</span><span class="txt"><b>Listrik</b><span>elektrik</span></span></div>
+      </div>
+    </div>
+  </div>`;
+}
+/* ============================================================
+   PAGE RENDERERS — 5. C.2 Sumber Energi
+   ============================================================ */
+function renderC2(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
+    <h2 class="page-title">C.2 Sumber Energi</h2>
+    <p class="lead-text" style="font-size:14px; margin-bottom:16px;">Sumber energi diklasifikasikan menjadi dua kelompok besar:</p>
+    <div class="compare-grid">
+      <div class="compare-card tak">
+        <h4>${ICONS.flame}<span>Energi Tak Terbarukan</span></h4>
+        <ul>
+          <li>Bahan bakar fosil (minyak bumi, gas alam, batu bara)</li>
+          <li>Nuklir (uranium, plutonium)</li>
+        </ul>
+        <div class="ciri"><b>Ciri:</b> stok terbatas, tidak dapat diperbarui dalam waktu singkat, penyebab utama polusi dan efek rumah kaca.</div>
+      </div>
+      <div class="compare-card bar">
+        <h4>${ICONS.sun}<span>Energi Terbarukan</span></h4>
+        <ul>
+          <li>Energi surya (matahari)</li>
+          <li>Energi angin</li>
+          <li>Energi air (PLTA, gelombang)</li>
+          <li>Biomassa, panas bumi (geotermal)</li>
+        </ul>
+        <div class="ciri"><b>Ciri:</b> dapat diperbarui secara alami, ramah lingkungan, berkelanjutan.</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 6. C.3 Energi Terbarukan
+   ============================================================ */
+function renderC3(){
+  const items = [
+    ['sun','Energi Surya','Panel fotovoltaik mengubah cahaya matahari menjadi listrik melalui efek fotolistrik.','PLTS (Pembangkit Listrik Tenaga Surya), pemanas air surya.'],
+    ['wind','Energi Angin','Turbin angin mengubah energi kinetik angin menjadi energi mekanik/listrik.','PLTB (Pembangkit Listrik Tenaga Bayu) di Sidrap, Sulawesi Selatan.'],
+    ['water','Energi Air','Air yang mengalir/jatuh memutar turbin untuk menghasilkan listrik.','PLTA Saguling, PLTA Asahan, PLTA Kayan (Kalimantan Utara).'],
+    ['geo','Panas Bumi','Uap/air panas dari dalam bumi memutar turbin generator.','PLTP Kamojang (Jawa Barat), PLTP Lahendong (Sulawesi Utara).'],
+    ['biomass','Biomassa','Pembakaran bahan organik atau fermentasi untuk menghasilkan biogas/bioetanol.','Biogas dari kotoran hewan, bioetanol dari singkong/tebu.'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
+    <h2 class="page-title">C.3 Energi Terbarukan</h2>
+    <p class="lead-text" style="font-size:13.5px; margin-bottom:14px;">Energi terbarukan berasal dari sumber alam yang terus-menerus terisi ulang secara alami. Indonesia memiliki potensi besar dalam pengembangannya, mengingat posisi geografis dan kekayaan alamnya.</p>
+    <div class="energy-cards">
+      ${items.map(it => `
+      <div class="energy-card">
+        <span class="ico">${ICONS[it[0]]}</span>
+        <div>
+          <h4>${it[1]}</h4>
+          <p>${it[2]}</p>
+          <div class="contoh">Contoh: ${it[3]}</div>
+        </div>
+      </div>`).join('')}
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 7. Kegiatan 1 (a): Observasi + Menggambar
+   ============================================================ */
+function renderK1a(){
+  const fc = [
+    ['Produsen','Rumput'],['Konsumen I','Belalang'],['Konsumen II','Katak'],
+    ['Konsumen III','Ular'],['Konsumen Akhir','Elang'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian D &middot; Kegiatan 1</span>
+    <h2 class="page-title">Mengamati &amp; Mengidentifikasi Siklus Energi</h2>
+    <p class="page-sub"><b>Tujuan:</b> peserta didik dapat mendeskripsikan alur siklus energi dari matahari dalam kehidupan sehari-hari.</p>
+    <p class="lead-text" style="font-size:13.5px;">Perhatikan ilustrasi rantai makanan berikut ini:</p>
+    <div class="foodchain">
+      ${fc.map((n,i)=>`<div class="fc-node"><span class="fc-tier">${n[0]}</span><span class="fc-name">${n[1]}</span></div>${i<fc.length-1?`<span class="fc-arrow">&rarr;</span>`:''}`).join('')}
+      <span class="fc-arrow">&rarr;</span>
+      <div class="fc-node fc-decomposer"><span class="fc-tier">Dekomposer</span><span class="fc-name">Cacing</span></div>
+    </div>
+    <p class="fc-loop-note">&#8635; Hasil penguraian dekomposer mengembalikan unsur hara ke tanah dan menyuburkan produsen kembali — siklus energi pun berlanjut.</p>
+    <hr class="hairline">
+    <span class="eyebrow">1.1</span>
+    <p class="lead-text" style="font-size:14px; margin-bottom:10px;">Gambarkan diagram siklus energi dari matahari secara lengkap! Gunakan area gambar di bawah ini.</p>
+    <div class="pad-toolbar">
+      <div class="pad-group"><span class="glabel">Warna</span>
+        <button type="button" class="swatch active" data-pen-color="#2A2118" style="background:#2A2118" aria-label="Hitam"></button>
+        <button type="button" class="swatch" data-pen-color="#B8441A" style="background:#B8441A" aria-label="Ember"></button>
+        <button type="button" class="swatch" data-pen-color="#146B70" style="background:#146B70" aria-label="Teal"></button>
+        <button type="button" class="swatch" data-pen-color="#E2941F" style="background:#E2941F" aria-label="Emas"></button>
+      </div>
+      <div class="pad-group"><span class="glabel">Ukuran</span>
+        <button type="button" class="pad-size active" data-pen-width="2.5"></button>
+        <button type="button" class="pad-size" data-pen-width="5" style="width:17px;height:17px;"></button>
+        <button type="button" class="pad-size" data-pen-width="9" style="width:21px;height:21px;"></button>
+      </div>
+      <button type="button" class="pad-btn" data-canvas-undo>${ICONS.undo}Undo</button>
+      <button type="button" class="pad-btn" data-canvas-clear>${ICONS.trash}Hapus</button>
+    </div>
+    <div class="pad-canvas-wrap"><canvas data-canvas="k1-drawing" width="900" height="380"></canvas></div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 8. Kegiatan 1 (b): Pertanyaan Analisis
+   ============================================================ */
+function renderK1b(){
+  return `
+  <div>
+    <span class="eyebrow">Kegiatan 1 &middot; Lanjutan</span>
+    <h2 class="page-title">1.2 Pertanyaan Analisis</h2>
+    <p class="page-sub">Diskusikan bersama kelompokmu, lalu tuliskan kesimpulannya.</p>
+    ${qaBlock('a.', 'Apa yang dimaksud dengan &ldquo;energi tidak dapat diciptakan dan tidak dapat dimusnahkan&rdquo;? Berikan contoh nyata dalam kehidupan sehari-hari!', 'k1-2a', 4)}
+    ${qaBlock('b.', 'Bagaimana sinar matahari dapat berperan dalam siklus energi yang terjadi pada ekosistem hutan? Jelaskan secara runtut!', 'k1-2b', 4)}
+    ${qaBlock('c.', 'Menurut kelompok Anda, apa yang akan terjadi apabila energi matahari tiba-tiba berkurang secara drastis? Diskusikan dampaknya!', 'k1-2c', 4)}
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 9. Kegiatan 2 (a): Tabel Perbandingan
+   ============================================================ */
+function renderK2a(){
+  const rows = [
+    ['Contoh Sumber Energi','k2-tak-contoh','k2-bar-contoh'],
+    ['Ketersediaan','k2-tak-ketersediaan','k2-bar-ketersediaan'],
+    ['Dampak Lingkungan','k2-tak-dampak','k2-bar-dampak'],
+    ['Biaya Awal','k2-tak-biaya','k2-bar-biaya'],
+    ['Keberlanjutan','k2-tak-berkelanjutan','k2-bar-berkelanjutan'],
+    ['Potensi di Indonesia','k2-tak-potensi','k2-bar-potensi'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian D &middot; Kegiatan 2</span>
+    <h2 class="page-title">Membandingkan Sumber Energi</h2>
+    <p class="page-sub"><b>Tujuan:</b> menganalisis perbedaan, keunggulan, dan kelemahan sumber energi terbarukan dan tak terbarukan.</p>
+    <p class="lead-text" style="font-size:13.5px;">2.1 Lengkapi tabel perbandingan berikut berdasarkan pengetahuan dan referensi yang kalian miliki!</p>
+    <div style="overflow-x:auto;">
+      <table class="fill-table two-col">
+        <thead><tr><th>Aspek</th><th>Energi Tak Terbarukan</th><th>Energi Terbarukan</th></tr></thead>
+        <tbody>${rows.map(r=>fillRow2(r[0],r[1],r[2])).join('')}</tbody>
+      </table>
+    </div>
+  </div>`;
+}
+/* ============================================================
+   PAGE RENDERERS — 10. Kegiatan 2 (b): Diskusi Kelompok
+   ============================================================ */
+function renderK2b(){
+  return `
+  <div>
+    <span class="eyebrow">Kegiatan 2 &middot; Lanjutan</span>
+    <h2 class="page-title">2.2 Diskusi Kelompok</h2>
+    <p class="page-sub">Diskusikan bersama, lalu tuliskan kesimpulan kelompokmu.</p>
+    ${qaBlock('', 'Mengapa Indonesia masih sangat bergantung pada bahan bakar fosil, padahal potensi energi terbarukan Indonesia sangat besar? Diskusikan faktor-faktor penghambatnya!', 'k2-diskusi', 8)}
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 11. Kegiatan 3 (a): Studi Kasus
+   ============================================================ */
+function renderK3a(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian D &middot; Kegiatan 3</span>
+    <h2 class="page-title">Studi Kasus — Energi Terbarukan di Indonesia</h2>
+    <p class="page-sub"><b>Tujuan:</b> menganalisis penerapan energi terbarukan secara nyata di Indonesia dan merancang solusi inovatif.</p>
+    <div class="case-box">
+      <div class="case-box-tag">${ICONS.pin}Bacaan Studi Kasus</div>
+      <p>Desa Nglanggeran di Gunung Kidul, Yogyakarta, merupakan salah satu contoh keberhasilan penerapan biogas dari kotoran sapi. Warga desa memanfaatkan bioreaktor sederhana untuk mengolah kotoran ternak menjadi gas metana yang digunakan untuk memasak, penerangan, dan mengurangi pengeluaran rumah tangga. Program ini berhasil mengurangi penggunaan LPG secara signifikan dan sekaligus menjadi sumber pendapatan tambahan melalui pupuk organik (bioslurry) hasil sampingan proses biogas.</p>
+      <p>Di sisi lain, Kabupaten Sidrap di Sulawesi Selatan menjadi lokasi Pembangkit Listrik Tenaga Bayu (PLTB) pertama dan terbesar di Indonesia dengan kapasitas 75 MW, menggunakan 30 unit turbin angin yang mampu menyuplai listrik untuk sekitar 70.000 rumah tangga.</p>
+    </div>
+    <span class="eyebrow">3.1 Analisis Studi Kasus</span>
+    ${qaBlock('a.', 'Apa prinsip fisika yang mendasari konversi energi pada: (i) biogas, dan (ii) turbin angin? Jelaskan!', 'k3-1a', 4)}
+    ${qaBlock('b.', 'Sebutkan minimal 3 (tiga) manfaat sosial-ekonomi dari penerapan energi terbarukan di komunitas lokal berdasarkan studi kasus di atas!', 'k3-1b', 4)}
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 12. Kegiatan 3 (b): Proyek Mini
+   ============================================================ */
+function renderK3b(){
+  const rows = [
+    ['Jenis Energi Terbarukan yang Dipilih','k3-2-jenis'],
+    ['Alasan Pemilihan','k3-2-alasan'],
+    ['Cara Kerja Secara Singkat','k3-2-cara'],
+    ['Manfaat yang Diharapkan','k3-2-manfaat'],
+    ['Hambatan yang Mungkin Dihadapi','k3-2-hambatan'],
+    ['Solusi atas Hambatan','k3-2-solusi'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Kegiatan 3 &middot; Lanjutan</span>
+    <h2 class="page-title">3.2 Proyek Mini: Rancangan Solusi Energi</h2>
+    <p class="lead-text" style="font-size:13.5px;">Bayangkan Anda adalah seorang peneliti energi. Rancang sebuah solusi sederhana pemanfaatan energi terbarukan untuk sekolah Anda! Gunakan panduan berikut:</p>
+    <div style="overflow-x:auto;">
+      <table class="fill-table"><tbody>${rows.map(r=>fillRow1(r[0],r[1])).join('')}</tbody></table>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 13. Kegiatan 4: Divider / Chapter Opener
+   ============================================================ */
+function renderK4(){
+  return `
+  <div class="divider-page">
+    <div class="ico-big">${ICONS.compass}</div>
+    <span class="divider-kicker">Kegiatan 4</span>
+    <h2>Evaluasi &amp; Refleksi</h2>
+    <p class="lead-text">Peserta didik dapat mengevaluasi pemahaman diri dan merefleksikan kontribusi nyata terhadap keberlanjutan energi.</p>
+    <ul class="preview-list">
+      <li><span class="n">01</span><span>Menjawab 5 soal pilihan ganda</span></li>
+      <li><span class="n">02</span><span>Menjawab 4 soal uraian secara mandiri</span></li>
+      <li><span class="n">03</span><span>Mengisi refleksi diri setelah belajar</span></li>
+    </ul>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 14. E.I Soal Pilihan Ganda
+   ============================================================ */
+function renderPG(){
+  const qs = [
+    ['Pernyataan yang paling tepat tentang hukum kekekalan energi adalah &hellip;', [
+      'Energi dapat diciptakan dari bahan bakar fosil',
+      'Energi berubah bentuk namun jumlah totalnya tetap',
+      'Energi surya adalah energi yang paling efisien di alam',
+      'Energi terbarukan tidak dapat diubah menjadi listrik',
+      'Semua energi pada akhirnya akan musnah menjadi panas']],
+    ['Panel surya (fotovoltaik) bekerja berdasarkan prinsip &hellip;', [
+      'Efek Doppler','Efek termoelektrik','Efek fotolistrik','Efek Coriolis','Efek piezoelektrik']],
+    ['Berikut yang BUKAN merupakan keunggulan energi terbarukan adalah &hellip;', [
+      'Ramah lingkungan','Dapat diperbarui secara alami','Tidak menghasilkan emisi gas rumah kaca saat digunakan','Biaya investasi awal yang sangat murah','Tersedia secara lokal di berbagai daerah']],
+    ['Biomassa termasuk sumber energi terbarukan karena &hellip;', [
+      'Tidak menghasilkan gas CO2 sama sekali','Berasal dari organisme hidup yang terus-menerus ada','Lebih murah dari bahan bakar fosil','Tidak memerlukan teknologi khusus','Hanya dapat digunakan di daerah pedesaan']],
+    ['Salah satu tantangan utama pengembangan energi surya di Indonesia adalah &hellip;', [
+      'Posisi Indonesia yang jauh dari khatulistiwa','Kurangnya sinar matahari sepanjang tahun','Tingginya biaya investasi awal panel surya','Panel surya tidak dapat digunakan di iklim tropis','Energi surya tidak dapat disimpan dalam baterai']],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian E &middot; Soal Evaluasi</span>
+    <h2 class="page-title">I. Pilihan Ganda</h2>
+    <p class="page-sub">Kerjakan soal-soal berikut secara mandiri! Ketuk salah satu pilihan jawaban.</p>
+    ${qs.map((q,i)=>mcqBlock(i+1,q[0],q[1],'pg-'+(i+1))).join('')}
+  </div>`;
+}
+/* ============================================================
+   PAGE RENDERERS — 15. E.II Soal Uraian (1–2)
+   ============================================================ */
+function renderUraian1(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian E &middot; Soal Evaluasi</span>
+    <h2 class="page-title">II. Soal Uraian (No. 1&ndash;2)</h2>
+    <p class="page-sub">Jawablah pertanyaan berikut dengan lengkap dan sistematis!</p>
+    ${qaBlock('1.', 'Jelaskan mengapa bahan bakar fosil diklasifikasikan sebagai sumber energi tak terbarukan! Apa dampak utama penggunaan bahan bakar fosil terhadap lingkungan dan iklim global?', 'uraian-1', 6)}
+    ${qaBlock('2.', 'Sebutkan dan jelaskan minimal 4 (empat) jenis energi terbarukan yang memiliki potensi besar untuk dikembangkan di Indonesia! Sertakan lokasi atau daerah yang sesuai untuk pengembangannya.', 'uraian-2', 6)}
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 16. E.II Soal Uraian (3–4)
+   ============================================================ */
+function renderUraian2(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian E &middot; Soal Evaluasi</span>
+    <h2 class="page-title">II. Soal Uraian (No. 3&ndash;4)</h2>
+    <p class="page-sub">Lanjutkan jawabanmu dengan lengkap dan sistematis.</p>
+    ${qaBlock('3.', 'Analisislah proses konversi energi yang terjadi pada sebuah PLTA (Pembangkit Listrik Tenaga Air)! Tuliskan alur perubahan bentuk energinya secara lengkap.', 'uraian-3', 6)}
+    ${qaBlock('4.', 'Bagaimana peran individu (sebagai pelajar) dalam mendukung transisi menuju energi terbarukan dan pengurangan emisi karbon? Berikan contoh tindakan konkret!', 'uraian-4', 6)}
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 17. F. Refleksi Diri
+   ============================================================ */
+function renderRefleksi(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian F</span>
+    <h2 class="page-title">Refleksi Diri</h2>
+    <p class="page-sub">Isilah refleksi diri setelah menyelesaikan LKPD ini!</p>
+    <div class="reflect-grid">
+      <div class="reflect-cell"><label>Hal baru yang saya pelajari</label><textarea data-field="refleksi-baru" placeholder="Tulis di sini..."></textarea></div>
+      <div class="reflect-cell"><label>Hal yang masih perlu saya pelajari</label><textarea data-field="refleksi-perlu" placeholder="Tulis di sini..."></textarea></div>
+      <div class="reflect-cell"><label>Bagian yang paling menarik</label><textarea data-field="refleksi-menarik" placeholder="Tulis di sini..."></textarea></div>
+      <div class="reflect-cell"><label>Tindakan nyata yang akan saya lakukan</label><textarea data-field="refleksi-aksi" placeholder="Tulis di sini..."></textarea></div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 18. G. Daftar Pustaka
+   ============================================================ */
+function renderPustaka(){
+  const refs = [
+    'Giancoli, D. C. (2014). <i>Physics: Principles with Applications</i> (7th ed.). Pearson.',
+    'Kementerian Energi dan Sumber Daya Mineral. (2023). <i>Handbook of Energy and Economic Statistics of Indonesia 2023</i>. KESDM.',
+    'Surya, Y. (2016). <i>Fisika untuk SMA/MA Kelas X</i>. PT Kandel.',
+    'Zemansky, M. W., &amp; Dittman, R. H. (2013). <i>Heat and Thermodynamics</i> (8th ed.). McGraw-Hill.',
+    'IRENA. (2022). <i>Renewable Power Generation Costs in 2022</i>. International Renewable Energy Agency.',
+    'Badan Pengkajian dan Penerapan Teknologi (BPPT). (2022). <i>Outlook Energi Indonesia 2022</i>. BPPT.',
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian G</span>
+    <h2 class="page-title">Daftar Pustaka</h2>
+    <ul class="biblio-list">${refs.map(r=>`<li>${r}</li>`).join('')}</ul>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — 19. Penutup / Back Cover
+   ============================================================ */
+function renderPenutup(){
+  return `
+  <div class="backcover">
+    <div class="ico-big">${ICONS.check}</div>
+    <span class="divider-kicker">Selesai</span>
+    <h2>Terima kasih telah menuntaskan LKPD ini</h2>
+    <p class="lead-text">Semoga perjalananmu memahami siklus energi, sumber energi, dan energi terbarukan membekas — dan menjadi bekal langkah nyata menuju masa depan energi yang berkelanjutan.</p>
+    <button class="cover-cta" type="button" data-action="print">${ICONS.printer}&nbsp;Cetak Lembar Jawaban</button>
+    <button class="link-btn" type="button" data-goto="0">&larr; Kembali ke sampul</button>
+    <div class="cover-foot" style="margin-top:10px;">Disusun oleh Kelompok 5 &middot; Program Magister Pendidikan MIPA &middot; Universitas Indraprasta PGRI Jakarta &middot; 2026</div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGES REGISTRY
+   ============================================================ */
+const PAGES = [
+  { id:'cover', chapter:'Sampul', part:null, render:renderCover },
+  { id:'identitas', chapter:'Identitas & Daftar Isi', part:null, render:renderIdentitas },
+  { id:'kd', chapter:'A · Kompetensi & Tujuan', part:'A · Kompetensi Dasar', render:renderKD },
+  { id:'petunjuk', chapter:'B · Petunjuk Penggunaan', part:'B · Petunjuk', render:renderPetunjuk },
+  { id:'c1', chapter:'C.1 · Siklus Energi', part:'C · Materi Ringkas', render:renderC1 },
+  { id:'c2', chapter:'C.2 · Sumber Energi', part:'C · Materi Ringkas', render:renderC2 },
+  { id:'c3', chapter:'C.3 · Energi Terbarukan', part:'C · Materi Ringkas', render:renderC3 },
+  { id:'k1a', chapter:'D · Kegiatan 1 (Observasi)', part:'D · Kegiatan Belajar', render:renderK1a },
+  { id:'k1b', chapter:'D · Kegiatan 1 (Analisis)', part:'D · Kegiatan Belajar', render:renderK1b },
+  { id:'k2a', chapter:'D · Kegiatan 2 (Tabel)', part:'D · Kegiatan Belajar', render:renderK2a },
+  { id:'k2b', chapter:'D · Kegiatan 2 (Diskusi)', part:'D · Kegiatan Belajar', render:renderK2b },
+  { id:'k3a', chapter:'D · Kegiatan 3 (Studi Kasus)', part:'D · Kegiatan Belajar', render:renderK3a },
+  { id:'k3b', chapter:'D · Kegiatan 3 (Proyek Mini)', part:'D · Kegiatan Belajar', render:renderK3b },
+  { id:'k4', chapter:'D · Kegiatan 4 (Evaluasi & Refleksi)', part:'D · Kegiatan Belajar', render:renderK4 },
+  { id:'pg', chapter:'E · Pilihan Ganda', part:'E · Soal Evaluasi', render:renderPG },
+  { id:'uraian1', chapter:'E · Uraian (No. 1–2)', part:'E · Soal Evaluasi', render:renderUraian1 },
+  { id:'uraian2', chapter:'E · Uraian (No. 3–4)', part:'E · Soal Evaluasi', render:renderUraian2 },
+  { id:'refleksi', chapter:'F · Refleksi Diri', part:'F · Refleksi Diri', render:renderRefleksi },
+  { id:'pustaka', chapter:'G · Daftar Pustaka', part:'G · Daftar Pustaka', render:renderPustaka },
+  { id:'penutup', chapter:'Penutup', part:null, render:renderPenutup },
+];
+/* ============================================================
+   FIELD REGISTRY — every answerable field, for print & reset
+   ============================================================ */
+const FIELD_REGISTRY = [
+  {id:'id-nama', label:'Nama', section:'Identitas Peserta Didik', type:'text'},
+  {id:'id-kelas', label:'Kelas', section:'Identitas Peserta Didik', type:'text'},
+  {id:'id-absen', label:'No. Absen', section:'Identitas Peserta Didik', type:'text'},
+  {id:'id-tanggal', label:'Tanggal', section:'Identitas Peserta Didik', type:'text'},
+  {id:'k1-drawing', label:'1.1 Diagram siklus energi (gambar)', section:'Kegiatan 1', type:'canvas'},
+  {id:'k1-2a', label:'1.2a Makna &ldquo;energi tak dapat diciptakan/dimusnahkan&rdquo;', section:'Kegiatan 1', type:'text'},
+  {id:'k1-2b', label:'1.2b Peran matahari pada ekosistem hutan', section:'Kegiatan 1', type:'text'},
+  {id:'k1-2c', label:'1.2c Dampak jika energi matahari berkurang drastis', section:'Kegiatan 1', type:'text'},
+  {id:'k2-tak-contoh', label:'2.1 Contoh Sumber Energi — Tak Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-bar-contoh', label:'2.1 Contoh Sumber Energi — Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-tak-ketersediaan', label:'2.1 Ketersediaan — Tak Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-bar-ketersediaan', label:'2.1 Ketersediaan — Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-tak-dampak', label:'2.1 Dampak Lingkungan — Tak Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-bar-dampak', label:'2.1 Dampak Lingkungan — Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-tak-biaya', label:'2.1 Biaya Awal — Tak Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-bar-biaya', label:'2.1 Biaya Awal — Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-tak-berkelanjutan', label:'2.1 Keberlanjutan — Tak Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-bar-berkelanjutan', label:'2.1 Keberlanjutan — Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-tak-potensi', label:'2.1 Potensi di Indonesia — Tak Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-bar-potensi', label:'2.1 Potensi di Indonesia — Terbarukan', section:'Kegiatan 2', type:'text'},
+  {id:'k2-diskusi', label:'2.2 Diskusi: ketergantungan pada bahan bakar fosil', section:'Kegiatan 2', type:'text'},
+  {id:'k3-1a', label:'3.1a Prinsip fisika biogas & turbin angin', section:'Kegiatan 3', type:'text'},
+  {id:'k3-1b', label:'3.1b Manfaat sosial-ekonomi energi terbarukan', section:'Kegiatan 3', type:'text'},
+  {id:'k3-2-jenis', label:'3.2 Jenis Energi Terbarukan yang Dipilih', section:'Kegiatan 3', type:'text'},
+  {id:'k3-2-alasan', label:'3.2 Alasan Pemilihan', section:'Kegiatan 3', type:'text'},
+  {id:'k3-2-cara', label:'3.2 Cara Kerja Secara Singkat', section:'Kegiatan 3', type:'text'},
+  {id:'k3-2-manfaat', label:'3.2 Manfaat yang Diharapkan', section:'Kegiatan 3', type:'text'},
+  {id:'k3-2-hambatan', label:'3.2 Hambatan yang Mungkin Dihadapi', section:'Kegiatan 3', type:'text'},
+  {id:'k3-2-solusi', label:'3.2 Solusi atas Hambatan', section:'Kegiatan 3', type:'text'},
+  {id:'pg-1', label:'PG No. 1 — Hukum kekekalan energi', section:'Soal Evaluasi', type:'mcq', options:['Energi dapat diciptakan dari bahan bakar fosil','Energi berubah bentuk namun jumlah totalnya tetap','Energi surya adalah energi yang paling efisien di alam','Energi terbarukan tidak dapat diubah menjadi listrik','Semua energi pada akhirnya akan musnah menjadi panas']},
+  {id:'pg-2', label:'PG No. 2 — Prinsip panel surya', section:'Soal Evaluasi', type:'mcq', options:['Efek Doppler','Efek termoelektrik','Efek fotolistrik','Efek Coriolis','Efek piezoelektrik']},
+  {id:'pg-3', label:'PG No. 3 — Bukan keunggulan energi terbarukan', section:'Soal Evaluasi', type:'mcq', options:['Ramah lingkungan','Dapat diperbarui secara alami','Tidak menghasilkan emisi gas rumah kaca saat digunakan','Biaya investasi awal yang sangat murah','Tersedia secara lokal di berbagai daerah']},
+  {id:'pg-4', label:'PG No. 4 — Biomassa sebagai energi terbarukan', section:'Soal Evaluasi', type:'mcq', options:['Tidak menghasilkan gas CO2 sama sekali','Berasal dari organisme hidup yang terus-menerus ada','Lebih murah dari bahan bakar fosil','Tidak memerlukan teknologi khusus','Hanya dapat digunakan di daerah pedesaan']},
+  {id:'pg-5', label:'PG No. 5 — Tantangan energi surya di Indonesia', section:'Soal Evaluasi', type:'mcq', options:['Posisi Indonesia yang jauh dari khatulistiwa','Kurangnya sinar matahari sepanjang tahun','Tingginya biaya investasi awal panel surya','Panel surya tidak dapat digunakan di iklim tropis','Energi surya tidak dapat disimpan dalam baterai']},
+  {id:'uraian-1', label:'Uraian No. 1 — Bahan bakar fosil sebagai energi tak terbarukan', section:'Soal Evaluasi', type:'text'},
+  {id:'uraian-2', label:'Uraian No. 2 — 4 jenis energi terbarukan potensial di Indonesia', section:'Soal Evaluasi', type:'text'},
+  {id:'uraian-3', label:'Uraian No. 3 — Konversi energi pada PLTA', section:'Soal Evaluasi', type:'text'},
+  {id:'uraian-4', label:'Uraian No. 4 — Peran pelajar dalam transisi energi', section:'Soal Evaluasi', type:'text'},
+  {id:'refleksi-baru', label:'Hal baru yang saya pelajari', section:'Refleksi Diri', type:'text'},
+  {id:'refleksi-perlu', label:'Hal yang masih perlu saya pelajari', section:'Refleksi Diri', type:'text'},
+  {id:'refleksi-menarik', label:'Bagian yang paling menarik', section:'Refleksi Diri', type:'text'},
+  {id:'refleksi-aksi', label:'Tindakan nyata yang akan saya lakukan', section:'Refleksi Diri', type:'text'},
+];
+/* ============================================================
+   RENDER + HYDRATE INTO A FACE
+   ============================================================ */
+function renderInto(el, idx){
+  el.innerHTML = PAGES[idx].render();
+  hydratePage(el);
+}
+
+/* ============================================================
+   NAVIGATION / PAGE-FLIP MECHANIC
+   ============================================================ */
+let currentIndex = 0;
+let isAnimating = false;
+
+function updateNavDisabled(){
+  document.getElementById('btnPrev').disabled = isAnimating || currentIndex === 0;
+  document.getElementById('btnNext').disabled = isAnimating || currentIndex === PAGES.length - 1;
+}
+
+function updateChrome(){
+  document.getElementById('runningHead').textContent = PAGES[currentIndex].chapter;
+  document.getElementById('pageIndicator').textContent = (currentIndex+1) + ' / ' + PAGES.length;
+  document.getElementById('progressFill').style.width = (((currentIndex+1)/PAGES.length)*100).toFixed(1) + '%';
+  updateNavDisabled();
+  updateTocActive();
+}
+
+function goTo(targetIndex){
+  if (isAnimating || targetIndex === currentIndex || targetIndex < 0 || targetIndex >= PAGES.length) return;
+  const direction = targetIndex > currentIndex ? 1 : -1;
+  isAnimating = true;
+  updateNavDisabled();
+  closeTOC();
+
+  const flipper = document.getElementById('flipper');
+  const back = document.getElementById('faceBack');
+  const front = document.getElementById('faceFront');
+
+  renderInto(back, targetIndex);
+  back.scrollTop = 0;
+
+  flipper.classList.remove('no-anim');
+  void flipper.offsetWidth;
+  flipper.classList.add(direction === 1 ? 'flip-next' : 'flip-prev');
+
+  let done = false;
+  const fallback = setTimeout(finish, 900);
+  function finish(){
+    if (done) return;
+    done = true;
+    flipper.removeEventListener('transitionend', onEnd);
+    clearTimeout(fallback);
+
+    renderInto(front, targetIndex);
+    front.scrollTop = 0;
+    back.innerHTML = '';
+
+    flipper.classList.add('no-anim');
+    flipper.classList.remove('flip-next','flip-prev');
+    void flipper.offsetWidth;
+    flipper.classList.remove('no-anim');
+
+    currentIndex = targetIndex;
+    updateChrome();
+    isAnimating = false;
+    updateNavDisabled();
+  }
+  function onEnd(e){
+    if (e.target !== flipper || e.propertyName !== 'transform') return;
+    finish();
+  }
+  flipper.addEventListener('transitionend', onEnd);
+}
+
+/* ============================================================
+   TABLE OF CONTENTS DRAWER
+   ============================================================ */
+function renderTOC(){
+  const list = document.getElementById('tocList');
+  let html = '';
+  let lastPart;
+  PAGES.forEach((p, i) => {
+    if (p.part !== lastPart){
+      if (p.part) html += `<div class="toc-item section-label">${p.part}</div>`;
+      lastPart = p.part;
+    }
+    html += `<button type="button" class="toc-item" data-goto="${i}" data-toc-idx="${i}"><span class="num">${String(i+1).padStart(2,'0')}</span><span>${p.chapter}</span></button>`;
+  });
+  list.innerHTML = html;
+}
+function updateTocActive(){
+  document.querySelectorAll('.toc-item[data-toc-idx]').forEach(el => {
+    el.classList.toggle('active', +el.getAttribute('data-toc-idx') === currentIndex);
+  });
+}
+function openTOC(){ document.getElementById('tocOverlay').classList.add('open'); updateTocActive(); }
+function closeTOC(){ document.getElementById('tocOverlay').classList.remove('open'); }
+
+/* ============================================================
+   PRINT — builds a plain printable answer sheet on demand
+   ============================================================ */
+function escapeHtml(str){
+  const d = document.createElement('div');
+  d.textContent = str == null ? '' : str;
+  return d.innerHTML;
+}
+async function preparePrint(){
+  const sheet = document.getElementById('printSheet');
+  const results = await Promise.all(FIELD_REGISTRY.map(async f => {
+    const val = Object.prototype.hasOwnProperty.call(memoryCache, f.id) ? memoryCache[f.id] : await loadField(f.id);
+    return Object.assign({}, f, {val});
+  }));
+  const bySection = {};
+  results.forEach(r => { (bySection[r.section] = bySection[r.section] || []).push(r); });
+
+  let html = `<h1>Energi dalam Kehidupan — LKPD Kelompok 5</h1>
+  <div class="p-meta">Fisika SMA Kelas X &middot; Program Magister Pendidikan MIPA, Universitas Indraprasta PGRI Jakarta</div>`;
+
+  Object.keys(bySection).forEach(section => {
+    html += `<h2>${escapeHtml(section)}</h2>`;
+    bySection[section].forEach(f => {
+      html += `<div class="p-item"><span class="p-label">${escapeHtml(f.label)}</span>`;
+      if (f.type === 'canvas'){
+        html += f.val ? `<img src="${f.val}" alt="Gambar jawaban">` : `<div class="p-val">(belum digambar)</div>`;
+      } else if (f.type === 'mcq'){
+        const idx = ['A','B','C','D','E'].indexOf(f.val);
+        const text = idx >= 0 && f.options ? f.options[idx] : '';
+        html += `<div class="p-val">${f.val ? escapeHtml(f.val + ' — ' + text) : '(belum dipilih)'}</div>`;
+      } else {
+        html += `<div class="p-val">${escapeHtml(f.val || '(belum diisi)')}</div>`;
+      }
+      html += `</div>`;
+    });
+  });
+  sheet.innerHTML = html;
+  setTimeout(() => window.print(), 80);
+}
+
+/* ============================================================
+   RESET ALL ANSWERS
+   ============================================================ */
+function resetAllAnswers(){
+  const ok = window.confirm('Yakin ingin menghapus SEMUA jawaban yang sudah diisi? Tindakan ini tidak dapat dibatalkan.');
+  if (!ok) return;
+  FIELD_REGISTRY.forEach(f => {
+    delete memoryCache[f.id];
+    if (hasStorage()){
+      try{ window.storage.delete(STORAGE_PREFIX + f.id).catch(()=>{}); }catch(e){}
+    }
+  });
+  renderInto(document.getElementById('faceFront'), currentIndex);
+  closeTOC();
+  showToast('Semua jawaban telah direset');
+}
+
+/* ============================================================
+   KEYBOARD & SWIPE NAVIGATION
+   ============================================================ */
+document.addEventListener('keydown', (e) => {
+  const overlayOpen = document.getElementById('tocOverlay').classList.contains('open');
+  if (overlayOpen) return;
+  const activeTag = document.activeElement ? document.activeElement.tagName : '';
+  if (activeTag === 'TEXTAREA' || activeTag === 'INPUT') return;
+  if (e.key === 'ArrowRight') goTo(currentIndex + 1);
+  if (e.key === 'ArrowLeft') goTo(currentIndex - 1);
+});
+
+let touchStartX = null;
+document.addEventListener('DOMContentLoaded', () => {
+  const stageEl = document.querySelector('.flip-stage');
+  if (!stageEl) return;
+  stageEl.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, {passive:true});
+  stageEl.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 60){ dx < 0 ? goTo(currentIndex + 1) : goTo(currentIndex - 1); }
+    touchStartX = null;
+  }, {passive:true});
+});
+
+/* ============================================================
+   GLOBAL CLICK DELEGATION (data-goto / data-action)
+   ============================================================ */
+document.getElementById('app').addEventListener('click', (e) => {
+  const gotoBtn = e.target.closest('[data-goto]');
+  if (gotoBtn){ goTo(parseInt(gotoBtn.getAttribute('data-goto'), 10)); return; }
+  const printTrigger = e.target.closest('[data-action="print"]');
+  if (printTrigger){ preparePrint(); return; }
+});
+document.getElementById('btnPrev').addEventListener('click', () => goTo(currentIndex - 1));
+document.getElementById('btnNext').addEventListener('click', () => goTo(currentIndex + 1));
+document.getElementById('tocBtn').addEventListener('click', openTOC);
+document.getElementById('tocCloseBtn').addEventListener('click', closeTOC);
+document.getElementById('tocOverlay').addEventListener('click', (e) => { if (e.target.id === 'tocOverlay') closeTOC(); });
+document.getElementById('resetBtn').addEventListener('click', resetAllAnswers);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeTOC(); });
+
+/* ============================================================
+   INIT
+   ============================================================ */
+renderTOC();
+renderInto(document.getElementById('faceFront'), 0);
+updateChrome();
+
+/* ============================================================
+   DEBUG HOOKS — harmless introspection, no behavior change
+   ============================================================ */
+window.PAGES = PAGES;
+window.FIELD_REGISTRY = FIELD_REGISTRY;
+window.memoryCache = memoryCache;
+window.__getCurrentIndex = () => currentIndex;
+window.__isAnimating = () => isAnimating;
+
+</script>
+</body>
+</html>
