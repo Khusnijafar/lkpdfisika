@@ -522,6 +522,191 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,
 .backcover .cover-cta:hover{box-shadow:0 14px 26px -8px rgba(13,79,83,.55);}
 .link-btn{background:none; border:none; color:var(--teal-deep); font-family:var(--font-mono); font-size:12.5px; text-decoration:underline; cursor:pointer; padding:6px;}
 
+/* ============ INFO NOTE / DID-YOU-KNOW ============ */
+.info-note{
+  display:flex; gap:11px; align-items:flex-start;
+  background:linear-gradient(180deg,#F1F6F2,#E6F0EC);
+  border:1px solid #BEDAD0; border-radius:var(--radius-m);
+  padding:12px 15px; margin:16px 0; font-size:13px; line-height:1.6; color:var(--teal-deep);
+}
+.info-note .ico{flex:none; width:22px; height:22px; color:var(--teal-bright); margin-top:1px;}
+.info-note .ico svg{width:100%; height:100%;}
+.info-note b{color:var(--teal-deep);}
+
+/* ============ FORMULA CARDS (C.4) ============ */
+.forms-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:9px; margin-bottom:18px;}
+.form-chip{
+  display:flex; align-items:center; gap:9px; background:var(--paper-deep);
+  border:1px solid var(--paper-line); border-radius:var(--radius-s); padding:9px 11px;
+}
+.form-chip .ico{flex:none; width:30px; height:30px; border-radius:8px; background:var(--paper); display:flex; align-items:center; justify-content:center; box-shadow:0 1px 3px rgba(var(--shadow-color),.12);}
+.form-chip .ico svg{width:19px; height:19px; color:var(--ember);}
+.form-chip b{display:block; font-size:12.5px; line-height:1.2;}
+.form-chip span{font-size:11px; color:var(--ink-soft);}
+@media (max-width:520px){.forms-grid{grid-template-columns:1fr;}}
+
+.formula-stack{display:flex; flex-direction:column; gap:11px; margin:6px 0 4px;}
+.formula-card{
+  position:relative; overflow:hidden;
+  background:linear-gradient(155deg,#2B2318 0%,#1D1710 100%);
+  border-radius:var(--radius-m); padding:15px 17px 14px;
+  box-shadow:0 8px 20px -10px rgba(var(--shadow-color),.5);
+}
+.formula-card::before{
+  content:""; position:absolute; right:-30px; top:-30px; width:110px; height:110px;
+  background:radial-gradient(circle, rgba(226,148,31,.28), transparent 70%); pointer-events:none;
+}
+.formula-card .fc-name{font-family:var(--font-mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--sun-bright); font-weight:600; margin-bottom:8px;}
+.formula-eq{
+  font-family:var(--font-display); font-size:clamp(23px,5.6vw,29px); color:var(--cream-on-dark);
+  font-weight:600; letter-spacing:.01em; line-height:1.2; margin-bottom:12px;
+}
+.formula-eq sub{font-size:.52em; font-weight:500; opacity:.9;}
+.formula-eq sup{font-size:.55em;}
+.formula-eq .frac{display:inline-flex; flex-direction:column; text-align:center; font-size:.62em; line-height:1.05; vertical-align:middle; margin:0 2px;}
+.formula-eq .frac .top{border-bottom:1.5px solid var(--cream-on-dark); padding:0 4px;}
+.formula-eq .frac .bot{padding:0 4px;}
+.formula-legend{display:flex; flex-wrap:wrap; gap:5px 14px; font-family:var(--font-mono); font-size:11px; color:#D9C9A8;}
+.formula-legend span{white-space:nowrap;}
+.formula-legend b{color:var(--sun-bright); font-weight:600;}
+
+/* ============ WORKED EXAMPLE ============ */
+.worked{
+  background:#FBF6EA; border:1.5px solid var(--paper-deeper); border-radius:var(--radius-m);
+  padding:0; margin:16px 0; overflow:hidden;
+}
+.worked-head{
+  display:flex; align-items:center; gap:8px; background:var(--teal-deep); color:var(--cream-on-dark);
+  padding:9px 15px; font-family:var(--font-mono); font-size:11px; letter-spacing:.08em; text-transform:uppercase; font-weight:600;
+}
+.worked-head svg{width:15px; height:15px;}
+.worked-body{padding:13px 16px 15px;}
+.worked-body .prob{font-size:13.5px; line-height:1.6; margin-bottom:12px; padding-bottom:12px; border-bottom:1px dashed var(--paper-deeper);}
+.worked-step{display:flex; gap:10px; margin-bottom:9px; font-size:13px; line-height:1.55;}
+.worked-step .s-num{flex:none; width:20px; height:20px; border-radius:50%; background:var(--sun); color:#3a2405; font-family:var(--font-mono); font-weight:700; font-size:11px; display:flex; align-items:center; justify-content:center;}
+.worked-math{font-family:var(--font-mono); font-size:12.5px; background:#FFFCF4; border:1px solid var(--paper-deeper); border-radius:6px; padding:6px 10px; margin:4px 0 2px; display:inline-block; color:var(--ember-deep);}
+.worked-answer{margin-top:11px; padding:10px 13px; background:#EAF3EF; border-left:4px solid var(--teal-bright); border-radius:0 var(--radius-s) var(--radius-s) 0; font-size:13px;}
+.worked-answer b{color:var(--teal-deep);}
+
+/* ============ INTERACTIVE CALCULATOR (Lab) ============ */
+.lab-intro{font-size:13.5px; line-height:1.65; margin-bottom:14px;}
+.calc{
+  background:linear-gradient(180deg,#fffdf7,var(--paper-deep));
+  border:1.5px solid var(--paper-line); border-radius:var(--radius-l);
+  padding:16px 16px 18px; margin-bottom:16px; box-shadow:0 4px 14px -8px rgba(var(--shadow-color),.25);
+}
+.calc-title{display:flex; align-items:center; gap:8px; font-family:var(--font-display); font-weight:700; font-size:15.5px; margin-bottom:4px;}
+.calc-title .dot{width:9px; height:9px; border-radius:50%; background:var(--ember); box-shadow:0 0 0 4px rgba(184,68,26,.16);}
+.calc-sub{font-size:12px; color:var(--ink-soft); margin-bottom:14px;}
+.calc-row{margin-bottom:14px;}
+.calc-row .rl{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px;}
+.calc-row .rl label{font-family:var(--font-mono); font-size:11px; letter-spacing:.03em; color:var(--teal-deep); font-weight:600; text-transform:uppercase;}
+.calc-val{font-family:var(--font-mono); font-size:13px; color:var(--ember-deep); font-weight:600; background:#fff; border:1px solid var(--paper-deeper); border-radius:6px; padding:2px 9px;}
+.calc-slider{
+  -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:6px;
+  background:linear-gradient(90deg,var(--sun),var(--teal-bright)); outline:none; cursor:pointer;
+}
+.calc-slider::-webkit-slider-thumb{-webkit-appearance:none; appearance:none; width:22px; height:22px; border-radius:50%; background:#fff; border:3px solid var(--ember); cursor:pointer; box-shadow:0 2px 5px rgba(var(--shadow-color),.3);}
+.calc-slider::-moz-range-thumb{width:20px; height:20px; border-radius:50%; background:#fff; border:3px solid var(--ember); cursor:pointer;}
+.calc-readout{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin-top:6px;}
+.readout-card{background:#2B2318; border-radius:var(--radius-m); padding:12px 10px; text-align:center; position:relative; overflow:hidden;}
+.readout-card .rc-label{font-family:var(--font-mono); font-size:9.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--sun-bright); margin-bottom:5px;}
+.readout-card .rc-value{font-family:var(--font-display); font-size:clamp(18px,4.6vw,23px); font-weight:700; color:var(--cream-on-dark); line-height:1; transition:color .2s;}
+.readout-card .rc-unit{font-family:var(--font-mono); font-size:10px; color:#B9A986; margin-top:3px;}
+.readout-card.flash .rc-value{color:var(--sun-bright);}
+.calc-bar-wrap{margin-top:13px;}
+.calc-bar-wrap .bl{display:flex; justify-content:space-between; font-family:var(--font-mono); font-size:10px; color:var(--ink-soft); margin-bottom:4px; text-transform:uppercase; letter-spacing:.04em;}
+.calc-bar{height:22px; border-radius:7px; background:var(--paper-deeper); overflow:hidden; display:flex;}
+.calc-bar .seg-ek{background:linear-gradient(90deg,var(--ember-bright),var(--ember)); transition:width .3s ease;}
+.calc-bar .seg-ep{background:linear-gradient(90deg,var(--teal-bright),var(--teal)); transition:width .3s ease;}
+.calc-legend{display:flex; gap:16px; margin-top:8px; font-size:11.5px; color:var(--ink-soft);}
+.calc-legend i{display:inline-block; width:11px; height:11px; border-radius:3px; margin-right:5px; vertical-align:middle;}
+.calc-note{font-size:12px; font-style:italic; color:var(--ink-soft); margin-top:12px; line-height:1.55; display:flex; gap:8px;}
+.calc-note svg{flex:none; width:16px; height:16px; color:var(--sun-deep); margin-top:1px;}
+.calc-select{display:flex; gap:7px; flex-wrap:wrap; margin-bottom:14px;}
+.calc-preset{font-family:var(--font-mono); font-size:11px; padding:6px 11px; border-radius:999px; border:1.5px solid var(--paper-deeper); background:#fff; cursor:pointer; color:var(--ink-soft); transition:all .15s;}
+.calc-preset:hover{border-color:var(--teal-bright); color:var(--teal-deep);}
+.calc-preset.active{background:var(--teal-deep); border-color:var(--teal-deep); color:var(--cream-on-dark);}
+
+/* ============ MCQ SELF-CHECK ADDITIONS ============ */
+.mcq-opt .letter .tick{display:none;}
+.mcq-opt.correct{border-color:var(--teal-bright); background:#E7F3EE;}
+.mcq-opt.correct .letter{background:var(--teal-bright); border-color:var(--teal-bright); color:#fff;}
+.mcq-opt.incorrect{border-color:var(--ember); background:#FBEBE4;}
+.mcq-opt.incorrect .letter{background:var(--ember); border-color:var(--ember); color:#fff;}
+.mcq-opt.locked{cursor:default;}
+.mcq-opt.dimmed{opacity:.55;}
+.mcq-feedback{
+  display:none; margin-top:10px; padding:11px 13px; border-radius:var(--radius-s); font-size:12.7px; line-height:1.6;
+  border-left:4px solid;
+}
+.mcq-feedback.show{display:block; animation:fbIn .3s ease;}
+.mcq-feedback.right{background:#E7F3EE; border-color:var(--teal-bright); color:var(--teal-deep);}
+.mcq-feedback.wrong{background:#FBEBE4; border-color:var(--ember); color:var(--ember-deep);}
+.mcq-feedback .fb-verdict{font-family:var(--font-mono); font-size:11px; letter-spacing:.05em; text-transform:uppercase; font-weight:700; display:block; margin-bottom:4px;}
+@keyframes fbIn{from{opacity:0; transform:translateY(-4px);} to{opacity:1; transform:translateY(0);}}
+
+.quiz-actions{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin-top:6px; padding-top:16px; border-top:1px dashed var(--paper-line);}
+.quiz-btn{
+  display:inline-flex; align-items:center; gap:8px; background:var(--teal-deep); color:var(--cream-on-dark);
+  border:none; border-radius:999px; font-family:var(--font-body); font-weight:700; font-size:13.5px;
+  padding:10px 20px; cursor:pointer; box-shadow:0 6px 16px -8px rgba(13,79,83,.6); transition:transform .15s ease, box-shadow .15s ease;
+}
+.quiz-btn:hover{transform:translateY(-1px); box-shadow:0 9px 20px -8px rgba(13,79,83,.65);}
+.quiz-btn svg{width:16px; height:16px;}
+.quiz-btn.ghost{background:none; color:var(--teal-deep); border:1.5px solid var(--paper-deeper); box-shadow:none;}
+.quiz-btn.ghost:hover{background:var(--paper-deep);}
+.quiz-score{font-family:var(--font-mono); font-size:13px; color:var(--ink-soft);}
+.quiz-score b{color:var(--ember-deep); font-size:16px;}
+
+/* numeric self-check input */
+.num-solve{margin:14px 0 18px; padding-bottom:16px; border-bottom:1px dashed var(--paper-line);}
+.num-solve:last-of-type{border-bottom:none;}
+.num-q{display:flex; gap:9px; font-size:13.7px; line-height:1.58; margin-bottom:10px;}
+.num-q .tag{flex:none; font-family:var(--font-mono); font-weight:700; color:var(--ember-deep);}
+.num-input-row{display:flex; align-items:center; gap:9px; flex-wrap:wrap;}
+.num-input-row .pretext{font-size:12.5px; color:var(--ink-soft); font-family:var(--font-mono);}
+.num-input{
+  font-family:var(--font-mono); font-size:14px; color:var(--ink); width:120px;
+  border:1.5px solid var(--paper-deeper); border-radius:var(--radius-s); background:#fffdf7; padding:8px 11px; outline:none; transition:border-color .15s;
+}
+.num-input:focus{border-color:var(--teal-bright); background:#fff;}
+.num-unit{font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft);}
+.num-check-btn{font-family:var(--font-mono); font-size:11.5px; padding:8px 14px; border-radius:999px; border:1.5px solid var(--teal-deep); background:var(--teal-deep); color:var(--cream-on-dark); cursor:pointer;}
+.num-check-btn:hover{background:var(--teal-bright); border-color:var(--teal-bright);}
+.num-feedback{display:none; margin-top:9px; font-size:12.3px; line-height:1.55; padding:9px 12px; border-radius:var(--radius-s); border-left:4px solid;}
+.num-feedback.show{display:block; animation:fbIn .3s ease;}
+.num-feedback.right{background:#E7F3EE; border-color:var(--teal-bright); color:var(--teal-deep);}
+.num-feedback.wrong{background:#FBEBE4; border-color:var(--ember); color:var(--ember-deep);}
+.num-feedback .reveal{display:block; margin-top:5px; font-family:var(--font-mono); font-size:11.5px; color:var(--ink-soft);}
+
+/* ============ GLOSSARY ============ */
+.gloss-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:0;}
+.gloss-item{padding:12px 2px; border-bottom:1px solid var(--paper-line); display:grid; grid-template-columns:auto 1fr; gap:12px; align-items:start;}
+.gloss-item:last-child{border-bottom:none;}
+.gloss-term{font-family:var(--font-display); font-weight:700; font-size:14px; color:var(--ember-deep); min-width:118px;}
+.gloss-def{font-size:12.8px; line-height:1.58; color:var(--ink);}
+@media (max-width:520px){.gloss-item{grid-template-columns:1fr; gap:3px;}}
+
+/* ============ COMPLETION SUMMARY (Penutup) ============ */
+.completion{
+  background:var(--paper-deep); border:1.5px solid var(--paper-line); border-radius:var(--radius-l);
+  padding:16px 20px; margin:4px auto 14px; max-width:420px; width:100%;
+}
+.completion-top{display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;}
+.completion-top .ct-label{font-family:var(--font-mono); font-size:11px; letter-spacing:.06em; text-transform:uppercase; color:var(--teal-deep); font-weight:600;}
+.completion-top .ct-pct{font-family:var(--font-display); font-weight:700; font-size:22px; color:var(--ember-deep);}
+.completion-bar{height:10px; border-radius:6px; background:var(--paper-deeper); overflow:hidden;}
+.completion-bar > div{height:100%; border-radius:6px; background:linear-gradient(90deg,var(--sun),var(--teal)); width:0; transition:width .6s ease;}
+.completion-hint{font-size:12px; color:var(--ink-soft); margin-top:9px; text-align:left;}
+
+/* ============ CONCEPT-CHECK CHIPS (interleaved mini quiz) ============ */
+.self-tip{
+  display:inline-flex; align-items:center; gap:6px; font-family:var(--font-mono); font-size:10.5px;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--sun-deep); font-weight:600; margin:2px 0 10px;
+}
+.self-tip svg{width:14px; height:14px;}
+
 /* ============ PRINT SHEET ============ */
 .print-sheet{display:none;}
 @media print{
@@ -571,7 +756,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,
         </div>
         <div class="book-footer">
           <button class="nav-btn" id="btnPrev" aria-label="Halaman sebelumnya">&#8249;</button>
-          <span class="page-indicator" id="pageIndicator">1 / 20</span>
+          <span class="page-indicator" id="pageIndicator">1 / 25</span>
           <button class="nav-btn" id="btnNext" aria-label="Halaman berikutnya">&#8250;</button>
         </div>
       </div>
@@ -619,7 +804,15 @@ const ICONS = {
   check: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l5 5L20 6"/></svg>`,
   printer: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V3h12v6"/><path d="M6 18H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-2"/><rect x="6" y="14" width="12" height="7"/></svg>`,
   arrowDown: `<svg viewBox="0 0 24 32" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="2" x2="12" y2="23"/><path d="M6 17l6 8 6-8"/></svg>`,
-  compass: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M30 18l-4 9-9 4 4-9Z"/></svg>`
+  compass: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="24" r="18"/><path d="M30 18l-4 9-9 4 4-9Z"/></svg>`,
+  info: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.5" r="1" fill="currentColor" stroke="none"/></svg>`,
+  bulb: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.8.8 1 1.5 1 2.5h6c0-1 .2-1.7 1-2.5A6 6 0 0 0 12 3Z"/></svg>`,
+  calc: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="5" width="30" height="38" rx="4"/><rect x="15" y="11" width="18" height="7" rx="1.5"/><line x1="16" y1="26" x2="16" y2="26"/><line x1="24" y1="26" x2="24" y2="26"/><line x1="32" y1="26" x2="32" y2="26"/><line x1="16" y1="33" x2="16" y2="33"/><line x1="24" y1="33" x2="24" y2="33"/><line x1="32" y1="33" x2="32" y2="38"/><line x1="16" y1="38" x2="24" y2="38"/></svg>`,
+  beaker: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M19 6v13L9 37a4 4 0 0 0 3.5 6h23A4 4 0 0 0 39 37L29 19V6"/><line x1="16" y1="6" x2="32" y2="6"/><path d="M14 29c4-2 7 2 10 0s6-2 10 0"/></svg>`,
+  atom: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="24" cy="24" r="3.4" fill="currentColor" stroke="none"/><ellipse cx="24" cy="24" rx="20" ry="8"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(120 24 24)"/></svg>`,
+  scale: `<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="24" y1="7" x2="24" y2="41"/><line x1="13" y1="41" x2="35" y2="41"/><path d="M24 11 10 17l-5 11a7 7 0 0 0 14 0Z"/><path d="M24 11l14 6 5 11a7 7 0 0 1-14 0Z"/></svg>`,
+  refresh: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-2.6-6.4"/><path d="M21 4v5h-5"/></svg>`,
+  sparkle: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2Z"/></svg>`
 };
 /* ============================================================
    STORAGE LAYER — memoryCache (sync, always works within session)
@@ -702,13 +895,149 @@ function hydratePage(root){
         const letter = btn.getAttribute('data-mcq-option');
         applySelected(letter);
         scheduleSave(qid, letter);
+        clearMcqFeedback(group);   // allow changing answer, then re-checking
       });
     });
   });
 
+  // quiz self-check bar (Periksa Jawaban / Ulangi)
+  const checkBtn = root.querySelector('[data-quiz-check]');
+  if (checkBtn) checkBtn.addEventListener('click', () => checkQuizPage(root));
+  const clearBtn2 = root.querySelector('[data-quiz-clear]');
+  if (clearBtn2) clearBtn2.addEventListener('click', () => clearQuizPage(root));
+
+  // numeric problems (instant tolerance-based check)
+  root.querySelectorAll('[data-num]').forEach(block => {
+    const btn = block.querySelector('[data-num-check]');
+    const input = block.querySelector('[data-num-input]');
+    if (btn) btn.addEventListener('click', () => checkNumeric(block));
+    if (input) input.addEventListener('keydown', (e) => { if (e.key === 'Enter'){ e.preventDefault(); checkNumeric(block); } });
+    if (input) input.addEventListener('input', () => {
+      const fb = block.querySelector('[data-num-feedback]');
+      if (fb) fb.classList.remove('show');
+    });
+  });
+
+  // interactive energy calculator
+  const calc = root.querySelector('[data-calc]');
+  if (calc) initEnergyCalc(calc);
+
+  // completion summary (Penutup)
+  const comp = root.querySelector('[data-completion]');
+  if (comp) updateCompletion(comp);
+
   // drawing canvas
   const canvas = root.querySelector('[data-canvas]');
   if (canvas) initDrawingPad(canvas, root);
+}
+
+/* ============================================================
+   SELF-CHECK ENGINE — answer key, MCQ checking, numeric checking
+   ============================================================ */
+const ANSWER_KEY = {
+  'pg-1': {letter:'B', explain:'Hukum kekekalan energi: energi tidak dapat diciptakan atau dimusnahkan, hanya berubah bentuk — jumlah total energi dalam sistem tertutup selalu tetap.'},
+  'pg-2': {letter:'C', explain:'Sel surya (fotovoltaik) memanfaatkan efek fotolistrik: foton cahaya matahari melepaskan elektron pada bahan semikonduktor sehingga timbul arus listrik.'},
+  'pg-3': {letter:'D', explain:'Biaya investasi awal energi terbarukan justru cenderung tinggi (panel, turbin, instalasi). Keunggulannya terletak pada aspek lingkungan dan keberlanjutan, bukan biaya awal.'},
+  'pg-4': {letter:'B', explain:'Biomassa tergolong terbarukan karena bersumber dari makhluk hidup (tumbuhan, limbah organik) yang dapat terus tumbuh dan diproduksi ulang secara alami.'},
+  'pg-5': {letter:'C', explain:'Indonesia berada di garis khatulistiwa sehingga kaya sinar matahari sepanjang tahun. Kendala utamanya adalah tingginya biaya awal panel surya dan infrastruktur pendukung.'},
+  'pg-6': {letter:'C', explain:'Eₖ = ½·m·v² = ½·(2)·(3)² = ½·2·9 = 9 joule.'},
+  'pg-7': {letter:'D', explain:'Eₚ = m·g·h = (2)·(10)·(5) = 100 joule.'},
+  'pg-8': {letter:'B', explain:'Efisiensi η = (daya keluaran ÷ daya masukan) × 100% = (20 ÷ 100) × 100% = 20%. Sisa 80% terbuang sebagai kalor.'}
+};
+
+function clearMcqFeedback(group){
+  group.querySelectorAll('[data-mcq-option]').forEach(b => b.classList.remove('correct','incorrect','locked','dimmed'));
+  const fb = group.querySelector('[data-mcq-feedback]');
+  if (fb){ fb.classList.remove('show','right','wrong'); fb.innerHTML = ''; }
+}
+
+function checkQuizPage(root){
+  const groups = root.querySelectorAll('[data-mcq]');
+  let answered = 0, correct = 0, total = 0;
+  groups.forEach(group => {
+    const qid = group.getAttribute('data-mcq');
+    const key = ANSWER_KEY[qid];
+    if (!key) return;
+    total++;
+    const chosen = memoryCache[qid];
+    const opts = group.querySelectorAll('[data-mcq-option]');
+    opts.forEach(b => {
+      b.classList.remove('correct','incorrect','dimmed');
+      b.classList.add('locked');
+      const L = b.getAttribute('data-mcq-option');
+      if (L === key.letter) b.classList.add('correct');
+      else if (L === chosen) b.classList.add('incorrect');
+      else b.classList.add('dimmed');
+    });
+    const fb = group.querySelector('[data-mcq-feedback]');
+    if (fb){
+      if (!chosen){
+        fb.className = 'mcq-feedback show wrong';
+        fb.innerHTML = `<span class="fb-verdict">Belum dijawab</span>Jawaban benar: <b>${key.letter}</b>. ${key.explain}`;
+      } else if (chosen === key.letter){
+        answered++; correct++;
+        fb.className = 'mcq-feedback show right';
+        fb.innerHTML = `<span class="fb-verdict">Benar ✓</span>${key.explain}`;
+      } else {
+        answered++;
+        fb.className = 'mcq-feedback show wrong';
+        fb.innerHTML = `<span class="fb-verdict">Belum tepat</span>Jawabanmu <b>${chosen}</b>. Jawaban benar: <b>${key.letter}</b>. ${key.explain}`;
+      }
+    }
+  });
+  const score = root.querySelector('[data-quiz-score]');
+  if (score) score.innerHTML = `Skor: <b>${correct}</b>/${total} benar`;
+  // remove the click-to-clear listeners' effect isn't needed; options stay interactive for retry
+}
+
+function clearQuizPage(root){
+  root.querySelectorAll('[data-mcq]').forEach(group => clearMcqFeedback(group));
+  const score = root.querySelector('[data-quiz-score]');
+  if (score) score.innerHTML = '';
+}
+
+function checkNumeric(block){
+  const input = block.querySelector('[data-num-input]');
+  const fb = block.querySelector('[data-num-feedback]');
+  if (!input || !fb) return;
+  const raw = (input.value || '').replace(/\./g,'').replace(',', '.').replace(/[^0-9.\-]/g,'');
+  const val = parseFloat(raw);
+  const answer = parseFloat(block.getAttribute('data-answer'));
+  const reveal = block.getAttribute('data-reveal') || '';
+  if (isNaN(val)){
+    fb.className = 'num-feedback show wrong';
+    fb.innerHTML = 'Masukkan angka terlebih dahulu.';
+    return;
+  }
+  const tol = Math.max(Math.abs(answer) * 0.02, 0.5); // 2% tolerance (or 0.5 min)
+  if (Math.abs(val - answer) <= tol){
+    fb.className = 'num-feedback show right';
+    fb.innerHTML = `Tepat sekali! ✓ ${reveal ? `<span class="reveal">${reveal}</span>` : ''}`;
+  } else {
+    fb.className = 'num-feedback show wrong';
+    fb.innerHTML = `Belum tepat — coba periksa kembali perhitunganmu. ${reveal ? `<span class="reveal">${reveal}</span>` : ''}`;
+  }
+}
+
+/* Completion summary — counts filled fields across the whole LKPD */
+async function updateCompletion(root){
+  const results = await Promise.all(FIELD_REGISTRY.map(async f => {
+    const v = Object.prototype.hasOwnProperty.call(memoryCache, f.id) ? memoryCache[f.id] : await loadField(f.id);
+    return v != null && String(v).trim() !== '';
+  }));
+  const total = results.length;
+  const done = results.filter(Boolean).length;
+  const pct = total ? Math.round(done / total * 100) : 0;
+  const pctEl = root.querySelector('[data-comp-pct]');
+  const barEl = root.querySelector('[data-comp-bar]');
+  const hintEl = root.querySelector('[data-comp-hint]');
+  if (pctEl) pctEl.textContent = pct + '%';
+  if (barEl) requestAnimationFrame(() => { barEl.style.width = pct + '%'; });
+  if (hintEl){
+    hintEl.textContent = done >= total
+      ? 'Kerja bagus! Semua bagian sudah terisi. Kamu siap mencetak lembar jawaban.'
+      : `Sudah terisi ${done} dari ${total} bagian. Lengkapi sisanya sebelum mencetak, atau cetak apa adanya.`;
+  }
 }
 
 /* ============================================================
@@ -792,6 +1121,79 @@ function initDrawingPad(canvas, root){
   if (Object.prototype.hasOwnProperty.call(memoryCache, id)) restore(memoryCache[id]);
   else loadField(id).then(restore);
 }
+
+/* ============================================================
+   INTERACTIVE ENERGY CALCULATOR — live Ek / Ep / Em explorer
+   ============================================================ */
+const CALC_PRESETS = [
+  {label:'🥥 Kelapa di pohon', m:2,   v:0,  h:10},
+  {label:'🏍️ Motor melaju',    m:100, v:15, h:0 },
+  {label:'⚽ Bola melambung',   m:0.45,v:18, h:8 },
+  {label:'💧 Air terjun /kg',   m:1,   v:4,  h:45},
+];
+const G = 10; // percepatan gravitasi (m/s²), standar soal SMA
+
+function fmtJ(x){
+  const n = Math.round(x);
+  return n.toLocaleString('id-ID');
+}
+function initEnergyCalc(root){
+  const mEl = root.querySelector('[data-calc-m]');
+  const vEl = root.querySelector('[data-calc-v]');
+  const hEl = root.querySelector('[data-calc-h]');
+  const mOut = root.querySelector('[data-out-m]');
+  const vOut = root.querySelector('[data-out-v]');
+  const hOut = root.querySelector('[data-out-h]');
+  const ekOut = root.querySelector('[data-out-ek]');
+  const epOut = root.querySelector('[data-out-ep]');
+  const emOut = root.querySelector('[data-out-em]');
+  const ekCard = root.querySelector('[data-card-ek]');
+  const epCard = root.querySelector('[data-card-ep]');
+  const emCard = root.querySelector('[data-card-em]');
+  const segEk = root.querySelector('[data-seg-ek]');
+  const segEp = root.querySelector('[data-seg-ep]');
+
+  let flashTimer = null;
+  function flash(card){
+    if (!card) return;
+    card.classList.add('flash');
+  }
+  function update(fromSlider){
+    const m = parseFloat(mEl.value);
+    const v = parseFloat(vEl.value);
+    const h = parseFloat(hEl.value);
+    const ek = 0.5 * m * v * v;
+    const ep = m * G * h;
+    const em = ek + ep;
+    mOut.textContent = m.toLocaleString('id-ID') + ' kg';
+    vOut.textContent = v.toLocaleString('id-ID') + ' m/s';
+    hOut.textContent = h.toLocaleString('id-ID') + ' m';
+    ekOut.textContent = fmtJ(ek);
+    epOut.textContent = fmtJ(ep);
+    emOut.textContent = fmtJ(em);
+    const ekPct = em > 0 ? (ek/em*100) : 0;
+    const epPct = em > 0 ? (ep/em*100) : 0;
+    segEk.style.width = ekPct + '%';
+    segEp.style.width = epPct + '%';
+    if (fromSlider){
+      [ekCard, epCard, emCard].forEach(c => c && c.classList.add('flash'));
+      clearTimeout(flashTimer);
+      flashTimer = setTimeout(() => { [ekCard,epCard,emCard].forEach(c => c && c.classList.remove('flash')); }, 220);
+    }
+  }
+  [mEl, vEl, hEl].forEach(el => el && el.addEventListener('input', () => update(true)));
+  root.querySelectorAll('[data-preset]').forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      const p = CALC_PRESETS[+btn.getAttribute('data-preset')];
+      mEl.value = p.m; vEl.value = p.v; hEl.value = p.h;
+      root.querySelectorAll('[data-preset]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      update(true);
+    });
+  });
+  update(false);
+}
+
 /* ============================================================
    SHARED TEMPLATE HELPERS
    ============================================================ */
@@ -836,9 +1238,42 @@ function mcqBlock(qnum, question, options, qid){
     <div class="mcq-opts">
       ${options.map((opt,i)=>`<button type="button" class="mcq-opt" data-mcq-option="${letters[i]}"><span class="letter">${letters[i]}</span><span>${opt}</span></button>`).join('')}
     </div>
+    <div class="mcq-feedback" data-mcq-feedback></div>
   </div>`;
 }
 function icoWrap(name){ return `<span class="ico">${ICONS[name]}</span>`; }
+
+/* Quiz action bar — reveals self-check feedback for all MCQs on the page */
+function quizActions(){
+  return `<div class="quiz-actions">
+    <button type="button" class="quiz-btn" data-quiz-check>${ICONS.check}Periksa Jawaban</button>
+    <button type="button" class="quiz-btn ghost" data-quiz-clear>${ICONS.refresh}Ulangi</button>
+    <span class="quiz-score" data-quiz-score></span>
+  </div>`;
+}
+
+/* Numeric problem with instant, tolerance-based self-check */
+function numBlock(tag, question, fieldId, answer, unit, reveal){
+  return `<div class="num-solve" data-num data-answer="${answer}" data-reveal="${reveal ? reveal.replace(/"/g,'&quot;') : ''}">
+    <div class="num-q"><span class="tag">${tag}</span><span>${question}</span></div>
+    <div class="num-input-row">
+      <span class="pretext">Jawaban =</span>
+      <input type="text" inputmode="decimal" class="num-input" data-field="${fieldId}" data-num-input placeholder="cth. 250">
+      <span class="num-unit">${unit || ''}</span>
+      <button type="button" class="num-check-btn" data-num-check>Cek</button>
+    </div>
+    <div class="num-feedback" data-num-feedback></div>
+  </div>`;
+}
+
+/* Formula card — displays an equation with its variable legend, physics-notebook style */
+function formulaCard(name, eqHtml, legend){
+  return `<div class="formula-card">
+    <div class="fc-name">${name}</div>
+    <div class="formula-eq">${eqHtml}</div>
+    <div class="formula-legend">${legend.map(l=>`<span><b>${l[0]}</b> = ${l[1]}</span>`).join('')}</div>
+  </div>`;
+}
 
 /* ============================================================
    PAGE RENDERERS — 0. Cover
@@ -862,10 +1297,9 @@ function renderCover(){
       <div class="cover-group-label">Disusun oleh — Kelompok 5</div>
       <ul class="people-list">
         <li><span>Khusni Ja'far</span><span class="npm">NPM 20257270264</span></li>
-        <li><span>Kandi</span><span class="npm">NPM xxxx</span></li>
-        <li><span>Risan</span><span class="npm">NPM xxxx</span></li>
-        <li><span>Marjah</span><span class="npm">NPM xxxx</span></li>
-        <li><span>Anindita</span><span class="npm">NPM xxxx</span></li>
+        <li><span>Pramesti Krisna Kandi</span><span class="npm">NPM 20257270208</span></li>
+        <li><span>Risan Puntaningrum</span><span class="npm">NPM 20257270217</span></li>
+        <li><span>Marjah</span><span class="npm">NPM 20257270148</span></li>
       </ul>
     </div>
     <div class="cover-spacer"></div>
@@ -884,19 +1318,24 @@ function renderIdentitas(){
     [4,'C.1','Materi — Siklus Energi'],
     [5,'C.2','Materi — Sumber Energi'],
     [6,'C.3','Materi — Energi Terbarukan'],
-    [7,'D','Kegiatan 1 — Mengamati Siklus Energi'],
-    [8,'D','Kegiatan 1 — Pertanyaan Analisis'],
-    [9,'D','Kegiatan 2 — Tabel Perbandingan'],
-    [10,'D','Kegiatan 2 — Diskusi Kelompok'],
-    [11,'D','Kegiatan 3 — Studi Kasus'],
-    [12,'D','Kegiatan 3 — Proyek Mini'],
-    [13,'D','Kegiatan 4 — Evaluasi & Refleksi'],
-    [14,'E','Soal Pilihan Ganda'],
-    [15,'E','Soal Uraian (No. 1–2)'],
-    [16,'E','Soal Uraian (No. 3–4)'],
-    [17,'F','Refleksi Diri'],
-    [18,'G','Daftar Pustaka'],
-    [19,'&bull;','Penutup'],
+    [7,'C.4','Materi — Bentuk Energi & Rumus'],
+    [8,'C.5','Materi — Konversi & Efisiensi'],
+    [9,'★','Lab Mini — Kalkulator Energi'],
+    [10,'D','Kegiatan 1 — Mengamati Siklus Energi'],
+    [11,'D','Kegiatan 1 — Pertanyaan Analisis'],
+    [12,'D','Kegiatan 2 — Tabel Perbandingan'],
+    [13,'D','Kegiatan 2 — Diskusi Kelompok'],
+    [14,'D','Latihan — Menghitung Energi'],
+    [15,'D','Kegiatan 3 — Studi Kasus'],
+    [16,'D','Kegiatan 3 — Proyek Mini'],
+    [17,'D','Kegiatan 4 — Evaluasi & Refleksi'],
+    [18,'E','Soal Pilihan Ganda'],
+    [19,'E','Soal Uraian (No. 1–2)'],
+    [20,'E','Soal Uraian (No. 3–4)'],
+    [21,'F','Refleksi Diri'],
+    [22,'G','Glosarium'],
+    [23,'H','Daftar Pustaka'],
+    [24,'&bull;','Penutup'],
   ];
   return `
   <div>
@@ -953,11 +1392,13 @@ function renderKD(){
    ============================================================ */
 function renderPetunjuk(){
   const items = [
-    ['book','Baca terlebih dahulu materi ringkas pada bagian C sebelum mengerjakan kegiatan.'],
-    ['check','Kerjakan setiap kegiatan secara berurutan dari Kegiatan 1 hingga Kegiatan 4.'],
+    ['book','Baca lebih dahulu materi ringkas pada bagian C — termasuk rumus energi di C.4 dan C.5 — sebelum mengerjakan kegiatan.'],
+    ['calc','Gunakan Kalkulator Energi interaktif untuk mengamati hubungan massa, kecepatan, dan ketinggian dengan besar energi.'],
+    ['check','Kerjakan kegiatan dan soal secara berurutan; tekan tombol Cek atau Periksa Jawaban untuk melihat hasil dan pembahasan.'],
     ['chat','Diskusikan setiap pertanyaan bersama anggota kelompok dan tuliskan kesimpulan bersama.'],
-    ['compass','Gunakan referensi tambahan (buku teks, artikel ilmiah, atau internet) jika diperlukan.'],
+    ['compass','Gunakan referensi tambahan (buku teks, artikel, atau internet) bila diperlukan.'],
     ['clock','Waktu pengerjaan: 2 &times; 45 menit (1 pertemuan).'],
+    ['sparkle','Semua jawaban tersimpan otomatis di perangkatmu dan dapat dicetak menjadi lembar jawaban melalui tombol Cetak.'],
     ['group','Presentasikan hasil kerja kelompok pada akhir kegiatan.'],
   ];
   return `
@@ -1059,6 +1500,178 @@ function renderC3(){
         </div>
       </div>`).join('')}
     </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — C.4 Bentuk Energi & Rumus Dasar
+   ============================================================ */
+function renderC4(){
+  const forms = [
+    ['motion','Energi Kinetik','energi gerak'],
+    ['geo','Energi Potensial','energi posisi / ketinggian'],
+    ['flame','Energi Kalor','energi panas'],
+    ['leaf','Energi Kimia','tersimpan dalam ikatan zat'],
+    ['bolt','Energi Listrik','muatan yang bergerak'],
+    ['atom','Energi Nuklir','tersimpan dalam inti atom'],
+    ['sun','Energi Cahaya','radiasi gelombang'],
+    ['chat','Energi Bunyi','getaran yang merambat'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
+    <h2 class="page-title">C.4 Bentuk Energi &amp; Rumus Dasar</h2>
+    <p class="lead-text" style="font-size:13.5px; margin-bottom:14px;">Energi hadir dalam banyak bentuk dan dapat berpindah dari satu bentuk ke bentuk lain. Dua bentuk yang paling sering dihitung di kelas X adalah <b>energi kinetik</b> (karena gerak) dan <b>energi potensial</b> (karena ketinggian). Keduanya membentuk <b>energi mekanik</b>.</p>
+    <div class="forms-grid">
+      ${forms.map(f=>`<div class="form-chip"><span class="ico">${ICONS[f[0]]}</span><span><b>${f[1]}</b><span>${f[2]}</span></span></div>`).join('')}
+    </div>
+    <span class="eyebrow" style="margin-bottom:2px;">Rumus Penting</span>
+    <div class="formula-stack">
+      ${formulaCard('Energi Kinetik', 'E<sub>k</sub> = ½ · m · v<sup>2</sup>', [['Eₖ','energi kinetik (joule)'],['m','massa (kg)'],['v','kecepatan (m/s)']])}
+      ${formulaCard('Energi Potensial', 'E<sub>p</sub> = m · g · h', [['Eₚ','energi potensial (joule)'],['m','massa (kg)'],['g','gravitasi ≈ 10 m/s²'],['h','ketinggian (m)']])}
+      ${formulaCard('Energi Mekanik', 'E<sub>m</sub> = E<sub>k</sub> + E<sub>p</sub>', [['Eₘ','energi mekanik (joule)'],['Eₖ','energi kinetik'],['Eₚ','energi potensial']])}
+      ${formulaCard('Daya', 'P = <span class="frac"><span class="top">W</span><span class="bot">t</span></span>', [['P','daya (watt)'],['W','usaha / energi (joule)'],['t','waktu (sekon)']])}
+    </div>
+    <div class="info-note"><span class="ico">${ICONS.info}</span><span>Satuan energi dalam SI adalah <b>joule (J)</b>. 1 joule = energi untuk memindahkan gaya 1 newton sejauh 1 meter. Satuan daya adalah <b>watt (W)</b>, yaitu 1 joule tiap sekon.</span></div>
+    <div class="worked">
+      <div class="worked-head">${ICONS.beaker}Contoh Soal — Kekekalan Energi</div>
+      <div class="worked-body">
+        <div class="prob">Sebutir kelapa bermassa <b>2 kg</b> tergantung <b>6 m</b> di atas tanah (g = 10 m/s²). Berapa energi potensialnya? Jika kelapa jatuh, berapa energi kinetiknya tepat saat menyentuh tanah? (anggap energi mekanik kekal)</div>
+        <div class="worked-step"><span class="s-num">1</span><span>Energi potensial di atas: <span class="worked-math">Eₚ = m·g·h = 2 · 10 · 6 = 120 J</span></span></div>
+        <div class="worked-step"><span class="s-num">2</span><span>Di titik tertinggi benda diam (v = 0), maka Eₖ = 0 sehingga energi mekanik <span class="worked-math">Eₘ = Eₖ + Eₚ = 0 + 120 = 120 J</span></span></div>
+        <div class="worked-step"><span class="s-num">3</span><span>Energi mekanik kekal. Di tanah h = 0 maka Eₚ = 0, sehingga seluruh energi berubah menjadi kinetik: <span class="worked-math">Eₖ = Eₘ = 120 J</span></span></div>
+        <div class="worked-answer"><b>Jawaban:</b> energi potensial awal = 120 J, dan energi kinetik saat menyentuh tanah = 120 J. Energinya tidak hilang — hanya berubah bentuk dari potensial menjadi kinetik.</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — C.5 Konversi Energi & Efisiensi
+   ============================================================ */
+function renderC5(){
+  const conv = [
+    ['bolt','Setrika listrik','listrik → kalor'],
+    ['wind','Kipas angin','listrik → gerak'],
+    ['sun','Panel surya','cahaya → listrik'],
+    ['leaf','Aki / baterai','kimia → listrik'],
+    ['flame','Lampu pijar','listrik → cahaya + kalor'],
+    ['water','PLTA','potensial → kinetik → mekanik → listrik'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
+    <h2 class="page-title">C.5 Konversi Energi &amp; Efisiensi</h2>
+    <p class="lead-text" style="font-size:13.5px; margin-bottom:14px;">Setiap alat mengubah satu bentuk energi menjadi bentuk lain. Namun pada setiap konversi selalu ada energi yang berubah menjadi <b>kalor</b> yang tidak berguna, sehingga tidak ada alat yang benar-benar 100% efisien.</p>
+    <span class="eyebrow" style="margin-bottom:10px;">Contoh Konversi Energi di Sekitar Kita</span>
+    <div class="energy-cards" style="margin-bottom:18px;">
+      ${conv.map(c=>`<div class="energy-card"><span class="ico">${ICONS[c[0]]}</span><div><h4>${c[1]}</h4><div class="contoh" style="color:var(--ember-deep);">${c[2]}</div></div></div>`).join('')}
+    </div>
+    <span class="eyebrow" style="margin-bottom:2px;">Rumus Efisiensi</span>
+    <div class="formula-stack">
+      ${formulaCard('Efisiensi', '&eta; = <span class="frac"><span class="top">energi keluaran</span><span class="bot">energi masukan</span></span> × 100%', [['η','efisiensi (%)'],['keluaran','energi berguna yang dihasilkan'],['masukan','energi total yang diberikan']])}
+    </div>
+    <div class="worked">
+      <div class="worked-head">${ICONS.beaker}Contoh Soal — Efisiensi</div>
+      <div class="worked-body">
+        <div class="prob">Sebuah lampu LED menyerap daya listrik <b>12 W</b> dan memancarkan daya cahaya <b>9 W</b>. Berapa efisiensi lampu tersebut?</div>
+        <div class="worked-step"><span class="s-num">1</span><span>Gunakan rumus efisiensi: <span class="worked-math">η = (keluaran ÷ masukan) × 100%</span></span></div>
+        <div class="worked-step"><span class="s-num">2</span><span>Masukkan nilai: <span class="worked-math">η = (9 ÷ 12) × 100% = 75%</span></span></div>
+        <div class="worked-answer"><b>Jawaban:</b> efisiensi lampu = 75%. Artinya 25% energi listrik berubah menjadi kalor (panas) yang tidak berguna sebagai cahaya.</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — Laboratorium Mini: Kalkulator Energi
+   ============================================================ */
+function renderLab(){
+  return `
+  <div>
+    <span class="eyebrow">Laboratorium Mini &middot; Interaktif</span>
+    <h2 class="page-title">Kalkulator Energi</h2>
+    <p class="lab-intro">Geser slider untuk mengubah <b>massa</b>, <b>kecepatan</b>, dan <b>ketinggian</b> sebuah benda, lalu amati bagaimana energi kinetik, potensial, dan mekaniknya berubah secara langsung. Coba juga tombol contoh benda di bawah! <span style="font-family:var(--font-mono); font-size:12px; color:var(--ink-soft);">(g = 10 m/s²)</span></p>
+    <div class="calc" data-calc>
+      <div class="calc-title"><span class="dot"></span>Panel Energi</div>
+      <div class="calc-sub">Pilih contoh benda, atau atur nilainya sendiri:</div>
+      <div class="calc-select">
+        ${CALC_PRESETS.map((p,i)=>`<button type="button" class="calc-preset" data-preset="${i}">${p.label}</button>`).join('')}
+      </div>
+      <div class="calc-row">
+        <div class="rl"><label>Massa (m)</label><span class="calc-val" data-out-m>2 kg</span></div>
+        <input type="range" class="calc-slider" data-calc-m min="0.1" max="200" step="0.1" value="2">
+      </div>
+      <div class="calc-row">
+        <div class="rl"><label>Kecepatan (v)</label><span class="calc-val" data-out-v>0 m/s</span></div>
+        <input type="range" class="calc-slider" data-calc-v min="0" max="40" step="0.5" value="0">
+      </div>
+      <div class="calc-row">
+        <div class="rl"><label>Ketinggian (h)</label><span class="calc-val" data-out-h>10 m</span></div>
+        <input type="range" class="calc-slider" data-calc-h min="0" max="100" step="0.5" value="10">
+      </div>
+      <div class="calc-readout">
+        <div class="readout-card" data-card-ek><div class="rc-label">Kinetik Eₖ</div><div class="rc-value" data-out-ek>0</div><div class="rc-unit">joule</div></div>
+        <div class="readout-card" data-card-ep><div class="rc-label">Potensial Eₚ</div><div class="rc-value" data-out-ep>0</div><div class="rc-unit">joule</div></div>
+        <div class="readout-card" data-card-em><div class="rc-label">Mekanik Eₘ</div><div class="rc-value" data-out-em>0</div><div class="rc-unit">joule</div></div>
+      </div>
+      <div class="calc-bar-wrap">
+        <div class="bl"><span>Proporsi Energi</span><span>Eₖ vs Eₚ</span></div>
+        <div class="calc-bar"><div class="seg-ek" data-seg-ek style="width:0"></div><div class="seg-ep" data-seg-ep style="width:0"></div></div>
+        <div class="calc-legend"><span><i style="background:var(--ember);"></i>Kinetik</span><span><i style="background:var(--teal);"></i>Potensial</span></div>
+      </div>
+      <div class="calc-note">${ICONS.bulb}<span>Perhatikan: menggandakan <b>kecepatan</b> membuat energi kinetik menjadi <b>empat kali lipat</b> (karena v dikuadratkan), sedangkan menggandakan <b>ketinggian</b> hanya menggandakan energi potensial.</span></div>
+    </div>
+    <span class="self-tip">${ICONS.sparkle}Tugas Eksplorasi</span>
+    ${qaBlock('', 'Berdasarkan eksplorasimu dengan kalkulator: apa yang terjadi pada energi kinetik ketika kecepatan (v) dinaikkan menjadi dua kali lipat? Mengapa demikian? Tuliskan temuanmu.', 'lab-refleksi', 4)}
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — Kegiatan: Latihan Menghitung Energi
+   ============================================================ */
+function renderLatihan(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian D &middot; Latihan Terbimbing</span>
+    <h2 class="page-title">Latihan Menghitung Energi</h2>
+    <p class="page-sub">Terapkan rumus dari bagian C.4 dan C.5. Ketik jawabanmu (angka saja), lalu tekan <b>Cek</b> untuk melihat apakah sudah tepat. Gunakan g = 10 m/s².</p>
+    ${numBlock('1.', 'Sebuah sepeda motor bermassa 100 kg melaju dengan kecepatan 10 m/s. Hitung energi kinetiknya.', 'lat-1', 5000, 'joule', 'Eₖ = ½·m·v² = ½·100·10² = 5.000 J')}
+    ${numBlock('2.', 'Sebuah kotak bermassa 20 kg diangkat ke rak setinggi 1,5 m. Hitung energi potensial kotak.', 'lat-2', 300, 'joule', 'Eₚ = m·g·h = 20·10·1,5 = 300 J')}
+    ${numBlock('3.', 'Pemanas air listrik berdaya 400 watt menyala selama 30 sekon. Hitung energi listrik yang digunakan.', 'lat-3', 12000, 'joule', 'W = P·t = 400·30 = 12.000 J')}
+    ${numBlock('4.', 'Sebuah mesin menerima energi 500 J dan menghasilkan energi berguna 350 J. Hitung efisiensinya.', 'lat-4', 70, '%', 'η = (350 ÷ 500) × 100% = 70%')}
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — Glosarium
+   ============================================================ */
+function renderGlosarium(){
+  const terms = [
+    ['Energi','Kemampuan untuk melakukan usaha (kerja). Satuannya joule (J).'],
+    ['Usaha (W)','Hasil kali gaya dengan perpindahan searah gaya; menyebabkan perubahan energi.'],
+    ['Daya (P)','Laju melakukan usaha atau menggunakan energi tiap satuan waktu; satuannya watt (W).'],
+    ['Energi Kinetik','Energi yang dimiliki benda karena geraknya: Eₖ = ½mv².'],
+    ['Energi Potensial','Energi yang dimiliki benda karena kedudukan/ketinggiannya: Eₚ = mgh.'],
+    ['Energi Mekanik','Jumlah energi kinetik dan energi potensial suatu benda.'],
+    ['Hukum Kekekalan Energi','Energi tidak dapat diciptakan atau dimusnahkan, hanya berubah bentuk; total energi tetap.'],
+    ['Konversi Energi','Perubahan energi dari satu bentuk ke bentuk lain, misalnya listrik menjadi cahaya.'],
+    ['Efisiensi (η)','Perbandingan energi keluaran yang berguna terhadap energi masukan, dinyatakan dalam persen.'],
+    ['Energi Terbarukan','Sumber energi yang dapat terisi ulang secara alami, seperti surya, angin, dan air.'],
+    ['Energi Tak Terbarukan','Sumber energi yang jumlahnya terbatas dan tidak cepat pulih, seperti bahan bakar fosil.'],
+    ['Biomassa','Energi dari bahan organik (tumbuhan, limbah, kotoran ternak) yang dapat diperbarui.'],
+    ['Fotovoltaik','Teknologi sel surya yang mengubah cahaya menjadi listrik melalui efek fotolistrik.'],
+    ['Geotermal','Energi panas bumi yang berasal dari dalam Bumi.'],
+    ['Joule (J)','Satuan SI untuk energi dan usaha.'],
+  ];
+  return `
+  <div>
+    <span class="eyebrow">Bagian G</span>
+    <h2 class="page-title">Glosarium</h2>
+    <p class="page-sub">Istilah-istilah penting dalam LKPD ini beserta artinya.</p>
+    <ul class="gloss-list">
+      ${terms.map(t=>`<li class="gloss-item"><span class="gloss-term">${t[0]}</span><span class="gloss-def">${t[1]}</span></li>`).join('')}
+    </ul>
   </div>`;
 }
 
@@ -1238,13 +1851,20 @@ function renderPG(){
       'Tidak menghasilkan gas CO2 sama sekali','Berasal dari organisme hidup yang terus-menerus ada','Lebih murah dari bahan bakar fosil','Tidak memerlukan teknologi khusus','Hanya dapat digunakan di daerah pedesaan']],
     ['Salah satu tantangan utama pengembangan energi surya di Indonesia adalah &hellip;', [
       'Posisi Indonesia yang jauh dari khatulistiwa','Kurangnya sinar matahari sepanjang tahun','Tingginya biaya investasi awal panel surya','Panel surya tidak dapat digunakan di iklim tropis','Energi surya tidak dapat disimpan dalam baterai']],
+    ['Sebuah benda bermassa 2 kg bergerak dengan kecepatan 3 m/s. Energi kinetik benda tersebut adalah &hellip;', [
+      '3 joule','6 joule','9 joule','18 joule','36 joule']],
+    ['Sebuah kelapa bermassa 2 kg berada pada ketinggian 5 m (g = 10 m/s&sup2;). Energi potensialnya adalah &hellip;', [
+      '10 joule','20 joule','50 joule','100 joule','1.000 joule']],
+    ['Sebuah lampu menerima daya listrik 100 W dan menghasilkan daya cahaya 20 W. Efisiensi lampu tersebut adalah &hellip;', [
+      '5%','20%','50%','80%','120%']],
   ];
   return `
   <div>
     <span class="eyebrow">Bagian E &middot; Soal Evaluasi</span>
     <h2 class="page-title">I. Pilihan Ganda</h2>
-    <p class="page-sub">Kerjakan soal-soal berikut secara mandiri! Ketuk salah satu pilihan jawaban.</p>
+    <p class="page-sub">Ketuk salah satu pilihan untuk tiap soal. Setelah selesai, tekan <b>Periksa Jawaban</b> untuk melihat hasil dan pembahasannya.</p>
     ${qs.map((q,i)=>mcqBlock(i+1,q[0],q[1],'pg-'+(i+1))).join('')}
+    ${quizActions()}
   </div>`;
 }
 /* ============================================================
@@ -1323,6 +1943,14 @@ function renderPenutup(){
     <span class="divider-kicker">Selesai</span>
     <h2>Terima kasih telah menuntaskan LKPD ini</h2>
     <p class="lead-text">Semoga perjalananmu memahami siklus energi, sumber energi, dan energi terbarukan membekas — dan menjadi bekal langkah nyata menuju masa depan energi yang berkelanjutan.</p>
+    <div class="completion" data-completion>
+      <div class="completion-top">
+        <span class="ct-label">Kelengkapan Jawaban</span>
+        <span class="ct-pct" data-comp-pct>0%</span>
+      </div>
+      <div class="completion-bar"><div data-comp-bar></div></div>
+      <p class="completion-hint" data-comp-hint>Menghitung kelengkapan jawabanmu&hellip;</p>
+    </div>
     <button class="cover-cta" type="button" data-action="print">${ICONS.printer}&nbsp;Cetak Lembar Jawaban</button>
     <button class="link-btn" type="button" data-goto="0">&larr; Kembali ke sampul</button>
     <div class="cover-foot" style="margin-top:10px;">Disusun oleh Kelompok 5 &middot; Program Magister Pendidikan MIPA &middot; Universitas Indraprasta PGRI Jakarta &middot; 2026</div>
@@ -1340,10 +1968,14 @@ const PAGES = [
   { id:'c1', chapter:'C.1 · Siklus Energi', part:'C · Materi Ringkas', render:renderC1 },
   { id:'c2', chapter:'C.2 · Sumber Energi', part:'C · Materi Ringkas', render:renderC2 },
   { id:'c3', chapter:'C.3 · Energi Terbarukan', part:'C · Materi Ringkas', render:renderC3 },
+  { id:'c4', chapter:'C.4 · Bentuk Energi & Rumus', part:'C · Materi Ringkas', render:renderC4 },
+  { id:'c5', chapter:'C.5 · Konversi & Efisiensi', part:'C · Materi Ringkas', render:renderC5 },
+  { id:'lab', chapter:'Lab Mini · Kalkulator Energi', part:'Laboratorium Mini', render:renderLab },
   { id:'k1a', chapter:'D · Kegiatan 1 (Observasi)', part:'D · Kegiatan Belajar', render:renderK1a },
   { id:'k1b', chapter:'D · Kegiatan 1 (Analisis)', part:'D · Kegiatan Belajar', render:renderK1b },
   { id:'k2a', chapter:'D · Kegiatan 2 (Tabel)', part:'D · Kegiatan Belajar', render:renderK2a },
   { id:'k2b', chapter:'D · Kegiatan 2 (Diskusi)', part:'D · Kegiatan Belajar', render:renderK2b },
+  { id:'latihan', chapter:'D · Latihan Menghitung', part:'D · Kegiatan Belajar', render:renderLatihan },
   { id:'k3a', chapter:'D · Kegiatan 3 (Studi Kasus)', part:'D · Kegiatan Belajar', render:renderK3a },
   { id:'k3b', chapter:'D · Kegiatan 3 (Proyek Mini)', part:'D · Kegiatan Belajar', render:renderK3b },
   { id:'k4', chapter:'D · Kegiatan 4 (Evaluasi & Refleksi)', part:'D · Kegiatan Belajar', render:renderK4 },
@@ -1351,7 +1983,8 @@ const PAGES = [
   { id:'uraian1', chapter:'E · Uraian (No. 1–2)', part:'E · Soal Evaluasi', render:renderUraian1 },
   { id:'uraian2', chapter:'E · Uraian (No. 3–4)', part:'E · Soal Evaluasi', render:renderUraian2 },
   { id:'refleksi', chapter:'F · Refleksi Diri', part:'F · Refleksi Diri', render:renderRefleksi },
-  { id:'pustaka', chapter:'G · Daftar Pustaka', part:'G · Daftar Pustaka', render:renderPustaka },
+  { id:'glosarium', chapter:'G · Glosarium', part:'G · Glosarium', render:renderGlosarium },
+  { id:'pustaka', chapter:'H · Daftar Pustaka', part:'H · Daftar Pustaka', render:renderPustaka },
   { id:'penutup', chapter:'Penutup', part:null, render:renderPenutup },
 ];
 /* ============================================================
@@ -1362,6 +1995,7 @@ const FIELD_REGISTRY = [
   {id:'id-kelas', label:'Kelas', section:'Identitas Peserta Didik', type:'text'},
   {id:'id-absen', label:'No. Absen', section:'Identitas Peserta Didik', type:'text'},
   {id:'id-tanggal', label:'Tanggal', section:'Identitas Peserta Didik', type:'text'},
+  {id:'lab-refleksi', label:'Eksplorasi kalkulator — pengaruh kecepatan terhadap energi kinetik', section:'Laboratorium Mini — Kalkulator Energi', type:'text'},
   {id:'k1-drawing', label:'1.1 Diagram siklus energi (gambar)', section:'Kegiatan 1', type:'canvas'},
   {id:'k1-2a', label:'1.2a Makna &ldquo;energi tak dapat diciptakan/dimusnahkan&rdquo;', section:'Kegiatan 1', type:'text'},
   {id:'k1-2b', label:'1.2b Peran matahari pada ekosistem hutan', section:'Kegiatan 1', type:'text'},
@@ -1379,6 +2013,10 @@ const FIELD_REGISTRY = [
   {id:'k2-tak-potensi', label:'2.1 Potensi di Indonesia — Tak Terbarukan', section:'Kegiatan 2', type:'text'},
   {id:'k2-bar-potensi', label:'2.1 Potensi di Indonesia — Terbarukan', section:'Kegiatan 2', type:'text'},
   {id:'k2-diskusi', label:'2.2 Diskusi: ketergantungan pada bahan bakar fosil', section:'Kegiatan 2', type:'text'},
+  {id:'lat-1', label:'Latihan 1 — Energi kinetik sepeda motor (joule)', section:'Latihan Menghitung Energi', type:'text'},
+  {id:'lat-2', label:'Latihan 2 — Energi potensial kotak (joule)', section:'Latihan Menghitung Energi', type:'text'},
+  {id:'lat-3', label:'Latihan 3 — Energi listrik pemanas air (joule)', section:'Latihan Menghitung Energi', type:'text'},
+  {id:'lat-4', label:'Latihan 4 — Efisiensi mesin (%)', section:'Latihan Menghitung Energi', type:'text'},
   {id:'k3-1a', label:'3.1a Prinsip fisika biogas & turbin angin', section:'Kegiatan 3', type:'text'},
   {id:'k3-1b', label:'3.1b Manfaat sosial-ekonomi energi terbarukan', section:'Kegiatan 3', type:'text'},
   {id:'k3-2-jenis', label:'3.2 Jenis Energi Terbarukan yang Dipilih', section:'Kegiatan 3', type:'text'},
@@ -1392,6 +2030,12 @@ const FIELD_REGISTRY = [
   {id:'pg-3', label:'PG No. 3 — Bukan keunggulan energi terbarukan', section:'Soal Evaluasi', type:'mcq', options:['Ramah lingkungan','Dapat diperbarui secara alami','Tidak menghasilkan emisi gas rumah kaca saat digunakan','Biaya investasi awal yang sangat murah','Tersedia secara lokal di berbagai daerah']},
   {id:'pg-4', label:'PG No. 4 — Biomassa sebagai energi terbarukan', section:'Soal Evaluasi', type:'mcq', options:['Tidak menghasilkan gas CO2 sama sekali','Berasal dari organisme hidup yang terus-menerus ada','Lebih murah dari bahan bakar fosil','Tidak memerlukan teknologi khusus','Hanya dapat digunakan di daerah pedesaan']},
   {id:'pg-5', label:'PG No. 5 — Tantangan energi surya di Indonesia', section:'Soal Evaluasi', type:'mcq', options:['Posisi Indonesia yang jauh dari khatulistiwa','Kurangnya sinar matahari sepanjang tahun','Tingginya biaya investasi awal panel surya','Panel surya tidak dapat digunakan di iklim tropis','Energi surya tidak dapat disimpan dalam baterai']},
+  {id:'pg-6', label:'PG No. 6 — Menghitung energi kinetik', section:'Soal Evaluasi', type:'mcq', options:['3 joule','6 joule','9 joule','18 joule','36 joule']},
+  {id:'pg-7', label:'PG No. 7 — Menghitung energi potensial', section:'Soal Evaluasi', type:'mcq', options:['10 joule','20 joule','50 joule','100 joule','1.000 joule']},
+  {id:'pg-8', label:'PG No. 8 — Menghitung efisiensi', section:'Soal Evaluasi', type:'mcq', options:['5%','20%','50%','80%','120%']},
+  {id:'pg-6', label:'PG No. 6 — Energi kinetik (m=2 kg, v=3 m/s)', section:'Soal Evaluasi', type:'mcq', options:['3 joule','6 joule','9 joule','18 joule','36 joule']},
+  {id:'pg-7', label:'PG No. 7 — Energi potensial (m=2 kg, h=5 m)', section:'Soal Evaluasi', type:'mcq', options:['10 joule','20 joule','50 joule','100 joule','1.000 joule']},
+  {id:'pg-8', label:'PG No. 8 — Efisiensi lampu (masukan 100 W, keluaran 20 W)', section:'Soal Evaluasi', type:'mcq', options:['5%','20%','50%','80%','120%']},
   {id:'uraian-1', label:'Uraian No. 1 — Bahan bakar fosil sebagai energi tak terbarukan', section:'Soal Evaluasi', type:'text'},
   {id:'uraian-2', label:'Uraian No. 2 — 4 jenis energi terbarukan potensial di Indonesia', section:'Soal Evaluasi', type:'text'},
   {id:'uraian-3', label:'Uraian No. 3 — Konversi energi pada PLTA', section:'Soal Evaluasi', type:'text'},
