@@ -707,6 +707,51 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,
 }
 .self-tip svg{width:14px; height:14px;}
 
+/* ============ WORK-SIGN CHIPS (positive / zero / negative work) ============ */
+.sign-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:9px; margin:8px 0 6px;}
+.sign-chip{border:1.5px solid var(--paper-deeper); border-radius:var(--radius-m); padding:11px 13px; background:#fff;}
+.sign-chip .sc-top{display:flex; align-items:baseline; gap:7px; margin-bottom:5px;}
+.sign-chip .sc-name{font-family:var(--font-mono); font-size:10.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;}
+.sign-chip .sc-sym{font-family:var(--font-display); font-weight:700; font-size:15px; margin-left:auto;}
+.sign-chip.pos{border-color:#9AD1B6;} .sign-chip.pos .sc-name,.sign-chip.pos .sc-sym{color:var(--teal-deep);}
+.sign-chip.zero{border-color:var(--paper-line);} .sign-chip.zero .sc-name,.sign-chip.zero .sc-sym{color:var(--stone-deep);}
+.sign-chip.neg{border-color:#E8A88C;} .sign-chip.neg .sc-name,.sign-chip.neg .sc-sym{color:var(--ember-deep);}
+.sign-chip p{font-size:11.6px; line-height:1.5; color:var(--ink-soft); margin:0;}
+@media (max-width:520px){.sign-grid{grid-template-columns:1fr;}}
+
+/* two-column readout variant for the spring calculator */
+.calc-readout.two{grid-template-columns:repeat(2,1fr);}
+
+/* ============ CONSERVATION OF ENERGY SIMULATOR ============ */
+.sim-stage{display:flex; gap:16px; align-items:flex-end; background:#2B2318; border-radius:var(--radius-m); padding:16px 16px 14px;}
+.sim-track{position:relative; height:224px; width:66px; flex:none; border-radius:11px; overflow:hidden;
+  background:linear-gradient(180deg,#22333d 0%, #33505c 52%, #6d5531 100%); box-shadow:inset 0 0 0 1px rgba(255,255,255,.05);}
+.sim-ground{position:absolute; left:0; right:0; bottom:0; height:16px; background:repeating-linear-gradient(45deg,#7c5e2f,#7c5e2f 4px,#674d26 4px,#674d26 8px);}
+.sim-ball{position:absolute; left:50%; width:26px; height:26px; margin-left:-13px; border-radius:50%;
+  background:radial-gradient(circle at 33% 30%, #F7C766, #B8441A 78%); box-shadow:0 3px 9px rgba(0,0,0,.45); transition:bottom .1s linear; z-index:2;}
+.sim-ball::after{content:''; position:absolute; left:33%; top:30%; width:6px; height:6px; margin:-3px 0 0 -3px; border-radius:50%; background:rgba(255,255,255,.6);}
+.sim-bars{flex:1; height:224px; display:flex; gap:16px; align-items:flex-end; justify-content:space-around;}
+.sim-barcol{flex:1; max-width:84px; height:100%; display:flex; flex-direction:column; align-items:center;}
+.sim-bar{position:relative; width:100%; flex:1; min-height:0; background:rgba(255,255,255,.08); border-radius:9px 9px 4px 4px; overflow:hidden; display:flex; align-items:flex-end;}
+.sim-bar > i{display:block; width:100%; height:0; transition:height .1s linear;}
+.sim-bar.ek > i{background:linear-gradient(180deg,var(--ember-bright),var(--ember));}
+.sim-bar.ep > i{background:linear-gradient(180deg,var(--teal-bright),var(--teal));}
+.sim-barcol .sb-cap{font-family:var(--font-mono); font-size:9.5px; text-transform:uppercase; letter-spacing:.05em; color:var(--sun-bright); margin-top:8px;}
+.sim-barcol .sb-val{font-family:var(--font-display); font-weight:700; font-size:15px; color:var(--cream-on-dark); margin-top:1px; line-height:1;}
+.sim-barcol .sb-val small{font-family:var(--font-mono); font-weight:400; font-size:8.5px; color:#B9A986;}
+.sim-readrow{display:grid; grid-template-columns:repeat(2,1fr); gap:11px; margin-top:12px;}
+.sim-vcard{border-radius:0 var(--radius-s) var(--radius-s) 0; padding:10px 14px; background:#EAF3EF; border-left:4px solid var(--sun);}
+.sim-vcard .vc-label{font-family:var(--font-mono); font-size:10px; text-transform:uppercase; letter-spacing:.04em; color:var(--sun-deep); display:flex; align-items:center; gap:5px;}
+.sim-vcard .vc-label svg{width:13px; height:13px; flex:none;}
+.sim-vcard .vc-val{font-family:var(--font-display); font-weight:700; font-size:20px; color:var(--sun-deep); margin-top:2px; line-height:1.05;}
+.sim-vcard.vteal{border-left-color:var(--teal-bright); background:#E7F3EE;}
+.sim-vcard.vteal .vc-label,.sim-vcard.vteal .vc-val{color:var(--teal-deep);}
+@media (max-width:520px){
+  .sim-stage{gap:11px; padding:12px;}
+  .sim-track{width:52px;}
+  .sim-bars{gap:10px;}
+}
+
 /* ============ PRINT SHEET ============ */
 .print-sheet{display:none;}
 @media print{
@@ -756,7 +801,7 @@ a:focus-visible,button:focus-visible,textarea:focus-visible,input:focus-visible,
         </div>
         <div class="book-footer">
           <button class="nav-btn" id="btnPrev" aria-label="Halaman sebelumnya">&#8249;</button>
-          <span class="page-indicator" id="pageIndicator">1 / 25</span>
+          <span class="page-indicator" id="pageIndicator">1 / 30</span>
           <button class="nav-btn" id="btnNext" aria-label="Halaman berikutnya">&#8250;</button>
         </div>
       </div>
@@ -922,6 +967,14 @@ function hydratePage(root){
   const calc = root.querySelector('[data-calc]');
   if (calc) initEnergyCalc(calc);
 
+  // spring / Hooke calculator
+  const spring = root.querySelector('[data-spring]');
+  if (spring) initSpringCalc(spring);
+
+  // conservation-of-energy simulator
+  const sim = root.querySelector('[data-sim]');
+  if (sim) initConservationSim(sim);
+
   // completion summary (Penutup)
   const comp = root.querySelector('[data-completion]');
   if (comp) updateCompletion(comp);
@@ -942,7 +995,11 @@ const ANSWER_KEY = {
   'pg-5': {letter:'C', explain:'Indonesia berada di garis khatulistiwa sehingga kaya sinar matahari sepanjang tahun. Kendala utamanya adalah tingginya biaya awal panel surya dan infrastruktur pendukung.'},
   'pg-6': {letter:'C', explain:'Eₖ = ½·m·v² = ½·(2)·(3)² = ½·2·9 = 9 joule.'},
   'pg-7': {letter:'D', explain:'Eₚ = m·g·h = (2)·(10)·(5) = 100 joule.'},
-  'pg-8': {letter:'B', explain:'Efisiensi η = (daya keluaran ÷ daya masukan) × 100% = (20 ÷ 100) × 100% = 20%. Sisa 80% terbuang sebagai kalor.'}
+  'pg-8': {letter:'B', explain:'Efisiensi η = (daya keluaran ÷ daya masukan) × 100% = (20 ÷ 100) × 100% = 20%. Sisa 80% terbuang sebagai kalor.'},
+  'pg-9': {letter:'A', explain:'Gaya jinjing arahnya vertikal (menahan berat tas ke atas), sedangkan perpindahan mendatar. Keduanya tegak lurus, θ = 90° dan cos 90° = 0, sehingga W = F·s·cos 90° = 0 joule.'},
+  'pg-10': {letter:'C', explain:'Teorema usaha–energi: W = ΔEₖ = ½m(v₂² − v₁²) = ½·2·(6² − 4²) = (36 − 16) = 20 joule.'},
+  'pg-11': {letter:'C', explain:'Dari kekekalan energi mekanik, m·g·h = ½m·v² sehingga v = √(2gh) = √(2·10·20) = √400 = 20 m/s. Massa tidak memengaruhi hasilnya.'},
+  'pg-12': {letter:'C', explain:'Energi potensial pegas Eₚ = ½·k·x² = ½·500·(0,2)² = 250·0,04 = 10 joule.'}
 };
 
 function clearMcqFeedback(group){
@@ -1194,6 +1251,77 @@ function initEnergyCalc(root){
   update(false);
 }
 
+/* Spring / Hooke's-law calculator: k, x → F = kx and Eₚ = ½kx² */
+function initSpringCalc(root){
+  const kEl = root.querySelector('[data-spring-k]');
+  const xEl = root.querySelector('[data-spring-x]');
+  const kOut = root.querySelector('[data-springout-k]');
+  const xOut = root.querySelector('[data-springout-x]');
+  const fOut = root.querySelector('[data-springout-f]');
+  const epOut = root.querySelector('[data-springout-ep]');
+  const fCard = root.querySelector('[data-springcard-f]');
+  const epCard = root.querySelector('[data-springcard-ep]');
+  let t = null;
+  function update(fromSlider){
+    const k = parseFloat(kEl.value);
+    const x = parseFloat(xEl.value);
+    const F = k * x;
+    const Ep = 0.5 * k * x * x;
+    kOut.textContent = k.toLocaleString('id-ID') + ' N/m';
+    xOut.textContent = x.toLocaleString('id-ID', {maximumFractionDigits:2}) + ' m';
+    fOut.textContent = F.toLocaleString('id-ID', {maximumFractionDigits:1});
+    epOut.textContent = Ep.toLocaleString('id-ID', {maximumFractionDigits:2});
+    if (fromSlider){
+      [fCard, epCard].forEach(c => c && c.classList.add('flash'));
+      clearTimeout(t); t = setTimeout(() => [fCard,epCard].forEach(c => c && c.classList.remove('flash')), 220);
+    }
+  }
+  [kEl, xEl].forEach(el => el && el.addEventListener('input', () => update(true)));
+  update(false);
+}
+
+/* Conservation-of-mechanical-energy simulator: drop a mass from height H and
+   watch Eₚ convert to Eₖ while Eₘ stays constant. v = √(2g(H−h)). */
+function initConservationSim(root){
+  const Hel = root.querySelector('[data-sim-h0]');
+  const mel = root.querySelector('[data-sim-m]');
+  const hel = root.querySelector('[data-sim-h]');
+  const HOut = root.querySelector('[data-simout-h0]');
+  const mOut = root.querySelector('[data-simout-m]');
+  const hOut = root.querySelector('[data-simout-h]');
+  const ball = root.querySelector('[data-sim-ball]');
+  const barEk = root.querySelector('[data-simbar-ek]');
+  const barEp = root.querySelector('[data-simbar-ep]');
+  const valEk = root.querySelector('[data-simval-ek]');
+  const valEp = root.querySelector('[data-simval-ep]');
+  const emVal = root.querySelector('[data-simval-em]');
+  const vVal  = root.querySelector('[data-simval-v]');
+  function update(){
+    const H = parseFloat(Hel.value);
+    const m = parseFloat(mel.value);
+    hel.max = H;                       // current height can't exceed release height
+    let h = parseFloat(hel.value);
+    if (h > H){ h = H; hel.value = H; }
+    const Em = m * G * H;
+    const Ep = m * G * h;
+    const Ek = Em - Ep;
+    const v  = Math.sqrt(2 * G * (H - h));
+    HOut.textContent = H.toLocaleString('id-ID') + ' m';
+    mOut.textContent = m.toLocaleString('id-ID') + ' kg';
+    hOut.textContent = h.toLocaleString('id-ID') + ' m';
+    const frac = H > 0 ? h / H : 0;
+    barEp.style.height = (frac * 100).toFixed(1) + '%';
+    barEk.style.height = ((1 - frac) * 100).toFixed(1) + '%';
+    if (ball) ball.style.bottom = `calc(16px + ${frac} * (100% - 42px))`;
+    valEp.textContent = fmtJ(Ep);
+    valEk.textContent = fmtJ(Ek);
+    emVal.textContent = fmtJ(Em);
+    vVal.textContent  = v.toLocaleString('id-ID', {maximumFractionDigits:1}) + ' m/s';
+  }
+  [Hel, mel, hel].forEach(el => el && el.addEventListener('input', update));
+  update();
+}
+
 /* ============================================================
    SHARED TEMPLATE HELPERS
    ============================================================ */
@@ -1318,24 +1446,29 @@ function renderIdentitas(){
     [4,'C.1','Materi — Siklus Energi'],
     [5,'C.2','Materi — Sumber Energi'],
     [6,'C.3','Materi — Energi Terbarukan'],
-    [7,'C.4','Materi — Bentuk Energi & Rumus'],
-    [8,'C.5','Materi — Konversi & Efisiensi'],
-    [9,'★','Lab Mini — Kalkulator Energi'],
-    [10,'D','Kegiatan 1 — Mengamati Siklus Energi'],
-    [11,'D','Kegiatan 1 — Pertanyaan Analisis'],
-    [12,'D','Kegiatan 2 — Tabel Perbandingan'],
-    [13,'D','Kegiatan 2 — Diskusi Kelompok'],
-    [14,'D','Latihan — Menghitung Energi'],
-    [15,'D','Kegiatan 3 — Studi Kasus'],
-    [16,'D','Kegiatan 3 — Proyek Mini'],
-    [17,'D','Kegiatan 4 — Evaluasi & Refleksi'],
-    [18,'E','Soal Pilihan Ganda'],
-    [19,'E','Soal Uraian (No. 1–2)'],
-    [20,'E','Soal Uraian (No. 3–4)'],
-    [21,'F','Refleksi Diri'],
-    [22,'G','Glosarium'],
-    [23,'H','Daftar Pustaka'],
-    [24,'&bull;','Penutup'],
+    [7,'C.4','Materi — Bentuk Energi & Rumus Dasar'],
+    [8,'C.5','Materi — Usaha & Teorema Usaha–Energi'],
+    [9,'C.6','Materi — Energi Pegas & Hukum Hooke'],
+    [10,'C.7','Materi — Kekekalan Energi Mekanik'],
+    [11,'C.8','Materi — Konversi & Efisiensi'],
+    [12,'★','Lab Mini — Kalkulator Energi'],
+    [13,'★','Lab Mini — Simulasi Kekekalan Energi'],
+    [14,'D','Kegiatan 1 — Mengamati Siklus Energi'],
+    [15,'D','Kegiatan 1 — Pertanyaan Analisis'],
+    [16,'D','Kegiatan 2 — Tabel Perbandingan'],
+    [17,'D','Kegiatan 2 — Diskusi Kelompok'],
+    [18,'D','Latihan Dasar — Menghitung Energi'],
+    [19,'D','Latihan Lanjutan — Usaha, Pegas & Kekekalan'],
+    [20,'D','Kegiatan 3 — Studi Kasus'],
+    [21,'D','Kegiatan 3 — Proyek Mini'],
+    [22,'D','Kegiatan 4 — Evaluasi & Refleksi'],
+    [23,'E','Soal Pilihan Ganda'],
+    [24,'E','Soal Uraian (No. 1–2)'],
+    [25,'E','Soal Uraian (No. 3–4)'],
+    [26,'F','Refleksi Diri'],
+    [27,'G','Glosarium'],
+    [28,'H','Daftar Pustaka'],
+    [29,'&bull;','Penutup'],
   ];
   return `
   <div>
@@ -1380,6 +1513,7 @@ function renderKD(){
       <ol class="num-list">
         <li>Menjelaskan alur siklus energi dari matahari hingga bentuk energi lain yang digunakan manusia.</li>
         <li>Membedakan jenis-jenis sumber energi berdasarkan karakteristik dan pembaruannya.</li>
+        <li>Menghitung usaha, energi kinetik, energi potensial (gravitasi &amp; pegas), dan daya, serta menerapkan teorema usaha&ndash;energi dan hukum kekekalan energi mekanik dalam pemecahan soal.</li>
         <li>Menganalisis keunggulan, keterbatasan, dan prospek energi terbarukan.</li>
         <li>Merancang solusi sederhana terkait pemanfaatan energi terbarukan di lingkungan sekitar.</li>
       </ol>
@@ -1392,9 +1526,9 @@ function renderKD(){
    ============================================================ */
 function renderPetunjuk(){
   const items = [
-    ['book','Baca lebih dahulu materi ringkas pada bagian C — termasuk rumus energi di C.4 dan C.5 — sebelum mengerjakan kegiatan.'],
-    ['calc','Gunakan Kalkulator Energi interaktif untuk mengamati hubungan massa, kecepatan, dan ketinggian dengan besar energi.'],
-    ['check','Kerjakan kegiatan dan soal secara berurutan; tekan tombol Cek atau Periksa Jawaban untuk melihat hasil dan pembahasan.'],
+    ['book','Baca lebih dahulu materi ringkas pada bagian C — termasuk rumus energi (C.4), usaha & teorema usaha–energi (C.5), energi pegas & Hukum Hooke (C.6), serta kekekalan energi mekanik (C.7) — sebelum mengerjakan kegiatan.'],
+    ['calc','Gunakan Kalkulator Energi dan Simulasi Kekekalan Energi yang interaktif untuk mengamati hubungan massa, kecepatan, ketinggian, dan energi secara langsung.'],
+    ['check','Kerjakan Latihan Dasar lalu Latihan Lanjutan serta soal evaluasi secara berurutan; tekan tombol Cek atau Periksa Jawaban untuk melihat hasil dan pembahasan.'],
     ['chat','Diskusikan setiap pertanyaan bersama anggota kelompok dan tuliskan kesimpulan bersama.'],
     ['compass','Gunakan referensi tambahan (buku teks, artikel, atau internet) bila diperlukan.'],
     ['clock','Waktu pengerjaan: 2 &times; 45 menit (1 pertemuan).'],
@@ -1561,7 +1695,7 @@ function renderC5(){
   return `
   <div>
     <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
-    <h2 class="page-title">C.5 Konversi Energi &amp; Efisiensi</h2>
+    <h2 class="page-title">C.8 Konversi Energi &amp; Efisiensi</h2>
     <p class="lead-text" style="font-size:13.5px; margin-bottom:14px;">Setiap alat mengubah satu bentuk energi menjadi bentuk lain. Namun pada setiap konversi selalu ada energi yang berubah menjadi <b>kalor</b> yang tidak berguna, sehingga tidak ada alat yang benar-benar 100% efisien.</p>
     <span class="eyebrow" style="margin-bottom:10px;">Contoh Konversi Energi di Sekitar Kita</span>
     <div class="energy-cards" style="margin-bottom:18px;">
@@ -1580,6 +1714,167 @@ function renderC5(){
         <div class="worked-answer"><b>Jawaban:</b> efisiensi lampu = 75%. Artinya 25% energi listrik berubah menjadi kalor (panas) yang tidak berguna sebagai cahaya.</div>
       </div>
     </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — C.5 Usaha & Teorema Usaha–Energi (SMA)
+   ============================================================ */
+function renderUsaha(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
+    <h2 class="page-title">C.5 Usaha &amp; Teorema Usaha&ndash;Energi</h2>
+    <p class="lead-text" style="font-size:13.5px; margin-bottom:14px;">Dalam fisika, <b>usaha</b> (kerja) dilakukan ketika sebuah gaya menyebabkan benda berpindah. Berbeda dari makna sehari-hari, menahan beban berat tanpa berpindah tidak menghasilkan usaha sama sekali. Besar usaha bergantung pada gaya, jarak perpindahan, dan <b>arah</b> gaya terhadap perpindahan.</p>
+    <span class="eyebrow" style="margin-bottom:2px;">Rumus Penting</span>
+    <div class="formula-stack">
+      ${formulaCard('Usaha oleh Gaya', 'W = F · s · cos θ', [['W','usaha (joule)'],['F','gaya (newton)'],['s','perpindahan (m)'],['θ','sudut gaya terhadap perpindahan']])}
+      ${formulaCard('Teorema Usaha–Energi', 'W<sub>total</sub> = ΔE<sub>k</sub> = ½m·v₂<sup>2</sup> − ½m·v₁<sup>2</sup>', [['W','usaha total (joule)'],['ΔEₖ','perubahan energi kinetik'],['v₁','kecepatan awal (m/s)'],['v₂','kecepatan akhir (m/s)']])}
+      ${formulaCard('Daya', 'P = <span class="frac"><span class="top">W</span><span class="bot">t</span></span> = F · v', [['P','daya (watt)'],['W','usaha (joule)'],['t','waktu (sekon)'],['v','kecepatan (m/s)']])}
+    </div>
+    <span class="eyebrow" style="margin:4px 0 2px;">Tanda Usaha Bergantung Arah Gaya</span>
+    <div class="sign-grid">
+      <div class="sign-chip pos"><div class="sc-top"><span class="sc-name">Positif</span><span class="sc-sym">θ &lt; 90°</span></div><p>Gaya searah perpindahan &mdash; energi kinetik bertambah. Contoh: mendorong meja hingga bergerak maju.</p></div>
+      <div class="sign-chip zero"><div class="sc-top"><span class="sc-name">Nol</span><span class="sc-sym">θ = 90°</span></div><p>Gaya tegak lurus perpindahan. Contoh: menjinjing tas sambil berjalan mendatar &mdash; gaya angkat ⟂ gerak.</p></div>
+      <div class="sign-chip neg"><div class="sc-top"><span class="sc-name">Negatif</span><span class="sc-sym">θ &gt; 90°</span></div><p>Gaya berlawanan arah gerak &mdash; energi kinetik berkurang. Contoh: gaya gesek yang memperlambat benda.</p></div>
+    </div>
+    <div class="info-note"><span class="ico">${ICONS.info}</span><span><b>Teorema usaha&ndash;energi</b> menghubungkan gaya dengan gerak: usaha total dari seluruh gaya yang bekerja pada benda sama dengan perubahan energi kinetiknya. Inilah sebabnya mengerem (gaya gesek melakukan usaha negatif) menurunkan kecepatan.</span></div>
+    <div class="worked">
+      <div class="worked-head">${ICONS.beaker}Contoh Soal — Usaha dengan Sudut</div>
+      <div class="worked-body">
+        <div class="prob">Sebuah peti ditarik dengan gaya <b>100 N</b> yang membentuk sudut <b>60&deg;</b> terhadap arah perpindahan. Peti berpindah sejauh <b>5 m</b>. Berapa usaha yang dilakukan gaya itu? (cos 60&deg; = 0,5)</div>
+        <div class="worked-step"><span class="s-num">1</span><span>Tulis rumus usaha: <span class="worked-math">W = F · s · cos θ</span></span></div>
+        <div class="worked-step"><span class="s-num">2</span><span>Masukkan nilai: <span class="worked-math">W = 100 · 5 · cos 60° = 100 · 5 · 0,5</span></span></div>
+        <div class="worked-answer"><b>Jawaban:</b> W = 250 joule. Hanya komponen gaya yang searah perpindahan (F·cos θ) yang melakukan usaha.</div>
+      </div>
+    </div>
+    <div class="worked">
+      <div class="worked-head">${ICONS.scale}Contoh Soal — Teorema Usaha–Energi</div>
+      <div class="worked-body">
+        <div class="prob">Sebuah mobil bermassa <b>800 kg</b> dipercepat dari <b>10 m/s</b> menjadi <b>20 m/s</b>. Berapa usaha total yang dilakukan pada mobil?</div>
+        <div class="worked-step"><span class="s-num">1</span><span>Gunakan teorema usaha&ndash;energi: <span class="worked-math">W = ½m(v₂² − v₁²)</span></span></div>
+        <div class="worked-step"><span class="s-num">2</span><span>Masukkan nilai: <span class="worked-math">W = ½ · 800 · (20² − 10²) = 400 · (400 − 100)</span></span></div>
+        <div class="worked-answer"><b>Jawaban:</b> W = 400 · 300 = 120.000 joule = 120 kJ. Usaha inilah yang menambah energi kinetik mobil.</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — C.6 Energi Pegas & Hukum Hooke (SMA)
+   ============================================================ */
+function renderPegas(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
+    <h2 class="page-title">C.6 Energi Potensial Pegas &amp; Hukum Hooke</h2>
+    <p class="lead-text" style="font-size:13.5px; margin-bottom:14px;">Benda elastis seperti <b>pegas</b> menyimpan energi ketika ditarik atau ditekan. Energi ini disebut <b>energi potensial elastis</b>, dan dilepaskan kembali saat pegas kembali ke bentuk semula &mdash; prinsip yang bekerja pada ketapel, per bolpoin, hingga suspensi kendaraan.</p>
+    <span class="eyebrow" style="margin-bottom:2px;">Rumus Penting</span>
+    <div class="formula-stack">
+      ${formulaCard('Hukum Hooke', 'F = k · x', [['F','gaya pegas (newton)'],['k','konstanta pegas (N/m)'],['x','pertambahan panjang (m)']])}
+      ${formulaCard('Energi Potensial Pegas', 'E<sub>p</sub> = ½ · k · x<sup>2</sup>', [['Eₚ','energi potensial pegas (joule)'],['k','konstanta pegas (N/m)'],['x','pertambahan panjang (m)']])}
+    </div>
+    <div class="info-note"><span class="ico">${ICONS.info}</span><span>Konstanta pegas <b>k</b> menyatakan kekakuan: makin besar k, makin sulit pegas diregangkan. Karena x <b>dikuadratkan</b>, menggandakan regangan membuat energi tersimpan menjadi <b>empat kali</b> lipat.</span></div>
+    <div class="worked">
+      <div class="worked-head">${ICONS.beaker}Contoh Soal — Pegas</div>
+      <div class="worked-body">
+        <div class="prob">Sebuah pegas dengan konstanta <b>200 N/m</b> ditarik sejauh <b>10 cm</b> (0,1 m). Hitung gaya tariknya dan energi potensial yang tersimpan.</div>
+        <div class="worked-step"><span class="s-num">1</span><span>Gaya pegas (Hukum Hooke): <span class="worked-math">F = k · x = 200 · 0,1 = 20 N</span></span></div>
+        <div class="worked-step"><span class="s-num">2</span><span>Energi potensial pegas: <span class="worked-math">Eₚ = ½ · k · x² = ½ · 200 · (0,1)² = 1 J</span></span></div>
+        <div class="worked-answer"><b>Jawaban:</b> gaya tarik = 20 N dan energi potensial pegas = 1 joule.</div>
+      </div>
+    </div>
+    <span class="self-tip">${ICONS.calc}Kalkulator Pegas — Coba Sendiri</span>
+    <div class="calc" data-spring>
+      <div class="calc-title"><span class="dot"></span>Panel Pegas</div>
+      <div class="calc-sub">Geser konstanta pegas dan regangan untuk melihat gaya serta energi yang tersimpan.</div>
+      <div class="calc-row">
+        <div class="rl"><label>Konstanta pegas (k)</label><span class="calc-val" data-springout-k>200 N/m</span></div>
+        <input type="range" class="calc-slider" data-spring-k min="10" max="1000" step="10" value="200">
+      </div>
+      <div class="calc-row">
+        <div class="rl"><label>Regangan (x)</label><span class="calc-val" data-springout-x>0,1 m</span></div>
+        <input type="range" class="calc-slider" data-spring-x min="0" max="0.5" step="0.01" value="0.1">
+      </div>
+      <div class="calc-readout two">
+        <div class="readout-card" data-springcard-f><div class="rc-label">Gaya Pegas F</div><div class="rc-value" data-springout-f>20</div><div class="rc-unit">newton</div></div>
+        <div class="readout-card" data-springcard-ep><div class="rc-label">Energi Eₚ</div><div class="rc-value" data-springout-ep>1</div><div class="rc-unit">joule</div></div>
+      </div>
+      <div class="calc-note">${ICONS.bulb}<span>Perhatikan bagaimana energi (Eₚ) melonjak jauh lebih cepat daripada gaya (F) ketika regangan bertambah &mdash; karena energi bergantung pada <b>x²</b>.</span></div>
+    </div>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — C.7 Hukum Kekekalan Energi Mekanik (SMA)
+   ============================================================ */
+function renderKekekalan(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian C &middot; Materi Ringkas</span>
+    <h2 class="page-title">C.7 Hukum Kekekalan Energi Mekanik</h2>
+    <p class="lead-text" style="font-size:13.5px; margin-bottom:14px;">Jika sebuah benda hanya dipengaruhi <b>gaya konservatif</b> (seperti gravitasi atau pegas) &mdash; tanpa gesekan atau hambatan udara &mdash; maka <b>energi mekanik totalnya tetap</b>. Energi potensial dapat berubah menjadi energi kinetik dan sebaliknya, tetapi jumlahnya selalu sama.</p>
+    <span class="eyebrow" style="margin-bottom:2px;">Rumus Penting</span>
+    <div class="formula-stack">
+      ${formulaCard('Kekekalan Energi Mekanik', 'E<sub>m1</sub> = E<sub>m2</sub> &nbsp;→&nbsp; ½m·v₁<sup>2</sup> + m·g·h₁ = ½m·v₂<sup>2</sup> + m·g·h₂', [['Eₘ','energi mekanik (joule)'],['v','kecepatan (m/s)'],['h','ketinggian (m)'],['g','gravitasi ≈ 10 m/s²']])}
+    </div>
+    <div class="sign-grid" style="grid-template-columns:1fr 1fr;">
+      <div class="sign-chip pos"><div class="sc-top"><span class="sc-name">Gaya Konservatif</span></div><p>Gravitasi &amp; pegas. Usaha tidak bergantung lintasan; energi mekanik <b>kekal</b>.</p></div>
+      <div class="sign-chip neg"><div class="sc-top"><span class="sc-name">Non-Konservatif</span></div><p>Gesekan &amp; hambatan udara. Sebagian energi mekanik berubah menjadi <b>kalor</b>.</p></div>
+    </div>
+    <div class="info-note"><span class="ico">${ICONS.info}</span><span>Pada kasus nyata dengan gesekan, energi tetap kekal secara keseluruhan, tetapi sebagian energi mekanik &ldquo;hilang&rdquo; menjadi panas: <b>Eₘ₁ = Eₘ₂ + energi yang menjadi kalor</b>.</span></div>
+    <div class="worked">
+      <div class="worked-head">${ICONS.beaker}Contoh Soal — Kecepatan Jatuh</div>
+      <div class="worked-body">
+        <div class="prob">Sebuah mangga bermassa <b>0,3 kg</b> jatuh bebas dari ketinggian <b>20 m</b> (g = 10 m/s², hambatan udara diabaikan). Berapa kecepatannya tepat sebelum menyentuh tanah?</div>
+        <div class="worked-step"><span class="s-num">1</span><span>Di atas benda diam (Eₖ = 0), di tanah h = 0 (Eₚ = 0). Kekekalan energi: <span class="worked-math">m·g·h = ½m·v²</span></span></div>
+        <div class="worked-step"><span class="s-num">2</span><span>Massa saling meniadakan, sehingga <span class="worked-math">v = √(2·g·h) = √(2 · 10 · 20) = √400</span></span></div>
+        <div class="worked-answer"><b>Jawaban:</b> v = 20 m/s. Perhatikan bahwa massa <b>tidak</b> memengaruhi kecepatan jatuh &mdash; benda berat dan ringan tiba bersamaan bila hambatan udara diabaikan.</div>
+      </div>
+    </div>
+    <p class="lead-text" style="font-size:12.5px; color:var(--ink-soft); margin-top:14px;">Ingin melihatnya bergerak? Buka <b>Lab Mini &middot; Simulasi Kekekalan Energi</b> pada halaman berikutnya untuk mengamati perubahan Eₖ dan Eₚ secara langsung.</p>
+  </div>`;
+}
+
+/* ============================================================
+   PAGE RENDERERS — Laboratorium Mini: Simulasi Kekekalan Energi
+   ============================================================ */
+function renderSimulasi(){
+  return `
+  <div>
+    <span class="eyebrow">Laboratorium Mini &middot; Interaktif</span>
+    <h2 class="page-title">Simulasi Kekekalan Energi</h2>
+    <p class="lab-intro">Jatuhkan benda dari ketinggian tertentu, lalu <b>geser slider posisi</b> untuk memindahkannya naik-turun. Amati bagaimana energi potensial (Eₚ) berubah menjadi energi kinetik (Eₖ) sementara energi mekanik (Eₘ) tetap. <span style="font-family:var(--font-mono); font-size:12px; color:var(--ink-soft);">(g = 10 m/s²)</span></p>
+    <div class="calc" data-sim style="padding-bottom:16px;">
+      <div class="calc-title"><span class="dot"></span>Panel Simulasi</div>
+      <div class="calc-sub">Atur ketinggian awal &amp; massa, lalu geser posisi benda:</div>
+      <div class="calc-row">
+        <div class="rl"><label>Ketinggian awal (H)</label><span class="calc-val" data-simout-h0>20 m</span></div>
+        <input type="range" class="calc-slider" data-sim-h0 min="5" max="50" step="1" value="20">
+      </div>
+      <div class="calc-row">
+        <div class="rl"><label>Massa (m)</label><span class="calc-val" data-simout-m>1 kg</span></div>
+        <input type="range" class="calc-slider" data-sim-m min="0.5" max="5" step="0.1" value="1">
+      </div>
+      <div class="calc-row">
+        <div class="rl"><label>Posisi benda (h)</label><span class="calc-val" data-simout-h>20 m</span></div>
+        <input type="range" class="calc-slider" data-sim-h min="0" max="50" step="0.5" value="20">
+      </div>
+      <div class="sim-stage">
+        <div class="sim-track"><div class="sim-ball" data-sim-ball></div><div class="sim-ground"></div></div>
+        <div class="sim-bars">
+          <div class="sim-barcol"><div class="sim-bar ek"><i data-simbar-ek></i></div><div class="sb-cap">Kinetik Eₖ</div><div class="sb-val"><span data-simval-ek>0</span> <small>J</small></div></div>
+          <div class="sim-barcol"><div class="sim-bar ep"><i data-simbar-ep></i></div><div class="sb-cap">Potensial Eₚ</div><div class="sb-val"><span data-simval-ep>0</span> <small>J</small></div></div>
+        </div>
+      </div>
+      <div class="sim-readrow">
+        <div class="sim-vcard"><div class="vc-label">${ICONS.scale}Energi Mekanik Eₘ &middot; tetap</div><div class="vc-val"><span data-simval-em>0</span> J</div></div>
+        <div class="sim-vcard vteal"><div class="vc-label">${ICONS.motion}Kecepatan saat ini</div><div class="vc-val" data-simval-v>0 m/s</div></div>
+      </div>
+      <div class="calc-note">${ICONS.bulb}<span>Di titik tertinggi seluruh energi berupa potensial; di dasar seluruhnya menjadi kinetik. Jumlah keduanya &mdash; energi mekanik &mdash; <b>tidak pernah berubah</b>.</span></div>
+    </div>
+    <span class="self-tip">${ICONS.sparkle}Tugas Eksplorasi</span>
+    ${qaBlock('', 'Berdasarkan simulasi: di posisi mana energi kinetik paling besar, dan di posisi mana energi potensial paling besar? Mengapa energi mekanik (Eₘ) tetap sama di semua posisi? Tuliskan kesimpulanmu.', 'sim-refleksi', 4)}
   </div>`;
 }
 
@@ -1644,6 +1939,22 @@ function renderLatihan(){
 }
 
 /* ============================================================
+   PAGE RENDERERS — Latihan Lanjutan (SMA: usaha, pegas, kekekalan)
+   ============================================================ */
+function renderLatihanLanjut(){
+  return `
+  <div>
+    <span class="eyebrow">Bagian D &middot; Latihan Lanjutan</span>
+    <h2 class="page-title">Latihan Lanjutan — Usaha, Pegas &amp; Kekekalan Energi</h2>
+    <p class="page-sub">Soal berikut memadukan konsep usaha, energi pegas, dan kekekalan energi mekanik (materi C.5&ndash;C.7). Ketik jawabanmu (angka saja), lalu tekan <b>Cek</b>. Gunakan g = 10 m/s².</p>
+    ${numBlock('5.', 'Sebuah balok ditarik gaya 50 N yang membentuk sudut 60° terhadap arah perpindahan, dan berpindah sejauh 4 m. Hitung usaha yang dilakukan gaya tersebut. (cos 60° = 0,5)', 'lat-5', 100, 'joule', 'W = F·s·cos θ = 50·4·0,5 = 100 J')}
+    ${numBlock('6.', 'Sebuah benda bermassa 2 kg bergerak lurus dengan kecepatan bertambah dari 3 m/s menjadi 7 m/s. Hitung usaha total yang bekerja pada benda.', 'lat-6', 40, 'joule', 'W = ½·m·(v₂²−v₁²) = ½·2·(49−9) = 40 J')}
+    ${numBlock('7.', 'Sebuah pegas dengan konstanta 400 N/m ditekan sejauh 0,2 m. Hitung energi potensial yang tersimpan dalam pegas.', 'lat-7', 8, 'joule', 'Eₚ = ½·k·x² = ½·400·(0,2)² = 8 J')}
+    ${numBlock('8.', 'Sebuah bola dijatuhkan bebas dari ketinggian 20 m (hambatan udara diabaikan). Hitung kecepatannya saat menyentuh tanah.', 'lat-8', 20, 'm/s', 'v = √(2·g·h) = √(2·10·20) = √400 = 20 m/s')}
+  </div>`;
+}
+
+/* ============================================================
    PAGE RENDERERS — Glosarium
    ============================================================ */
 function renderGlosarium(){
@@ -1654,6 +1965,11 @@ function renderGlosarium(){
     ['Energi Kinetik','Energi yang dimiliki benda karena geraknya: Eₖ = ½mv².'],
     ['Energi Potensial','Energi yang dimiliki benda karena kedudukan/ketinggiannya: Eₚ = mgh.'],
     ['Energi Mekanik','Jumlah energi kinetik dan energi potensial suatu benda.'],
+    ['Teorema Usaha–Energi','Usaha total yang bekerja pada benda sama dengan perubahan energi kinetiknya: W = ΔEₖ.'],
+    ['Hukum Hooke','Gaya pegas sebanding dengan pertambahan panjangnya: F = k·x.'],
+    ['Energi Potensial Pegas','Energi yang tersimpan pada pegas yang diregang/ditekan: Eₚ = ½kx².'],
+    ['Konstanta Pegas (k)','Ukuran kekakuan pegas dalam satuan N/m; makin besar k, makin kaku pegas.'],
+    ['Gaya Konservatif','Gaya (mis. gravitasi, pegas) yang usahanya tidak bergantung lintasan sehingga energi mekanik kekal; lawannya gaya non-konservatif seperti gesekan.'],
     ['Hukum Kekekalan Energi','Energi tidak dapat diciptakan atau dimusnahkan, hanya berubah bentuk; total energi tetap.'],
     ['Konversi Energi','Perubahan energi dari satu bentuk ke bentuk lain, misalnya listrik menjadi cahaya.'],
     ['Efisiensi (η)','Perbandingan energi keluaran yang berguna terhadap energi masukan, dinyatakan dalam persen.'],
@@ -1857,6 +2173,14 @@ function renderPG(){
       '10 joule','20 joule','50 joule','100 joule','1.000 joule']],
     ['Sebuah lampu menerima daya listrik 100 W dan menghasilkan daya cahaya 20 W. Efisiensi lampu tersebut adalah &hellip;', [
       '5%','20%','50%','80%','120%']],
+    ['Seorang siswa menjinjing tas seberat 20 N dan berjalan mendatar sejauh 10 m. Besar usaha yang dilakukan siswa terhadap tas adalah &hellip;', [
+      '0 joule','2 joule','20 joule','200 joule','2.000 joule']],
+    ['Sebuah benda bermassa 2 kg bergerak lurus dengan kecepatan bertambah dari 4 m/s menjadi 6 m/s. Usaha total yang bekerja pada benda adalah &hellip;', [
+      '4 joule','10 joule','20 joule','40 joule','100 joule']],
+    ['Sebuah kelapa jatuh bebas dari ketinggian 20 m (g = 10 m/s&sup2;, hambatan udara diabaikan). Kecepatannya saat menyentuh tanah adalah &hellip;', [
+      '10 m/s','14 m/s','20 m/s','40 m/s','200 m/s']],
+    ['Sebuah pegas dengan konstanta 500 N/m ditekan sejauh 0,2 m. Energi potensial yang tersimpan dalam pegas adalah &hellip;', [
+      '2 joule','5 joule','10 joule','20 joule','50 joule']],
   ];
   return `
   <div>
@@ -1969,13 +2293,18 @@ const PAGES = [
   { id:'c2', chapter:'C.2 · Sumber Energi', part:'C · Materi Ringkas', render:renderC2 },
   { id:'c3', chapter:'C.3 · Energi Terbarukan', part:'C · Materi Ringkas', render:renderC3 },
   { id:'c4', chapter:'C.4 · Bentuk Energi & Rumus', part:'C · Materi Ringkas', render:renderC4 },
-  { id:'c5', chapter:'C.5 · Konversi & Efisiensi', part:'C · Materi Ringkas', render:renderC5 },
+  { id:'usaha', chapter:'C.5 · Usaha & Teorema Usaha–Energi', part:'C · Materi Ringkas', render:renderUsaha },
+  { id:'pegas', chapter:'C.6 · Energi Pegas & Hukum Hooke', part:'C · Materi Ringkas', render:renderPegas },
+  { id:'kekekalan', chapter:'C.7 · Kekekalan Energi Mekanik', part:'C · Materi Ringkas', render:renderKekekalan },
+  { id:'c5', chapter:'C.8 · Konversi & Efisiensi', part:'C · Materi Ringkas', render:renderC5 },
   { id:'lab', chapter:'Lab Mini · Kalkulator Energi', part:'Laboratorium Mini', render:renderLab },
+  { id:'simulasi', chapter:'Lab Mini · Simulasi Kekekalan', part:'Laboratorium Mini', render:renderSimulasi },
   { id:'k1a', chapter:'D · Kegiatan 1 (Observasi)', part:'D · Kegiatan Belajar', render:renderK1a },
   { id:'k1b', chapter:'D · Kegiatan 1 (Analisis)', part:'D · Kegiatan Belajar', render:renderK1b },
   { id:'k2a', chapter:'D · Kegiatan 2 (Tabel)', part:'D · Kegiatan Belajar', render:renderK2a },
   { id:'k2b', chapter:'D · Kegiatan 2 (Diskusi)', part:'D · Kegiatan Belajar', render:renderK2b },
-  { id:'latihan', chapter:'D · Latihan Menghitung', part:'D · Kegiatan Belajar', render:renderLatihan },
+  { id:'latihan', chapter:'D · Latihan Dasar (Menghitung)', part:'D · Kegiatan Belajar', render:renderLatihan },
+  { id:'latihanlanjut', chapter:'D · Latihan Lanjutan', part:'D · Kegiatan Belajar', render:renderLatihanLanjut },
   { id:'k3a', chapter:'D · Kegiatan 3 (Studi Kasus)', part:'D · Kegiatan Belajar', render:renderK3a },
   { id:'k3b', chapter:'D · Kegiatan 3 (Proyek Mini)', part:'D · Kegiatan Belajar', render:renderK3b },
   { id:'k4', chapter:'D · Kegiatan 4 (Evaluasi & Refleksi)', part:'D · Kegiatan Belajar', render:renderK4 },
@@ -1996,6 +2325,7 @@ const FIELD_REGISTRY = [
   {id:'id-absen', label:'No. Absen', section:'Identitas Peserta Didik', type:'text'},
   {id:'id-tanggal', label:'Tanggal', section:'Identitas Peserta Didik', type:'text'},
   {id:'lab-refleksi', label:'Eksplorasi kalkulator — pengaruh kecepatan terhadap energi kinetik', section:'Laboratorium Mini — Kalkulator Energi', type:'text'},
+  {id:'sim-refleksi', label:'Eksplorasi simulasi — perubahan Eₖ/Eₚ dan kekekalan energi mekanik', section:'Laboratorium Mini — Simulasi Kekekalan Energi', type:'text'},
   {id:'k1-drawing', label:'1.1 Diagram siklus energi (gambar)', section:'Kegiatan 1', type:'canvas'},
   {id:'k1-2a', label:'1.2a Makna &ldquo;energi tak dapat diciptakan/dimusnahkan&rdquo;', section:'Kegiatan 1', type:'text'},
   {id:'k1-2b', label:'1.2b Peran matahari pada ekosistem hutan', section:'Kegiatan 1', type:'text'},
@@ -2013,10 +2343,14 @@ const FIELD_REGISTRY = [
   {id:'k2-tak-potensi', label:'2.1 Potensi di Indonesia — Tak Terbarukan', section:'Kegiatan 2', type:'text'},
   {id:'k2-bar-potensi', label:'2.1 Potensi di Indonesia — Terbarukan', section:'Kegiatan 2', type:'text'},
   {id:'k2-diskusi', label:'2.2 Diskusi: ketergantungan pada bahan bakar fosil', section:'Kegiatan 2', type:'text'},
-  {id:'lat-1', label:'Latihan 1 — Energi kinetik sepeda motor (joule)', section:'Latihan Menghitung Energi', type:'text'},
-  {id:'lat-2', label:'Latihan 2 — Energi potensial kotak (joule)', section:'Latihan Menghitung Energi', type:'text'},
-  {id:'lat-3', label:'Latihan 3 — Energi listrik pemanas air (joule)', section:'Latihan Menghitung Energi', type:'text'},
-  {id:'lat-4', label:'Latihan 4 — Efisiensi mesin (%)', section:'Latihan Menghitung Energi', type:'text'},
+  {id:'lat-1', label:'Latihan 1 — Energi kinetik sepeda motor (joule)', section:'Latihan Dasar (Menghitung Energi)', type:'text'},
+  {id:'lat-2', label:'Latihan 2 — Energi potensial kotak (joule)', section:'Latihan Dasar (Menghitung Energi)', type:'text'},
+  {id:'lat-3', label:'Latihan 3 — Energi listrik pemanas air (joule)', section:'Latihan Dasar (Menghitung Energi)', type:'text'},
+  {id:'lat-4', label:'Latihan 4 — Efisiensi mesin (%)', section:'Latihan Dasar (Menghitung Energi)', type:'text'},
+  {id:'lat-5', label:'Latihan 5 — Usaha gaya bersudut (joule)', section:'Latihan Lanjutan', type:'text'},
+  {id:'lat-6', label:'Latihan 6 — Usaha total via teorema usaha–energi (joule)', section:'Latihan Lanjutan', type:'text'},
+  {id:'lat-7', label:'Latihan 7 — Energi potensial pegas (joule)', section:'Latihan Lanjutan', type:'text'},
+  {id:'lat-8', label:'Latihan 8 — Kecepatan jatuh dari kekekalan energi (m/s)', section:'Latihan Lanjutan', type:'text'},
   {id:'k3-1a', label:'3.1a Prinsip fisika biogas & turbin angin', section:'Kegiatan 3', type:'text'},
   {id:'k3-1b', label:'3.1b Manfaat sosial-ekonomi energi terbarukan', section:'Kegiatan 3', type:'text'},
   {id:'k3-2-jenis', label:'3.2 Jenis Energi Terbarukan yang Dipilih', section:'Kegiatan 3', type:'text'},
@@ -2030,12 +2364,13 @@ const FIELD_REGISTRY = [
   {id:'pg-3', label:'PG No. 3 — Bukan keunggulan energi terbarukan', section:'Soal Evaluasi', type:'mcq', options:['Ramah lingkungan','Dapat diperbarui secara alami','Tidak menghasilkan emisi gas rumah kaca saat digunakan','Biaya investasi awal yang sangat murah','Tersedia secara lokal di berbagai daerah']},
   {id:'pg-4', label:'PG No. 4 — Biomassa sebagai energi terbarukan', section:'Soal Evaluasi', type:'mcq', options:['Tidak menghasilkan gas CO2 sama sekali','Berasal dari organisme hidup yang terus-menerus ada','Lebih murah dari bahan bakar fosil','Tidak memerlukan teknologi khusus','Hanya dapat digunakan di daerah pedesaan']},
   {id:'pg-5', label:'PG No. 5 — Tantangan energi surya di Indonesia', section:'Soal Evaluasi', type:'mcq', options:['Posisi Indonesia yang jauh dari khatulistiwa','Kurangnya sinar matahari sepanjang tahun','Tingginya biaya investasi awal panel surya','Panel surya tidak dapat digunakan di iklim tropis','Energi surya tidak dapat disimpan dalam baterai']},
-  {id:'pg-6', label:'PG No. 6 — Menghitung energi kinetik', section:'Soal Evaluasi', type:'mcq', options:['3 joule','6 joule','9 joule','18 joule','36 joule']},
-  {id:'pg-7', label:'PG No. 7 — Menghitung energi potensial', section:'Soal Evaluasi', type:'mcq', options:['10 joule','20 joule','50 joule','100 joule','1.000 joule']},
-  {id:'pg-8', label:'PG No. 8 — Menghitung efisiensi', section:'Soal Evaluasi', type:'mcq', options:['5%','20%','50%','80%','120%']},
   {id:'pg-6', label:'PG No. 6 — Energi kinetik (m=2 kg, v=3 m/s)', section:'Soal Evaluasi', type:'mcq', options:['3 joule','6 joule','9 joule','18 joule','36 joule']},
   {id:'pg-7', label:'PG No. 7 — Energi potensial (m=2 kg, h=5 m)', section:'Soal Evaluasi', type:'mcq', options:['10 joule','20 joule','50 joule','100 joule','1.000 joule']},
   {id:'pg-8', label:'PG No. 8 — Efisiensi lampu (masukan 100 W, keluaran 20 W)', section:'Soal Evaluasi', type:'mcq', options:['5%','20%','50%','80%','120%']},
+  {id:'pg-9', label:'PG No. 9 — Usaha bernilai nol (gaya ⟂ perpindahan)', section:'Soal Evaluasi', type:'mcq', options:['0 joule','2 joule','20 joule','200 joule','2.000 joule']},
+  {id:'pg-10', label:'PG No. 10 — Usaha total (teorema usaha–energi)', section:'Soal Evaluasi', type:'mcq', options:['4 joule','10 joule','20 joule','40 joule','100 joule']},
+  {id:'pg-11', label:'PG No. 11 — Kecepatan jatuh bebas (kekekalan energi)', section:'Soal Evaluasi', type:'mcq', options:['10 m/s','14 m/s','20 m/s','40 m/s','200 m/s']},
+  {id:'pg-12', label:'PG No. 12 — Energi potensial pegas', section:'Soal Evaluasi', type:'mcq', options:['2 joule','5 joule','10 joule','20 joule','50 joule']},
   {id:'uraian-1', label:'Uraian No. 1 — Bahan bakar fosil sebagai energi tak terbarukan', section:'Soal Evaluasi', type:'text'},
   {id:'uraian-2', label:'Uraian No. 2 — 4 jenis energi terbarukan potensial di Indonesia', section:'Soal Evaluasi', type:'text'},
   {id:'uraian-3', label:'Uraian No. 3 — Konversi energi pada PLTA', section:'Soal Evaluasi', type:'text'},
